@@ -70,7 +70,7 @@ class SetupPage(tk.Frame):
         username = tk.Entry(setup_window, textvariable=self.username_var, font=('Kozuka Mincho Pro M', 24))
         password_title = tk.Label(setup_window, text='Password:', font=('Kozuka Mincho Pro M', 24))
         password = tk.Entry(setup_window, textvariable=self.password_var, font=('Kozuka Mincho Pro M', 24))
-        submit = tk.Button(setup_window, text='Create', font=('Kozuka Mincho Pro M', 24))
+        submit = tk.Button(setup_window, text='Create', font=('Kozuka Mincho Pro M', 24), command=self.process_details)
 
         setup_window.place(relx=0.5, rely=0.5, anchor='center')
         setup_window.propagate(0)
@@ -83,15 +83,37 @@ class SetupPage(tk.Frame):
         submit.place(x=300, y=600, width=200)
     
     # no need for restrictions on input data as its personal use (atleast for now)
-        
+    
+    def process_details(self):
+        users['user'].username = self.username_var.get()
+        users['user'].password = self.password_var.get()
+        self.controller.update_user_save()
+        self.controller.show_page(LoginPage)
 
 class LoginPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
 
-        lbl = tk.Label(self, text='yo')
-        lbl.place(relx=0.5, rely=0.5, anchor='center')
+    def create_page(self):
+        setup_window = tk.Frame(self, highlightbackground='black', highlightthickness=2)
+        page_title = tk.Label(setup_window, text='Login To HappyXP', font=('Kozuka Mincho Pro M', 48))
+        username_title = tk.Label(setup_window, text='Username:', font=('Kozuka Mincho Pro M', 24))
+        username = tk.Entry(setup_window, textvariable=self.username_var, font=('Kozuka Mincho Pro M', 24))
+        password_title = tk.Label(setup_window, text='Password:', font=('Kozuka Mincho Pro M', 24))
+        password = tk.Entry(setup_window, textvariable=self.password_var, font=('Kozuka Mincho Pro M', 24))
+        submit = tk.Button(setup_window, text='Create', font=('Kozuka Mincho Pro M', 24))
+
+        setup_window.place(relx=0.5, rely=0.5, anchor='center')
+        setup_window.propagate(0)
+        setup_window.config(width=800, height=800)
+        page_title.place(x=200, y=100)
+        username_title.place(x=225, y=250)
+        username.place(x=225, y=300)
+        password_title.place(x=225, y=450)
+        password.place(x=225, y=500)
+        submit.place(x=300, y=600, width=200)
+
 
 class EntryPage(tk.Frame):  
     def __init__(self, parent, controller):
