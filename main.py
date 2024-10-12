@@ -17,6 +17,11 @@ class MainApp(tk.Tk):
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky='nswe')
 
+    # 
+    def show_page(self, page):
+        frame = self.frames[page]
+        frame.tkraise()
+
 class SetupPage:
     pass
 
