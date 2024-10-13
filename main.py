@@ -27,8 +27,11 @@ class MainApp(tk.Tk):
             frame = F(container, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky='nswe')
-     
-        self.show_page(SetupPage)
+
+        if users['user'].username:
+            self.show_page(LoginPage)
+        else:
+            self.show_page(SetupPage)
 
     def show_page(self, page):
         frame = self.frames[page]
@@ -43,6 +46,7 @@ class MainApp(tk.Tk):
         return obj
 
     def load_user(self):
+        global users
         if os.path.exists(user_savefile):
             with open(user_savefile, 'r') as file:
                 user_data = json.load(file)
@@ -130,15 +134,25 @@ class LoginPage(tk.Frame):
         else:
             self.error_message.config(text='Incorrect Username or Password. Try again.')
 
-class EntryPage(tk.Frame):  
+class HomePage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
 
-        lbl = tk.Label(self, text='yo')
-        lbl.pack()
+        self.create_page()
 
-class HomePage(tk.Frame):
+    def create_page(self):
+        top_section = tk.Frame(self, background='red', height=100, width=1000)
+        entries_section = tk.Frame(self, background='blue', height=450, width=500)
+        statistics_section = tk.Frame(self, background='green', height=450, width=500)
+        graphs_section = tk.Frame(self, background='magenta', height=900, width=500)
+
+        top_section.grid(row=0, columnspan=2, sticky='nswe')
+        entries_section.grid(row=1, column=0, sticky='nswe')
+        statistics_section.grid(row=2, column=0, sticky='nswe')
+        graphs_section.grid(row=1, column=1, rowspan=2, sticky='nswe')
+
+class EntryPage(tk.Frame):  
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
