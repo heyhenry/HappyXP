@@ -29,7 +29,7 @@ class MainApp(tk.Tk):
             frame.grid(row=0, column=0, sticky='nswe')
 
         if users['user'].username:
-            self.show_page(LoginPage)
+            self.show_page(HomePage)
         else:
             self.show_page(SetupPage)
 
@@ -151,6 +151,23 @@ class HomePage(tk.Frame):
         entries_section.grid(row=1, column=0, sticky='nswe')
         statistics_section.grid(row=2, column=0, sticky='nswe')
         graphs_section.grid(row=1, column=1, rowspan=2, sticky='nswe')
+
+        # entries section
+        entry_listbox = tk.Listbox(entries_section)
+        scrollbar = tk.Scrollbar(entries_section)
+        entry_listbox.config(yscrollcommand=scrollbar.set)
+        scrollbar.config(command=entry_listbox.yview)
+
+        entry_listbox.place(x=165, y=20, width=300, height=400)
+        scrollbar.place(x=465, y=20, width=30, height=400)
+
+        add_entry = tk.Button(entries_section, text='Add Entry', font=('Kozuka Mincho Pro M', 14))
+        update_entry = tk.Button(entries_section, text='Update Entry', font=('Kozuka Mincho Pro M', 14))
+        delete_entry = tk.Button(entries_section, text='Delete Entry', font=('Kozuka Mincho Pro M', 14))
+
+        add_entry.place(x=10, y=50, width=150)
+        update_entry.place(x=10, y=150, width=150)
+        delete_entry.place(x=10, y=250, width=150)
 
 class EntryPage(tk.Frame):  
     def __init__(self, parent, controller):
