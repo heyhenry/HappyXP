@@ -37,12 +37,12 @@ class MainApp(tk.Tk):
             self.pages[P] = page
             page.grid(row=0, column=0, sticky='nswe')
 
-        # check if user already exists, if they do display Login Page upon startup
-        if users['user'].username:
-            self.show_page(HomePage)
-        # if not, display the Setup Page upon startup
-        else:
+        if not users['user'].username:
             self.show_page(SetupPage)
+        elif users['user'].toggle_login:
+            self.show_page(HomePage)
+        else:
+            self.show_page(LoginPage)
 
     def show_page(self, cont):
         page = self.pages[cont]
