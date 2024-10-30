@@ -1,3 +1,5 @@
 # To do next, based on previous coding session.
 
-1. In th mainapp class, make sure to check and open correct page based on whether user's info has already been created or not.
+1. Create the Login Widgets
+2. Create the error checking for Login inputs
+3. HomePage next..?
