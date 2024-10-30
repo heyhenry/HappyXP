@@ -63,6 +63,13 @@ class MainApp(tk.Tk):
                 'password': obj.password
             }
         return obj
+    
+    def update_user_save(self):
+
+        json_object = json.dumps(users, indent=4, default=self.custom_serializer)
+
+        with open(user_savefile, 'w') as outfile:
+            outfile.write(json_object)
 
 class SetupPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -166,16 +173,14 @@ class SetupPage(tk.Frame):
     # processes valid account creation and saves data
     def process_account(self):
         if not self.check_errors():
+            # updates the users dictionary
             users['user'].username = self.username_var.get()
             users['user'].password = self.password_var.get()
-            
-            json_object = json.dumps(users, indent=4, default=self.controller.custom_serializer)
 
-            with open(user_savefile, 'w') as outfile:
-                outfile.write(json_object)
-
+            # updates save data            
+            self.controller.update_user_save()
+            # redirect to the login page
             self.controller.show_page(LoginPage)
-
 
 class LoginPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -206,7 +211,6 @@ class EditUserPage(tk.Frame):
         tk.Frame.__init__(self, parent)
 
         self.controller = controller
-
 
 if __name__ == "__main__":
     app = MainApp()
