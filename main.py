@@ -31,6 +31,7 @@ class MainApp(tk.Tk):
         self.login_status_var = tk.BooleanVar(value=users['user'].toggle_login)
         self.current_user_image_var = tk.StringVar(value='img/default_pic.png')
 
+        # tracer to find changes to the current_user_image_var variable, if found - execute the update_profile_image function
         self.current_user_image_var.trace_add('write', self.update_profile_image)
 
         # store the frames (pages)
@@ -42,6 +43,8 @@ class MainApp(tk.Tk):
             # initialise frame of each page
             self.pages[P] = page
             page.grid(row=0, column=0, sticky='nswe')
+
+        self.load_initial_profile_image()
 
         # initial startup page alogrithm
         # if a username is not found in the user save file, then it indicates the account hasnt been created
@@ -97,12 +100,22 @@ class MainApp(tk.Tk):
         else:
             widget_name.config(foreground='red')
 
-    def update_profile_image(self, widget_name, *args):
-        # initial image setup
+    def load_initial_profile_image(self):
+        self.user_profile_img = Image.open(self.current_user_image_var.get())
+        self.user_profile_img.thumbnail((150, 150))
+        self.user_profile_img = ImageTk.PhotoImage(self.user_profile_img)
+
+        self.pages[HomePage].update_image(self.user_profile_img)
+
+    # updates the user's profile image
+    def update_profile_image(self, *args):
+        # create the image based on the current given file path
         self.user_profile_img = Image.open(self.current_user_image_var.get())
         self.user_profile_img.thumbnail((150, 150))
         self.user_profile_img = ImageTk.PhotoImage(self.user_profile_img)
         self.user_profile_img.image = self.user_profile_img
+
+        # specifically trigge the HomePage's func to update it's page's profile image display
         self.pages[HomePage].update_image(self.user_profile_img)
 
 class SetupPage(tk.Frame):
@@ -333,9 +346,6 @@ class HomePage(tk.Frame):
         user_info_section.place(x=250, y=50)
         user_info_section.propagate(0)
         user_info_section.config(width=800, height=200)
-
-        # user_profile_pic = tk.Label(user_info_section, image=self.controller.user_profile_img, highlightbackground='black', highlightthickness=1)
-        # user_profile_pic.image = self.controller.user_profile_img
 
         self.user_profile_pic = tk.Label(user_info_section, highlightbackground='black', highlightthickness=1)
 
