@@ -33,3 +33,4 @@
         1.1.3.5 create a new entry option
     1.1.4 User Details Page
         1.1.4.0 edit username, password, profile picture
+        
