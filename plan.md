@@ -33,4 +33,8 @@
         1.1.3.5 create a new entry option
     1.1.4 User Details Page
         1.1.4.0 edit username, password, profile picture
-        
+    1.1.5 New Entry Page
+        1.1.5.0 userinput = title, content type, rating, progress, status, start date, end date
+        1.1.5.1 mandatory input validation for title, content type
+        1.1.5.2 if other input fields aside from mandatory fields left blank, then add entry day's date for start date, status set to watching/reading, everything else set to 0 or n/a
+        1.1.5.3 validation check to ensure no duplicate entries are created based on title and content type
