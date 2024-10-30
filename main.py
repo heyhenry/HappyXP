@@ -215,15 +215,17 @@ class LoginPage(tk.Frame):
         password_entry = tk.Entry(login_form, textvariable=self.password_var, font=('helvetica', 18))
         self.password_error = tk.Label(login_form, text='', foreground='red', font=('helvetica', 10))
 
-        login_btn = tk.Button(login_form, text='Login', font=('helvetica', 18))
+        login_btn = tk.Button(login_form, text='Login', font=('helvetica', 18), command=self.process_login)
 
         login_title.place(x=130, y=50)
 
         username_subtitle.place(x=130, y=150)
         username_entry.place(x=130, y=180)
+        self.username_error.place(x=130, y=210)
 
-        password_subtitle.place(x=130, y=280)
-        password_entry.place(x=130, y=310)
+        password_subtitle.place(x=130, y=260)
+        password_entry.place(x=130, y=290)
+        self.password_error.place(x=130, y=320)
 
         login_btn.place(x=130, y=380)
 
@@ -234,6 +236,7 @@ class LoginPage(tk.Frame):
 
     # check for errors in user input
     def check_errors(self):
+        self.clear_errors()
         if self.username_var.get() != users['user'].username:
             self.username_error.config(text='Incorrect Username.')
         elif self.password_var.get() != users['user'].password:
@@ -242,7 +245,10 @@ class LoginPage(tk.Frame):
             return False
         return True
 
-
+    # process login details
+    def process_login(self):
+        if not self.check_errors():
+            self.controller.show_page(HomePage)
 
 
 class HomePage(tk.Frame):
