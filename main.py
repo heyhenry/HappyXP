@@ -97,6 +97,14 @@ class SetupPage(tk.Frame):
 
         submit_btn.place(x=240, y=535)
 
+    # clear error messages
+    def clear_errors(self):
+        self.display_name_error.config(text='')
+        self.username_error.config(text='')
+        self.password_error.config(text='')
+        self.confirm_password_error.config(text='')
+
+    
 
 class LoginPage(tk.Frame):
     def __init__(self, parent, controller):
