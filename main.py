@@ -252,7 +252,6 @@ class LoginPage(tk.Frame):
         if not self.check_errors():
             self.controller.show_page(HomePage)
 
-
 class HomePage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -277,23 +276,40 @@ class HomePage(tk.Frame):
         entries_navtitle = tk.Label(nav_bar, text='Entries', font=('helvetica', 18))
         settings_navtitle = tk.Label(nav_bar, text='Settings', font=('helvetica', 18))
 
+        self.login_status = tk.Label(nav_bar, text='Stay Logged In', font=('helvetica', 18))
+
+        if users['user'].toggle_login:
+            self.login_status.config(foreground='green')
+        else:
+            self.login_status.config(foreground='red')
+
         home_navtitle.place(x=50, y=50)
         search_navtitle.place(x=50, y=100)
         entries_navtitle.place(x=50, y=150)
         settings_navtitle.place(x=50, y=200)
+
+        self.login_status.place(x=15, y=300)
 
         home_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, HomePage))
         search_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, SearchPage))
         entries_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, EntriesPage))
         settings_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, SettingsPage))
 
+        self.login_status.bind("<Button-1>", lambda mouse_event: self.toggle_login(mouse_event))
+
     # redirects user to the selected page from the navbar
     def redirect_page(self, mouse_event, page_name):
         self.controller.show_page(page_name)
 
-    # def toggle_login(self)
-
-
+    def toggle_login(self, mouse_event):
+        if users['user'].toggle_login:
+            users['user'].toggle_login = False
+            self.login_status.config(foreground='red')
+            self.controller.update_user_save()
+        else:
+            users['user'].toggle_login = True
+            self.login_status.config(foreground='green')
+            self.controller.update_user_save()
 
 class NewEntryPage(tk.Frame):
     def __init__(self, parent, controller):
