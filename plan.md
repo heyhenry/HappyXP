@@ -16,14 +16,13 @@
         1.1.1.2 error messages based on validation x
         1.1.1.3 redirect to the homepage x
     1.1.2 Home Page
-        1.1.2.0 display top 5 favourite anime
-        1.1.2.1 display top 5 mangas/manhwas 
-        1.1.2.3 display user profile image x
-        1.1.2.4 small section for personal bio
-        1.1.2.5 option to stay logged in toggle x 
-        1.1.2.6 display some achievement badges
-        1.1.2.7 navigation bar (home, entries) x
-        1.1.2.8 edit user account option button x
+        1.1.2.0/1 display top 5 favourite entries
+        1.1.2.2 display user profile image x
+        1.1.2.3 small section for personal bio
+        1.1.2.4 option to stay logged in toggle x 
+        1.1.2.5 display some achievement badges
+        1.1.2.6 navigation bar (home, entries) x
+        1.1.2.7 edit user account option button x
     1.1.3 Entries Page
         1.1.3.0 List of entries
         1.1.3.1 Tab feature to filter entry list to either mangas or anime

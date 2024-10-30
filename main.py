@@ -368,6 +368,58 @@ class SettingsPage(tk.Frame):
 
         self.controller = controller
 
+        self.create_widgets()
+
+    def create_widgets(self):
+        settings_window = tk.Frame(self, highlightbackground='black', highlightthickness=2)
+        settings_window.place(relx=0.5, rely=0.5, anchor='center')
+        settings_window.propagate(0)
+        settings_window.config(width=1100, height=700)
+
+        # navigation bar
+        nav_bar = tk.Frame(settings_window, highlightbackground='grey', highlightthickness=1)
+        nav_bar.place(x=10, y=50)
+        nav_bar.propagate(0)
+        nav_bar.config(width=200, height=600)
+
+        home_navtitle = tk.Label(nav_bar, text='Home', font=('helvetica', 18))
+        search_navtitle = tk.Label(nav_bar, text='Search', font=('helvetica', 18))
+        entries_navtitle = tk.Label(nav_bar, text='Entries', font=('helvetica', 18))
+        settings_navtitle = tk.Label(nav_bar, text='Settings', font=('helvetica', 18))
+
+        self.login_status = tk.Label(nav_bar, text='Stay Logged In', font=('helvetica', 18))
+
+        # determines which colour should be showcaseing the toggled or not login text
+        if users['user'].toggle_login:
+            self.login_status.config(foreground='green')
+        else:
+            self.login_status.config(foreground='red')
+
+        home_navtitle.place(x=50, y=50)
+        search_navtitle.place(x=50, y=100)
+        entries_navtitle.place(x=50, y=150)
+        settings_navtitle.place(x=50, y=200)
+
+        self.login_status.place(x=15, y=300)
+
+        home_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, HomePage))
+        search_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, SearchPage))
+        entries_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, EntriesPage))
+        settings_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, SettingsPage))
+
+    def redirect_page(self, mouse_event, page_name):
+        self.controller.show_page(page_name)
+
+    def toggle_login(self, mouse_event):
+        if users['user'].toggle_login:
+            users['user'].toggle_login = False
+            self.login_status.config(foreground='red')
+            self.controller.update_user_save()
+        else:
+            users['user'].toggle_login = True
+            self.login_status.config(foreground='green')
+            self.controller.update_user_save()
+
 class SearchPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
