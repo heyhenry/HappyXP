@@ -457,6 +457,8 @@ class SettingsPage(tk.Frame):
 
         edit_btn = tk.Button(edit_section, text='Update Details', font=('helvetica', 18), command=self.process_edit)
 
+        self.success_message = tk.Label(edit_section, text='', font=('helvetica', 12), foreground='green')
+
         update_display_name_subtitle.place(x=100, y=50)
         update_display_name_entry.place(x=100, y=80)
         self.update_display_name_error.place(x=100, y=110)
@@ -470,6 +472,8 @@ class SettingsPage(tk.Frame):
         self.update_password_error.place(x=100, y=290)
 
         edit_btn.place(x=100, y=320)
+
+        self.success_message.place(x=100, y=380)
 
     def redirect_page(self, mouse_event, page_name):
         self.controller.show_page(page_name)
@@ -526,6 +530,9 @@ class SettingsPage(tk.Frame):
             return False
         return True
 
+    def clear_success_message(self):
+        self.success_message.config(text='')
+
     def process_edit(self):
         if not self.check_errors():
             users['user'].display_name = self.display_name_var.get()
@@ -533,6 +540,9 @@ class SettingsPage(tk.Frame):
             users['user'].password = self.password_var.get()
 
             self.controller.update_user_save()
+
+            self.success_message.config(text='Successfully Updated!')
+            self.success_message.after(1000, self.clear_success_message)
 
 class SearchPage(tk.Frame):
     def __init__(self, parent, controller):
