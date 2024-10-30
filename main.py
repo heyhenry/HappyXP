@@ -3,6 +3,7 @@ from user import UserInfo
 import json
 import os
 from PIL import Image, ImageTk
+from tkinter import filedialog
 
 # save data 
 users = {}
@@ -475,9 +476,11 @@ class SettingsPage(tk.Frame):
 
         self.success_message.place(x=100, y=380)
 
+    # redirect to a different page
     def redirect_page(self, mouse_event, page_name):
         self.controller.show_page(page_name)
 
+    # update and toggle the stay logged in status
     def toggle_login(self, mouse_event):
         if self.controller.login_status_var.get():
             users['user'].toggle_login = False
