@@ -100,6 +100,7 @@ class MainApp(tk.Tk):
         else:
             widget_name.config(foreground='red')
 
+    # intial loading of the user's profile image (curently just to the homepage)
     def load_initial_profile_image(self):
         self.user_profile_img = Image.open(self.current_user_image_var.get())
         self.user_profile_img.thumbnail((150, 150))
@@ -509,6 +510,11 @@ class SettingsPage(tk.Frame):
 
     # redirect to a different page
     def redirect_page(self, mouse_event, page_name):
+        # if the selected display image was not updated, then revert the file path for selected_file_path
+        # and display the current user's profile image for the display preview next time settings page is opened
+        if self.selected_file_path.get() != self.controller.current_user_image_var.get():
+            self.selected_file_path.set(self.controller.current_user_image_var.get())
+            self.display_image(self.controller.current_user_image_var.get())
         self.controller.show_page(page_name)
 
     # update and toggle the stay logged in status
