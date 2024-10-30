@@ -291,6 +291,8 @@ class HomePage(tk.Frame):
         else:
             self.login_status.config(foreground='red')
 
+        self.controller.login_status_var.trace_add('write', self.update_login)
+
         home_navtitle.place(x=50, y=50)
         search_navtitle.place(x=50, y=100)
         entries_navtitle.place(x=50, y=150)
@@ -354,6 +356,12 @@ class HomePage(tk.Frame):
             self.controller.update_user_save()
             self.controller.login_status_var.set(True)
 
+    def update_login(self, *args):
+        if self.controller.login_status_var.get():
+            self.login_status.config(foreground='green')
+        else:
+            self.login_status.config(foreground='red')
+
 class NewEntryPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -399,6 +407,7 @@ class SettingsPage(tk.Frame):
         else:
             self.login_status.config(foreground='red')
 
+        # updates the toggle status in real time
         self.controller.login_status_var.trace_add('write', self.update_login)
 
         home_navtitle.place(x=50, y=50)
@@ -412,6 +421,8 @@ class SettingsPage(tk.Frame):
         search_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, SearchPage))
         entries_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, EntriesPage))
         settings_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, SettingsPage))
+
+        self.login_status.bind("<Button-1>", lambda mouse_event: self.toggle_login(mouse_event))
 
     def redirect_page(self, mouse_event, page_name):
         self.controller.show_page(page_name)
@@ -428,6 +439,7 @@ class SettingsPage(tk.Frame):
             self.controller.update_user_save()
             self.controller.login_status_var.set(True)
 
+    # checks the login status's curent value
     def update_login(self, *args):
         if self.controller.login_status_var.get():
             self.login_status.config(foreground='green')
