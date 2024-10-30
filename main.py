@@ -497,11 +497,13 @@ class SettingsPage(tk.Frame):
         else:
             self.login_status.config(foreground='red')
 
+    # clear the error messages
     def clear_errors(self):
         self.update_display_name_error.config(text='')
         self.update_username_error.config(text='')
         self.update_password_error.config(text='')
 
+    # check for errors in user input fields
     def check_errors(self):
         # clear error messages
         self.clear_errors()
@@ -530,9 +532,11 @@ class SettingsPage(tk.Frame):
             return False
         return True
 
+    # clear the success message
     def clear_success_message(self):
         self.success_message.config(text='')
 
+    # process to information in the edit section
     def process_edit(self):
         if not self.check_errors():
             users['user'].display_name = self.display_name_var.get()
