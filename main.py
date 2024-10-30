@@ -2,6 +2,7 @@ import tkinter as tk
 from user import UserInfo
 import json
 import os
+from PIL import Image, ImageTk
 
 # save data 
 users = {}
@@ -38,7 +39,7 @@ class MainApp(tk.Tk):
 
         # check if user already exists, if they do display Login Page upon startup
         if users['user'].username:
-            self.show_page(LoginPage)
+            self.show_page(HomePage)
         # if not, display the Setup Page upon startup
         else:
             self.show_page(SetupPage)
@@ -256,6 +257,30 @@ class HomePage(tk.Frame):
         tk.Frame.__init__(self, parent)
 
         self.controller = controller
+
+        self.create_widgets()
+
+    def create_widgets(self):
+        home_window = tk.Frame(self, highlightbackground='black', highlightthickness=2)
+        home_window.place(relx=0.5, rely=0.5, anchor='center')
+        home_window.propagate(0)
+        home_window.config(width=1100, height=700)
+
+        nav_bar = tk.Frame(home_window, highlightbackground='grey', highlightthickness=1)
+        nav_bar.place(x=10, y=50)
+        nav_bar.propagate(0)
+        nav_bar.config(width=200, height=600)
+
+        home_navtitle = tk.Label(nav_bar, text='Home', font=('helvetica', 18))
+        search_navtitle = tk.Label(nav_bar, text='Search', font=('helvetica', 18))
+        entries_navtitle = tk.Label(nav_bar, text='Entries', font=('helvetica', 18))
+        settings_navtitle = tk.Label(nav_bar, text='Settings', font=('helvetica', 18))
+
+        home_navtitle.place(x=50, y=50)
+        search_navtitle.place(x=50, y=100)
+        entries_navtitle.place(x=50, y=150)
+        settings_navtitle.place(x=50, y=200)
+
 
 class NewEntryPage(tk.Frame):
     def __init__(self, parent, controller):

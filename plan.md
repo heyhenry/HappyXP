@@ -6,15 +6,15 @@
 
 1.1 Features
     1.1.0 Setup Page (Create Account)
-        1.1.0.0 username, password, confirm password input fields
-        1.1.0.1 validation check user input for standard protection/security
-        1.1.0.2 error messages based on validation
-        1.1.0.3 save to a user save file (json file storage)
+        1.1.0.0 username, password, confirm password input fields x 
+        1.1.0.1 validation check user input for standard protection/security x
+        1.1.0.2 error messages based on validation x
+        1.1.0.3 save to a user save file (json file storage) x
     1.1.1 Login Page
-        1.1.1.0 username, password input fields
-        1.1.1.1 validation check for correct account details
-        1.1.1.2 error messages based on validation
-        1.1.1.3 redirect to the homepage
+        1.1.1.0 username, password input fields x
+        1.1.1.1 validation check for correct account details x
+        1.1.1.2 error messages based on validation x
+        1.1.1.3 redirect to the homepage x
     1.1.2 Home Page
         1.1.2.0 display top 5 favourite anime
         1.1.2.1 display top 5 mangas/manhwas
