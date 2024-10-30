@@ -394,6 +394,8 @@ class SettingsPage(tk.Frame):
         self.username_var = tk.StringVar(value=users['user'].username)
         self.password_var = tk.StringVar(value=users['user'].password)
 
+        self.selected_file_path = tk.StringVar(value='img/default_pic.png')
+
         self.create_widgets()
 
     def create_widgets(self):
@@ -456,6 +458,7 @@ class SettingsPage(tk.Frame):
         update_password_entry = tk.Entry(edit_section, textvariable=self.password_var, font=('helvetica', 18))
         self.update_password_error = tk.Label(edit_section, text='', foreground='red', font=('helvetica', 10))
 
+        self.display_image_preview = tk.Label(edit_section)
         update_user_profile_image = tk.Button(edit_section, text='Upload New User Image', command=self.open_image)
 
         edit_btn = tk.Button(edit_section, text='Update Details', font=('helvetica', 18), command=self.process_edit)
@@ -474,9 +477,10 @@ class SettingsPage(tk.Frame):
         update_password_entry.place(x=100, y=260)
         self.update_password_error.place(x=100, y=290)
 
-        update_user_profile_image.place(x=100, y=320)
+        self.display_image_preview.place(x=500, y=100)
+        update_user_profile_image.place(x=500, y=250)
 
-        edit_btn.place(x=100, y=350)
+        edit_btn.place(x=100, y=340)
 
         self.success_message.place(x=100, y=410)
 
@@ -552,6 +556,8 @@ class SettingsPage(tk.Frame):
 
             self.controller.update_user_save()
 
+            self.save_image()
+
             self.success_message.config(text='Successfully Updated!')
             self.success_message.after(1000, self.clear_success_message)
 
@@ -559,13 +565,23 @@ class SettingsPage(tk.Frame):
     def open_image(self):
         file_path = filedialog.askopenfilename(title='Update User Image File', filetypes=[('Image Files', '*.png *.jpg *jpeg')])
         # if image file is valid, save the image as the new profile pic
+        # if file_path:
+        #     self.save_image(file_path)
         if file_path:
-            self.save_image(file_path)
+            self.display_image(file_path)
 
     # save image file to img folder for user profile pic
-    def save_image(self, file_path):
-        user_image = Image.open(file_path)
+    def save_image(self):
+        user_image = Image.open(self.selected_file_path.get())
         user_image.save('img/default_pic.png')
+
+    def display_image(self, file_path):
+        profile_image = Image.open(file_path)
+        profile_image.thumbnail((150, 150))
+        profile_image = ImageTk.PhotoImage(profile_image)
+        self.display_image_preview.config(image=profile_image)
+        self.display_image_preview.image = profile_image
+        self.selected_file_path.set(file_path)
 
 class SearchPage(tk.Frame):
     def __init__(self, parent, controller):
