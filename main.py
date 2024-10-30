@@ -196,6 +196,7 @@ class SetupPage(tk.Frame):
     def process_account(self):
         if not self.check_errors():
             # updates the users dictionary
+            users['user'].display_name = self.display_name_var.get()
             users['user'].username = self.username_var.get()
             users['user'].password = self.password_var.get()
 
@@ -388,9 +389,9 @@ class SettingsPage(tk.Frame):
 
         self.controller = controller
 
-        self.display_name_var = tk.StringVar()
-        self.username_var = tk.StringVar()
-        self.password_var = tk.StringVar()
+        self.display_name_var = tk.StringVar(value=users['user'].display_name)
+        self.username_var = tk.StringVar(value=users['user'].username)
+        self.password_var = tk.StringVar(value=users['user'].password)
 
         self.create_widgets()
 
@@ -454,6 +455,8 @@ class SettingsPage(tk.Frame):
         update_password_entry = tk.Entry(edit_section, textvariable=self.password_var, font=('helvetica', 18))
         self.update_password_error = tk.Label(edit_section, text='', foreground='red', font=('helvetica', 10))
 
+        edit_btn = tk.Button(edit_section, text='Update Details', font=('helvetica', 18), command=self.process_edit)
+
         update_display_name_subtitle.place(x=100, y=50)
         update_display_name_entry.place(x=100, y=80)
         self.update_display_name_error.place(x=100, y=110)
@@ -465,6 +468,8 @@ class SettingsPage(tk.Frame):
         update_password_subtitle.place(x=100, y=230)
         update_password_entry.place(x=100, y=260)
         self.update_password_error.place(x=100, y=290)
+
+        edit_btn.place(x=100, y=320)
 
     def redirect_page(self, mouse_event, page_name):
         self.controller.show_page(page_name)
@@ -503,7 +508,6 @@ class SettingsPage(tk.Frame):
             self.update_display_name_error.config(text='Display Name Must Be Longer Than 2 Characters.')
         elif len(self.display_name_var.get()) > 12:
             self.update_display_name_error.config(text='Display Name Must Be Less Than 13 Characters.')
-        elif users['user'].display_name == self.display_name_var.get()
         # username related
         elif ' ' in self.username_var.get():
             self.update_username_error.config(text='Username Must Not Contain Spaces.')
@@ -511,8 +515,6 @@ class SettingsPage(tk.Frame):
             self.update_username_error.config(text='Username Must Be Longer Than 2 Characters.')
         elif len(self.username_var.get()) > 12:
             self.update_username_error.config(text='Username Must be Less Than 13 Characters.')
-        elif users['user'].username == self.username_var.get():
-            self.update_username_error.config(text='Username Must Be Different Than The Current One.')
         # password related
         elif ' ' in self.password_var.get():
             self.update_password_error.config(text='Password Must Not Contain Spaces.')
@@ -520,8 +522,17 @@ class SettingsPage(tk.Frame):
             self.update_password_error.config(text='Password Must Be Longer Than 7 Characters.')
         elif len(self.password_var.get()) > 12:
             self.update_password_error.config(text='Password Must Be Less Than 13 Characters.')
-        elif users['user'].password == self.password_var.get():
-            self.update_password_error.config(text='Password Must Be Different Than The Current One.')
+        else:
+            return False
+        return True
+
+    def process_edit(self):
+        if not self.check_errors():
+            users['user'].display_name = self.display_name_var.get()
+            users['user'].username = self.username_var.get()
+            users['user'].password = self.password_var.get()
+
+            self.controller.update_user_save()
 
 class SearchPage(tk.Frame):
     def __init__(self, parent, controller):
