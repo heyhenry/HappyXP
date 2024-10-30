@@ -55,6 +55,15 @@ class MainApp(tk.Tk):
                 for user, user_info in users_data.items():
                     users[user] = UserInfo(user_info['username'], user_info['password'])
 
+    # json customised serializer
+    def custom_serializer(self, obj):
+        if isinstance(obj, UserInfo):
+            return {
+                'username': obj.username,
+                'password': obj.password
+            }
+        return obj
+
 class SetupPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -154,10 +163,18 @@ class SetupPage(tk.Frame):
             return False
         return True
 
+    # processes valid account creation and saves data
     def process_account(self):
-        pass
-        # if not self.check_errors():
+        if not self.check_errors():
+            users['user'].username = self.username_var.get()
+            users['user'].password = self.password_var.get()
             
+            json_object = json.dumps(users, indent=4, default=self.controller.custom_serializer)
+
+            with open(user_savefile, 'w') as outfile:
+                outfile.write(json_object)
+
+            self.controller.show_page(LoginPage)
 
 
 class LoginPage(tk.Frame):
