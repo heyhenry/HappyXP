@@ -65,12 +65,13 @@ class MainApp(tk.Tk):
                 users_data = json.load(file)
                 # populate the users dictionary with the save file data
                 for user, user_info in users_data.items():
-                    users[user] = UserInfo(user_info['username'], user_info['password'], user_info['toggle_login'])
+                    users[user] = UserInfo(user_info['display_name'], user_info['username'], user_info['password'], user_info['toggle_login'])
 
     # json customised serializer
     def custom_serializer(self, obj):
         if isinstance(obj, UserInfo):
             return {
+                'display_name': obj.display_name,
                 'username': obj.username,
                 'password': obj.password,
                 'toggle_login': obj.toggle_login
