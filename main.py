@@ -75,7 +75,7 @@ class SetupPage(tk.Frame):
         confirm_password_entry = tk.Entry(setup_form, textvariable=self.confirm_password_var, font=('helvetica', 18))
         self.confirm_password_error = tk.Label(setup_form, text='', foreground='red', font=('helvetica', 10))
 
-        submit_btn = tk.Button(setup_form, text='Create', font=('helvetica', 18))
+        submit_btn = tk.Button(setup_form, text='Create', font=('helvetica', 18), command=self.check_errors)
 
         create_account_title.place(x=150, y=50)
 
@@ -104,7 +104,34 @@ class SetupPage(tk.Frame):
         self.password_error.config(text='')
         self.confirm_password_error.config(text='')
 
-    
+    # check for errors in the input fields
+    def check_errors(self):
+        # clean error messages
+        self.clear_errors()
+
+        # display name related
+        if ' ' in self.display_name_var.get():
+            self.display_name_error.config(text='Display Name Must Not Contain Spaces.') 
+        elif len(self.display_name_var.get()) < 3:
+            self.display_name_error.config(text='Display Name Must Be Longer Than 2 Characters.')
+        elif len(self.display_name_var.get()) > 12:
+            self.display_name_error.config(text='Display Name Must Be Less Than 13 Characters.')
+        # username related
+        elif ' ' in self.username_var.get():
+            self.username_error.config(text='Username Must Not Contain Spaces.')
+        elif len(self.username_var.get()) < 3:
+            self.username_error.config(text='Username Must Be Longer Than 2 Characters.')
+        elif len(self.username_var.get()) > 12:
+            self.username_error.config(text='Username Must Be Less Than 13 Characters.')
+        # password related
+        elif ' ' in self.password_var.get():
+            self.password_error.config(text='Password Must Not Contain Spaces.')
+        elif len(self.password_var.get()) < 8:
+            self.password_error.config(text='Password Must Be Longer Than 7 Characters.')
+        elif len(self.password_var.get()) > 12:
+            self.password_error.config(text='Password Must Be Less Than 13 Characters.')
+        elif self.password_var.get() != self.confirm_password_var.get():
+            self.confirm_password_error.config(text='Passwords Do Not Match.')
 
 class LoginPage(tk.Frame):
     def __init__(self, parent, controller):
