@@ -29,6 +29,9 @@ class MainApp(tk.Tk):
         self.load_users()
 
         self.login_status_var = tk.BooleanVar(value=users['user'].toggle_login)
+        self.current_user_image_var = tk.StringVar(value='img/default_pic.png')
+
+        self.current_user_image_var.trace_add('write', self.update_profile_image)
 
         # store the frames (pages)
         self.pages = {}
@@ -93,6 +96,14 @@ class MainApp(tk.Tk):
             widget_name.config(foreground='green')
         else:
             widget_name.config(foreground='red')
+
+    def update_profile_image(self, widget_name, *args):
+        # initial image setup
+        self.user_profile_img = Image.open(self.current_user_image_var.get())
+        self.user_profile_img.thumbnail((150, 150))
+        self.user_profile_img = ImageTk.PhotoImage(self.user_profile_img)
+        self.user_profile_img.image = self.user_profile_img
+        self.pages[HomePage].update_image(self.user_profile_img)
 
 class SetupPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -323,17 +334,15 @@ class HomePage(tk.Frame):
         user_info_section.propagate(0)
         user_info_section.config(width=800, height=200)
 
-        user_profile_img = Image.open('./img/default_pic.png')
-        user_profile_img.thumbnail((150, 150))
-        user_profile_img = ImageTk.PhotoImage(user_profile_img)
+        # user_profile_pic = tk.Label(user_info_section, image=self.controller.user_profile_img, highlightbackground='black', highlightthickness=1)
+        # user_profile_pic.image = self.controller.user_profile_img
 
-        user_profile_pic = tk.Label(user_info_section, image=user_profile_img, highlightbackground='black', highlightthickness=1)
-        user_profile_pic.image = user_profile_img
+        self.user_profile_pic = tk.Label(user_info_section, highlightbackground='black', highlightthickness=1)
 
         user_bio = tk.Label(user_info_section, highlightbackground='black', highlightthickness=1)
         user_bio.config(width=75, height=10)
 
-        user_profile_pic.place(x=600, y=25)
+        self.user_profile_pic.place(x=600, y=25)
 
         user_bio.place(x=25, y=25)
 
@@ -366,11 +375,9 @@ class HomePage(tk.Frame):
             self.controller.update_user_save()
             self.controller.login_status_var.set(True)
 
-    # def update_login(self, *args):
-    #     if self.controller.login_status_var.get():
-    #         self.login_status.config(foreground='green')
-    #     else:
-    #         self.login_status.config(foreground='red')
+    def update_image(self, new_image):
+        self.user_profile_pic.config(image=new_image)
+        self.user_profile_pic.image = new_image
 
 class NewEntryPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -562,6 +569,7 @@ class SettingsPage(tk.Frame):
 
             self.controller.update_user_save()
 
+            self.controller.current_user_image_var.set(self.selected_file_path.get())
             self.save_image()
 
             self.success_message.config(text='Successfully Updated!')
