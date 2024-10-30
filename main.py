@@ -458,7 +458,12 @@ class SettingsPage(tk.Frame):
         update_password_entry = tk.Entry(edit_section, textvariable=self.password_var, font=('helvetica', 18))
         self.update_password_error = tk.Label(edit_section, text='', foreground='red', font=('helvetica', 10))
 
-        self.display_image_preview = tk.Label(edit_section)
+        current_user_image = Image.open('img/default_pic.png')
+        current_user_image.thumbnail((150, 150))
+        current_user_image = ImageTk.PhotoImage(current_user_image)
+        current_user_image.image = current_user_image
+
+        self.display_image_preview = tk.Label(edit_section, image=current_user_image)
         update_user_profile_image = tk.Button(edit_section, text='Upload New User Image', command=self.open_image)
 
         edit_btn = tk.Button(edit_section, text='Update Details', font=('helvetica', 18), command=self.process_edit)
