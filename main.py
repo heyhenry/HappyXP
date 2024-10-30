@@ -270,6 +270,7 @@ class HomePage(tk.Frame):
         home_window.propagate(0)
         home_window.config(width=1100, height=700)
 
+        # navigation bar
         nav_bar = tk.Frame(home_window, highlightbackground='grey', highlightthickness=1)
         nav_bar.place(x=10, y=50)
         nav_bar.propagate(0)
@@ -301,6 +302,22 @@ class HomePage(tk.Frame):
         settings_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, SettingsPage))
 
         self.login_status.bind("<Button-1>", lambda mouse_event: self.toggle_login(mouse_event))
+
+        # bio and profile 
+        user_info_section = tk.Frame(home_window, highlightbackground='black', highlightthickness=1)
+        user_info_section.place(x=250, y=50)
+        user_info_section.propagate(0)
+        user_info_section.config(width=800, height=200)
+
+
+        user_profile_img = Image.open('./img/default_pic.jpg')
+        user_profile_img.thumbnail((150, 150))
+        user_profile_img = ImageTk.PhotoImage(user_profile_img)
+
+        user_profile_pic = tk.Label(user_info_section, image=user_profile_img, highlightbackground='black', highlightthickness=1)
+        user_profile_pic.image = user_profile_img
+
+        user_profile_pic.place(x=600, y=25)
 
     # redirects user to the selected page from the navbar
     def redirect_page(self, mouse_event, page_name):
