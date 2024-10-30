@@ -227,6 +227,22 @@ class LoginPage(tk.Frame):
 
         login_btn.place(x=130, y=380)
 
+    # clear error messages
+    def clear_errors(self):
+        self.username_error.config(text='')
+        self.password_error.config(text='')
+
+    # check for errors in user input
+    def check_errors(self):
+        if self.username_var.get() != users['user'].username:
+            self.username_error.config(text='Incorrect Username.')
+        elif self.password_var.get() != users['user'].password:
+            self.password_error.config(text='Incorrect Password.')
+        else:
+            return False
+        return True
+
+
 
 
 class HomePage(tk.Frame):
