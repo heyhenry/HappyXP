@@ -1,6 +1,7 @@
 {
     "user": {
         "username": "henry",
-        "password": "hens1234"
+        "password": "hens1234",
+        "toggle_login": false
     }
 }

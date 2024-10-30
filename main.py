@@ -59,14 +59,15 @@ class MainApp(tk.Tk):
                 users_data = json.load(file)
                 # populate the users dictionary with the save file data
                 for user, user_info in users_data.items():
-                    users[user] = UserInfo(user_info['username'], user_info['password'])
+                    users[user] = UserInfo(user_info['username'], user_info['password'], user_info['toggle_login'])
 
     # json customised serializer
     def custom_serializer(self, obj):
         if isinstance(obj, UserInfo):
             return {
                 'username': obj.username,
-                'password': obj.password
+                'password': obj.password,
+                'toggle_login': obj.toggle_login
             }
         return obj
 
@@ -289,6 +290,8 @@ class HomePage(tk.Frame):
     # redirects user to the selected page from the navbar
     def redirect_page(self, mouse_event, page_name):
         self.controller.show_page(page_name)
+
+    # def toggle_login(self)
 
 
 
