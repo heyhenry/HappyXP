@@ -85,6 +85,13 @@ class MainApp(tk.Tk):
         with open(user_savefile, 'w') as outfile:
             outfile.write(json_object)
 
+    # updates the login toggle status
+    def update_login(self, widget_name, *args):
+        if self.login_status_var.get():
+            widget_name.config(foreground='green')
+        else:
+            widget_name.config(foreground='red')
+
 class SetupPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -291,7 +298,7 @@ class HomePage(tk.Frame):
         else:
             self.login_status.config(foreground='red')
 
-        self.controller.login_status_var.trace_add('write', self.update_login)
+        self.controller.login_status_var.trace_add('write', lambda *args: self.controller.update_login(self.login_status))
 
         home_navtitle.place(x=50, y=50)
         search_navtitle.place(x=50, y=100)
@@ -356,11 +363,11 @@ class HomePage(tk.Frame):
             self.controller.update_user_save()
             self.controller.login_status_var.set(True)
 
-    def update_login(self, *args):
-        if self.controller.login_status_var.get():
-            self.login_status.config(foreground='green')
-        else:
-            self.login_status.config(foreground='red')
+    # def update_login(self, *args):
+    #     if self.controller.login_status_var.get():
+    #         self.login_status.config(foreground='green')
+    #     else:
+    #         self.login_status.config(foreground='red')
 
 class NewEntryPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -408,7 +415,7 @@ class SettingsPage(tk.Frame):
             self.login_status.config(foreground='red')
 
         # updates the toggle status in real time
-        self.controller.login_status_var.trace_add('write', self.update_login)
+        self.controller.login_status_var.trace_add('write', lambda *args: self.controller.update_login(self.login_status))
 
         home_navtitle.place(x=50, y=50)
         search_navtitle.place(x=50, y=100)
