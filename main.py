@@ -1,9 +1,14 @@
 import tkinter as tk
 from user import UserInfo
+import json
+import os
 
 # save data 
 users = {}
 entries = {}
+
+# save file names
+user_savefile = 'user_save.json'
 
 class MainApp(tk.Tk):
     # initiate MainApp class
@@ -18,6 +23,8 @@ class MainApp(tk.Tk):
         container.grid_columnconfigure(0, weight=1)
 
         self.geometry('1200x800+350+100')
+
+        self.load_users()
 
         # store the frames (pages)
         self.pages = {}
@@ -35,6 +42,18 @@ class MainApp(tk.Tk):
         page = self.pages[cont]
         page.tkraise()
 
+    # load the user saved data and update users dictionary
+    def load_users(self):
+        global users
+        # checks if the save file can be located
+        if os.path.exists(user_savefile):
+            # opens the save file and reads its data
+            with open(user_savefile, 'r') as file:
+                # save the data into a dictionary variable
+                users_data = json.load(file)
+                # populate the users dictionary with the save file data
+                for user, user_info in users_data.items():
+                    users[user] = UserInfo(user_info['username'], user_info['password'])
 
 class SetupPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -75,7 +94,7 @@ class SetupPage(tk.Frame):
         confirm_password_entry = tk.Entry(setup_form, textvariable=self.confirm_password_var, font=('helvetica', 18))
         self.confirm_password_error = tk.Label(setup_form, text='', foreground='red', font=('helvetica', 10))
 
-        submit_btn = tk.Button(setup_form, text='Create', font=('helvetica', 18), command=self.check_errors)
+        submit_btn = tk.Button(setup_form, text='Create', font=('helvetica', 18), command=self.process_account)
 
         create_account_title.place(x=150, y=50)
 
@@ -108,7 +127,6 @@ class SetupPage(tk.Frame):
     def check_errors(self):
         # clean error messages
         self.clear_errors()
-
         # display name related
         if ' ' in self.display_name_var.get():
             self.display_name_error.config(text='Display Name Must Not Contain Spaces.') 
@@ -132,6 +150,15 @@ class SetupPage(tk.Frame):
             self.password_error.config(text='Password Must Be Less Than 13 Characters.')
         elif self.password_var.get() != self.confirm_password_var.get():
             self.confirm_password_error.config(text='Passwords Do Not Match.')
+        else:
+            return False
+        return True
+
+    def process_account(self):
+        pass
+        # if not self.check_errors():
+            
+
 
 class LoginPage(tk.Frame):
     def __init__(self, parent, controller):
