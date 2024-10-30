@@ -37,10 +37,14 @@ class MainApp(tk.Tk):
             self.pages[P] = page
             page.grid(row=0, column=0, sticky='nswe')
 
+        # initial startup page alogrithm
+        # if a username is not found in the user save file, then it indicates the account hasnt been created
         if not users['user'].username:
             self.show_page(SetupPage)
+        # check if the toggle_login was toggled on
         elif users['user'].toggle_login:
             self.show_page(HomePage)
+        # otherwise, go to login page
         else:
             self.show_page(LoginPage)
 
@@ -278,6 +282,7 @@ class HomePage(tk.Frame):
 
         self.login_status = tk.Label(nav_bar, text='Stay Logged In', font=('helvetica', 18))
 
+        # determines which colour should be showcasing the toggled or not login text 
         if users['user'].toggle_login:
             self.login_status.config(foreground='green')
         else:
@@ -301,6 +306,7 @@ class HomePage(tk.Frame):
     def redirect_page(self, mouse_event, page_name):
         self.controller.show_page(page_name)
 
+    # toggling the status of the login's 'stay on' feature 
     def toggle_login(self, mouse_event):
         if users['user'].toggle_login:
             users['user'].toggle_login = False
