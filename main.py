@@ -27,6 +27,8 @@ class MainApp(tk.Tk):
 
         self.load_users()
 
+        self.login_status_var = tk.BooleanVar(value=users['user'].toggle_login)
+
         # store the frames (pages)
         self.pages = {}
 
@@ -284,7 +286,7 @@ class HomePage(tk.Frame):
         self.login_status = tk.Label(nav_bar, text='Stay Logged In', font=('helvetica', 18))
 
         # determines which colour should be showcasing the toggled or not login text 
-        if users['user'].toggle_login:
+        if self.controller.login_status_var.get():
             self.login_status.config(foreground='green')
         else:
             self.login_status.config(foreground='red')
@@ -341,14 +343,16 @@ class HomePage(tk.Frame):
 
     # toggling the status of the login's 'stay on' feature 
     def toggle_login(self, mouse_event):
-        if users['user'].toggle_login:
+        if self.controller.login_status_var.get():
             users['user'].toggle_login = False
             self.login_status.config(foreground='red')
             self.controller.update_user_save()
+            self.controller.login_status_var.set(False)
         else:
             users['user'].toggle_login = True
             self.login_status.config(foreground='green')
             self.controller.update_user_save()
+            self.controller.login_status_var.set(True)
 
 class NewEntryPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -390,10 +394,12 @@ class SettingsPage(tk.Frame):
         self.login_status = tk.Label(nav_bar, text='Stay Logged In', font=('helvetica', 18))
 
         # determines which colour should be showcaseing the toggled or not login text
-        if users['user'].toggle_login:
+        if self.controller.login_status_var.get():
             self.login_status.config(foreground='green')
         else:
             self.login_status.config(foreground='red')
+
+        self.controller.login_status_var.trace_add('write', self.update_login)
 
         home_navtitle.place(x=50, y=50)
         search_navtitle.place(x=50, y=100)
@@ -411,14 +417,22 @@ class SettingsPage(tk.Frame):
         self.controller.show_page(page_name)
 
     def toggle_login(self, mouse_event):
-        if users['user'].toggle_login:
+        if self.controller.login_status_var.get():
             users['user'].toggle_login = False
             self.login_status.config(foreground='red')
             self.controller.update_user_save()
+            self.controller.login_status_var.set(False)
         else:
             users['user'].toggle_login = True
             self.login_status.config(foreground='green')
             self.controller.update_user_save()
+            self.controller.login_status_var.set(True)
+
+    def update_login(self, *args):
+        if self.controller.login_status_var.get():
+            self.login_status.config(foreground='green')
+        else:
+            self.login_status.config(foreground='red')
 
 class SearchPage(tk.Frame):
     def __init__(self, parent, controller):
