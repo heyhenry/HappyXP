@@ -57,6 +57,47 @@ class SetupPage(tk.Frame):
         setup_form.propagate(0)
         setup_form.config(width=600, height=600)
 
+        create_account_title = tk.Label(setup_form, text='Create Account', font=('helvetica', 32))
+
+        display_name_subtitle = tk.Label(setup_form, text='Display Name:', font=('helvetica', 12))
+        display_name_entry = tk.Entry(setup_form, textvariable=self.display_name_var, font=('helvetica', 18))
+        self.display_name_error = tk.Label(setup_form, text='', foreground='red', font=('helvetica', 10))
+
+        username_subtitle = tk.Label(setup_form, text='Username:', font=('helvetica', 12))
+        username_entry = tk.Entry(setup_form, textvariable=self.username_var, font=('helvetica', 18))
+        self.username_error = tk.Label(setup_form, text='', foreground='red', font=('helvetica', 10))
+
+        password_subtitle = tk.Label(setup_form, text='Password:', font=('helvetica', 12))
+        password_entry = tk.Entry(setup_form, textvariable=self.password_var, font=('helvetica', 18))
+        self.password_error = tk.Label(setup_form, text='', foreground='red', font=('helvetica', 10))
+
+        confirm_password_subtitle = tk.Label(setup_form, text='Confirm Password:', font=('helvetica', 12))
+        confirm_password_entry = tk.Entry(setup_form, textvariable=self.confirm_password_var, font=('helvetica', 18))
+        self.confirm_password_error = tk.Label(setup_form, text='', foreground='red', font=('helvetica', 10))
+
+        submit_btn = tk.Button(setup_form, text='Create', font=('helvetica', 18))
+
+        create_account_title.place(x=150, y=50)
+
+        display_name_subtitle.place(x=150, y=150)
+        display_name_entry.place(x=150, y=180)
+        self.display_name_error.place(x=150, y=210)
+
+        username_subtitle.place(x=150, y=250) # +40
+        username_entry.place(x=150, y=280)
+        self.username_error.place(x=150, y=310)
+
+        password_subtitle.place(x=150, y=350)
+        password_entry.place(x=150, y=380)
+        self.password_error.place(x=150, y=410)
+
+        confirm_password_subtitle.place(x=150, y=450)
+        confirm_password_entry.place(x=150, y=480)
+        self.confirm_password_error.place(x=150, y=510)
+
+        submit_btn.place(x=240, y=535)
+
+
 class LoginPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
