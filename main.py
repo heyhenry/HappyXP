@@ -458,6 +458,7 @@ class SettingsPage(tk.Frame):
         update_password_entry = tk.Entry(edit_section, textvariable=self.password_var, font=('helvetica', 18))
         self.update_password_error = tk.Label(edit_section, text='', foreground='red', font=('helvetica', 10))
 
+        # display preview of the current user's profile image
         current_user_image = Image.open('img/default_pic.png')
         current_user_image.thumbnail((150, 150))
         current_user_image = ImageTk.PhotoImage(current_user_image)
@@ -580,6 +581,7 @@ class SettingsPage(tk.Frame):
         user_image = Image.open(self.selected_file_path.get())
         user_image.save('img/default_pic.png')
 
+    # display the selected image onto the settings page
     def display_image(self, file_path):
         profile_image = Image.open(file_path)
         profile_image.thumbnail((150, 150))
