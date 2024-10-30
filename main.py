@@ -31,7 +31,7 @@ class MainApp(tk.Tk):
         self.pages = {}
 
         # iterate through the various pages found in the app
-        for P in (SetupPage, LoginPage, HomePage, NewEntryPage, EntriesPage, EditUserPage):
+        for P in (SetupPage, LoginPage, HomePage, NewEntryPage, EntriesPage, SettingsPage, SearchPage):
             page = P(container, self)
             # initialise frame of each page
             self.pages[P] = page
@@ -281,6 +281,16 @@ class HomePage(tk.Frame):
         entries_navtitle.place(x=50, y=150)
         settings_navtitle.place(x=50, y=200)
 
+        home_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, HomePage))
+        search_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, SearchPage))
+        entries_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, EntriesPage))
+        settings_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, SettingsPage))
+
+    # redirects user to the selected page from the navbar
+    def redirect_page(self, mouse_event, page_name):
+        self.controller.show_page(page_name)
+
+
 
 class NewEntryPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -294,7 +304,13 @@ class EntriesPage(tk.Frame):
 
         self.controller = controller
 
-class EditUserPage(tk.Frame):
+class SettingsPage(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+
+        self.controller = controller
+
+class SearchPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
