@@ -68,7 +68,8 @@ class MainApp(tk.Tk):
                 'password': obj.password
             }
         return obj
-    
+
+    # update the user save file
     def update_user_save(self):
 
         json_object = json.dumps(users, indent=4, default=self.custom_serializer)
@@ -192,6 +193,41 @@ class LoginPage(tk.Frame):
         tk.Frame.__init__(self, parent)
 
         self.controller = controller
+
+        self.username_var = tk.StringVar()
+        self.password_var = tk.StringVar()
+
+        self.create_widgets()
+
+    def create_widgets(self):
+        login_form = tk.Frame(self, highlightbackground='black', highlightthickness=2)
+        login_form.place(relx=0.5, rely=0.5, anchor='center')
+        login_form.propagate(0)
+        login_form.config(width=600, height=600)
+
+        login_title = tk.Label(login_form, text='Login to HappyXP', font=('helvetica', 32))
+
+        username_subtitle = tk.Label(login_form, text='Username:', font=('helvetica', 12))
+        username_entry = tk.Entry(login_form, textvariable=self.username_var, font=('helvetica', 18))
+        self.username_error = tk.Label(login_form, text='', foreground='red', font=('helvetica', 10))
+
+        password_subtitle = tk.Label(login_form, text='Password:', font=('helvetica', 12))
+        password_entry = tk.Entry(login_form, textvariable=self.password_var, font=('helvetica', 18))
+        self.password_error = tk.Label(login_form, text='', foreground='red', font=('helvetica', 10))
+
+        login_btn = tk.Button(login_form, text='Login', font=('helvetica', 18))
+
+        login_title.place(x=130, y=50)
+
+        username_subtitle.place(x=130, y=150)
+        username_entry.place(x=130, y=180)
+
+        password_subtitle.place(x=130, y=280)
+        password_entry.place(x=130, y=310)
+
+        login_btn.place(x=130, y=380)
+
+
 
 class HomePage(tk.Frame):
     def __init__(self, parent, controller):
