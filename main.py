@@ -387,6 +387,10 @@ class SettingsPage(tk.Frame):
 
         self.controller = controller
 
+        self.display_name_var = tk.StringVar()
+        self.username_var = tk.StringVar()
+        self.password_var = tk.StringVar()
+
         self.create_widgets()
 
     def create_widgets(self):
@@ -430,6 +434,36 @@ class SettingsPage(tk.Frame):
         settings_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, SettingsPage))
 
         self.login_status.bind("<Button-1>", lambda mouse_event: self.toggle_login(mouse_event))
+
+        # edit section
+        edit_section = tk.Frame(settings_window, highlightbackground='black', highlightthickness=1)
+        edit_section.place(x=250, y=50)
+        edit_section.propagate(0)
+        edit_section.config(width=800, height=600)
+
+        update_display_name_subtitle = tk.Label(edit_section, text='Change Display Name:', font=('helvetica', 12))
+        update_display_name_entry = tk.Entry(edit_section, textvariable=self.display_name_var, font=('helvetica', 18))
+        self.update_display_name_error = tk.Label(edit_section, text='', foreground='red', font=('helvetica', 10))
+
+        update_username_subtitle = tk.Label(edit_section, text='Change Username:', font=('helvetica', 12))
+        update_username_entry = tk.Entry(edit_section, textvariable=self.username_var, font=('helvetica', 18))
+        self.update_username_error = tk.Label(edit_section, text='', foreground='red', font=('helvetica', 10))
+
+        update_password_subtitle = tk.Label(edit_section, text='Change Password:', font=('helvetica', 12))
+        update_password_entry = tk.Entry(edit_section, textvariable=self.password_var, font=('helvetica', 18))
+        self.update_password_error = tk.Label(edit_section, text='', foreground='red', font=('helvetica', 10))
+
+        update_display_name_subtitle.place(x=100, y=50)
+        update_display_name_entry.place(x=100, y=80)
+        self.update_display_name_error.place(x=100, y=110)
+
+        update_username_subtitle.place(x=100, y=140)
+        update_username_entry.place(x=100, y=170)
+        self.update_username_error.place(x=100, y=200)
+
+        update_password_subtitle.place(x=100, y=230)
+        update_password_entry.place(x=100, y=260)
+        self.update_password_error.place(x=100, y=290)
 
     def redirect_page(self, mouse_event, page_name):
         self.controller.show_page(page_name)
