@@ -309,7 +309,6 @@ class HomePage(tk.Frame):
         user_info_section.propagate(0)
         user_info_section.config(width=800, height=200)
 
-
         user_profile_img = Image.open('./img/default_pic.jpg')
         user_profile_img.thumbnail((150, 150))
         user_profile_img = ImageTk.PhotoImage(user_profile_img)
@@ -317,7 +316,15 @@ class HomePage(tk.Frame):
         user_profile_pic = tk.Label(user_info_section, image=user_profile_img, highlightbackground='black', highlightthickness=1)
         user_profile_pic.image = user_profile_img
 
+        user_bio = tk.Label(user_info_section, highlightbackground='black', highlightthickness=1)
+        user_bio.config(width=75, height=10)
+
         user_profile_pic.place(x=600, y=25)
+
+        user_bio.place(x=25, y=25)
+
+
+
 
     # redirects user to the selected page from the navbar
     def redirect_page(self, mouse_event, page_name):
