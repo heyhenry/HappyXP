@@ -487,6 +487,41 @@ class SettingsPage(tk.Frame):
         else:
             self.login_status.config(foreground='red')
 
+    def clear_errors(self):
+        self.update_display_name_error.config(text='')
+        self.update_username_error.config(text='')
+        self.update_password_error.config(text='')
+
+    def check_errors(self):
+        # clear error messages
+        self.clear_errors()
+        # display name related
+        if ' ' in self.display_name_var.get():
+            self.update_display_name_error.config(text='Display Name Must Not Contain Spaces.')
+        elif len(self.display_name_var.get()) < 3:
+            self.update_display_name_error.config(text='Display Name Must Be Longer Than 2 Characters.')
+        elif len(self.display_name_var.get()) > 12:
+            self.update_display_name_error.config(text='Display Name Must Be Less Than 13 Characters.')
+        elif users['user'].display_name == self.display_name_var.get()
+        # username related
+        elif ' ' in self.username_var.get():
+            self.update_username_error.config(text='Username Must Not Contain Spaces.')
+        elif len(self.username_var.get()) < 3:
+            self.update_username_error.config(text='Username Must Be Longer Than 2 Characters.')
+        elif len(self.username_var.get()) > 12:
+            self.update_username_error.config(text='Username Must be Less Than 13 Characters.')
+        elif users['user'].username == self.username_var.get():
+            self.update_username_error.config(text='Username Must Be Different Than The Current One.')
+        # password related
+        elif ' ' in self.password_var.get():
+            self.update_password_error.config(text='Password Must Not Contain Spaces.')
+        elif len(self.password_var.get()) < 8:
+            self.update_password_error.config(text='Password Must Be Longer Than 7 Characters.')
+        elif len(self.password_var.get()) > 12:
+            self.update_password_error.config(text='Password Must Be Less Than 13 Characters.')
+        elif users['user'].password == self.password_var.get():
+            self.update_password_error.config(text='Password Must Be Different Than The Current One.')
+
 class SearchPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
