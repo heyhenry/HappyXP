@@ -323,8 +323,17 @@ class HomePage(tk.Frame):
 
         user_bio.place(x=25, y=25)
 
+        # favourite entries
+        fav_entries_section = tk.Frame(home_window, highlightbackground='black', highlightthickness=1)
+        fav_entries_section.place(x=250, y=260)
+        fav_entries_section.propagate(0)
+        fav_entries_section.config(width=800, height=200)
 
-
+        # achievement badges
+        achievement_badges_section = tk.Frame(home_window, highlightbackground='black', highlightthickness=1)
+        achievement_badges_section.place(x=250, y=470)
+        achievement_badges_section.propagate(0)
+        achievement_badges_section.config(width=800, height=200)
 
     # redirects user to the selected page from the navbar
     def redirect_page(self, mouse_event, page_name):
