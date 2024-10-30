@@ -323,7 +323,7 @@ class HomePage(tk.Frame):
         user_info_section.propagate(0)
         user_info_section.config(width=800, height=200)
 
-        user_profile_img = Image.open('./img/default_pic.jpg')
+        user_profile_img = Image.open('./img/default_pic.png')
         user_profile_img.thumbnail((150, 150))
         user_profile_img = ImageTk.PhotoImage(user_profile_img)
 
@@ -456,6 +456,8 @@ class SettingsPage(tk.Frame):
         update_password_entry = tk.Entry(edit_section, textvariable=self.password_var, font=('helvetica', 18))
         self.update_password_error = tk.Label(edit_section, text='', foreground='red', font=('helvetica', 10))
 
+        update_user_profile_image = tk.Button(edit_section, text='Upload New User Image', command=self.open_image)
+
         edit_btn = tk.Button(edit_section, text='Update Details', font=('helvetica', 18), command=self.process_edit)
 
         self.success_message = tk.Label(edit_section, text='', font=('helvetica', 12), foreground='green')
@@ -472,9 +474,11 @@ class SettingsPage(tk.Frame):
         update_password_entry.place(x=100, y=260)
         self.update_password_error.place(x=100, y=290)
 
-        edit_btn.place(x=100, y=320)
+        update_user_profile_image.place(x=100, y=320)
 
-        self.success_message.place(x=100, y=380)
+        edit_btn.place(x=100, y=350)
+
+        self.success_message.place(x=100, y=410)
 
     # redirect to a different page
     def redirect_page(self, mouse_event, page_name):
@@ -550,6 +554,18 @@ class SettingsPage(tk.Frame):
 
             self.success_message.config(text='Successfully Updated!')
             self.success_message.after(1000, self.clear_success_message)
+
+    # open and search for image file
+    def open_image(self):
+        file_path = filedialog.askopenfilename(title='Update User Image File', filetypes=[('Image Files', '*.png *.jpg *jpeg')])
+        # if image file is valid, save the image as the new profile pic
+        if file_path:
+            self.save_image(file_path)
+
+    # save image file to img folder for user profile pic
+    def save_image(self, file_path):
+        user_image = Image.open(file_path)
+        user_image.save('img/default_pic.png')
 
 class SearchPage(tk.Frame):
     def __init__(self, parent, controller):
