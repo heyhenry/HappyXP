@@ -383,14 +383,15 @@ class HomePage(tk.Frame):
 
         user_bio = tk.Label(user_info_section, highlightbackground='black', highlightthickness=1)
         user_bio.config(width=75, height=10)
-        self.user_bio_info = tk.Text(user_info_section, background='blue', width=40, height=4.5, font=('helvetica', 18), state='disabled')
+        self.user_bio_info = tk.Text(user_info_section, width=39, height=4, font=('helvetica', 18), state='disabled', highlightbackground='black', highlightthickness=1)
         edit_bio = tk.Button(user_info_section, text='Edit', font=('helvetica', 7), command=self.edit_bio_info)
-        confirm_bio = tk.Button(user_info_section, text='Confirm', font=('helvetica', 7), command=self.confirm_bio_info)
+        self.confirm_bio = tk.Button(user_info_section, text='Confirm', font=('helvetica', 7), command=self.confirm_bio_info)
 
         user_bio.place(x=25, y=25)
         self.user_bio_info.place(x=30, y=30)
-        edit_bio.place(x=520, y=161)
-        confirm_bio.place(x=550, y=161)
+        edit_bio.place(x=450, y=155)
+        self.confirm_bio.place(x=480, y=155)
+        self.confirm_bio.place_forget()
 
         # favourite entries
         fav_entries_section = tk.Frame(home_window, highlightbackground='black', highlightthickness=1)
@@ -428,9 +429,11 @@ class HomePage(tk.Frame):
 
     def edit_bio_info(self):
         self.user_bio_info.config(state='normal')
+        self.confirm_bio.place(x=480, y=155)
 
     def confirm_bio_info(self):
         self.user_bio_info.config(state='disabled')
+        self.confirm_bio.place_forget()
 
 class NewEntryPage(tk.Frame):
     def __init__(self, parent, controller):
