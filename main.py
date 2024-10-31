@@ -351,7 +351,7 @@ class HomePage(tk.Frame):
         entries_navtitle.bind("<Enter>", lambda mouse_event: self.on_hover(mouse_event, entries_navtitle))
         entries_navtitle.bind("<Leave>", lambda mouse_event: self.off_hover(mouse_event, entries_navtitle))
         settings_navtitle.bind("<Enter>", lambda mouse_event: self.on_hover(mouse_event, settings_navtitle))
-        settings_navtitle.bind("<Leave>", lambda mouse_event: self.on_hover(mouse_event, settings_navtitle))
+        settings_navtitle.bind("<Leave>", lambda mouse_event: self.off_hover(mouse_event, settings_navtitle))
 
         self.login_status.bind("<Enter>", lambda mouse_event: self.on_hover(mouse_event, self.login_status))
         self.login_status.bind("<Leave>", lambda mouse_event: self.off_hover(mouse_event, self.login_status))
@@ -408,8 +408,18 @@ class HomePage(tk.Frame):
     # highlight nav options upon hover
     def on_hover(self, mouse_event, widget_name):
         widget_name.config(foreground='lightblue')
+
+    # return nav option text colour to original state found
     def off_hover(self, mouse_event, widget_name):
-        widget_name.config(foreground='black')
+        # if the widget in question is the login_status toggle text, then chnage to original state based on current status colour
+        if widget_name == self.login_status:
+            if self.controller.login_status_var.get():
+                widget_name.config(foreground='green')
+            else:
+                widget_name.config(foreground='red')
+        # otherwise can assume original text's state colour is black (at this current time)
+        else:
+            widget_name.config(foreground='black')
 
 class NewEntryPage(tk.Frame):
     def __init__(self, parent, controller):
