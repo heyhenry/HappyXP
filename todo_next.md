@@ -1,5 +1,8 @@
 # To do next, based on previous coding session.
 
-1. Create the Login Widgets
-2. Create the error checking for Login inputs
-3. HomePage next..?
+1. Highlight on hover for navbar options
+2. Editable text area for profile bio
+3. Start on Search Page
+    - Create Search Bar
+    - Gain access to Jikan API for retrieving results
+    - Showcase retrieved results

@@ -335,12 +335,26 @@ class HomePage(tk.Frame):
 
         self.login_status.place(x=15, y=300)
 
+        # when option is clicked in the navbar
         home_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, HomePage))
         search_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, SearchPage))
         entries_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, EntriesPage))
         settings_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, SettingsPage))
 
         self.login_status.bind("<Button-1>", lambda mouse_event: self.toggle_login(mouse_event))
+
+        # when option is hovered over in the navbar
+        home_navtitle.bind("<Enter>", lambda mouse_event: self.on_hover(mouse_event, home_navtitle))
+        home_navtitle.bind("<Leave>", lambda mouse_event: self.off_hover(mouse_event, home_navtitle))
+        search_navtitle.bind("<Enter>", lambda mouse_event: self.on_hover(mouse_event, search_navtitle))
+        search_navtitle.bind("<Leave>", lambda mouse_event: self.off_hover(mouse_event, search_navtitle))
+        entries_navtitle.bind("<Enter>", lambda mouse_event: self.on_hover(mouse_event, entries_navtitle))
+        entries_navtitle.bind("<Leave>", lambda mouse_event: self.off_hover(mouse_event, entries_navtitle))
+        settings_navtitle.bind("<Enter>", lambda mouse_event: self.on_hover(mouse_event, settings_navtitle))
+        settings_navtitle.bind("<Leave>", lambda mouse_event: self.on_hover(mouse_event, settings_navtitle))
+
+        self.login_status.bind("<Enter>", lambda mouse_event: self.on_hover(mouse_event, self.login_status))
+        self.login_status.bind("<Leave>", lambda mouse_event: self.off_hover(mouse_event, self.login_status))
 
         # bio and profile 
         user_info_section = tk.Frame(home_window, highlightbackground='black', highlightthickness=1)
@@ -386,9 +400,16 @@ class HomePage(tk.Frame):
             self.controller.update_user_save()
             self.controller.login_status_var.set(True)
 
+    # update the user's profile image
     def update_image(self, new_image):
         self.user_profile_pic.config(image=new_image)
         self.user_profile_pic.image = new_image
+
+    # highlight nav options upon hover
+    def on_hover(self, mouse_event, widget_name):
+        widget_name.config(foreground='lightblue')
+    def off_hover(self, mouse_event, widget_name):
+        widget_name.config(foreground='black')
 
 class NewEntryPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -502,7 +523,7 @@ class SettingsPage(tk.Frame):
         self.update_password_error.place(x=100, y=290)
 
         self.display_image_preview.place(x=500, y=100)
-        update_user_profile_image.place(x=500, y=250)
+        update_user_profile_image.place(x=500, y=300)
 
         edit_btn.place(x=100, y=340)
 
