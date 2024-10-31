@@ -379,13 +379,18 @@ class HomePage(tk.Frame):
         user_info_section.config(width=800, height=200)
 
         self.user_profile_pic = tk.Label(user_info_section, highlightbackground='black', highlightthickness=1)
+        self.user_profile_pic.place(x=600, y=25)
 
         user_bio = tk.Label(user_info_section, highlightbackground='black', highlightthickness=1)
         user_bio.config(width=75, height=10)
-
-        self.user_profile_pic.place(x=600, y=25)
+        self.user_bio_info = tk.Text(user_info_section, background='blue', width=40, height=4.5, font=('helvetica', 18), state='disabled')
+        edit_bio = tk.Button(user_info_section, text='Edit', font=('helvetica', 7), command=self.edit_bio_info)
+        confirm_bio = tk.Button(user_info_section, text='Confirm', font=('helvetica', 7), command=self.confirm_bio_info)
 
         user_bio.place(x=25, y=25)
+        self.user_bio_info.place(x=30, y=30)
+        edit_bio.place(x=520, y=161)
+        confirm_bio.place(x=550, y=161)
 
         # favourite entries
         fav_entries_section = tk.Frame(home_window, highlightbackground='black', highlightthickness=1)
@@ -420,6 +425,12 @@ class HomePage(tk.Frame):
     def update_image(self, new_image):
         self.user_profile_pic.config(image=new_image)
         self.user_profile_pic.image = new_image
+
+    def edit_bio_info(self):
+        self.user_bio_info.config(state='normal')
+
+    def confirm_bio_info(self):
+        self.user_bio_info.config(state='disabled')
 
 class NewEntryPage(tk.Frame):
     def __init__(self, parent, controller):
