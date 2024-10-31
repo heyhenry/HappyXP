@@ -72,7 +72,7 @@ class MainApp(tk.Tk):
                 users_data = json.load(file)
                 # populate the users dictionary with the save file data
                 for user, user_info in users_data.items():
-                    users[user] = UserInfo(user_info['display_name'], user_info['username'], user_info['password'], user_info['toggle_login'])
+                    users[user] = UserInfo(user_info['display_name'], user_info['username'], user_info['password'], user_info['toggle_login'], user_info['bio_message'])
 
     # json customised serializer
     def custom_serializer(self, obj):
@@ -81,7 +81,8 @@ class MainApp(tk.Tk):
                 'display_name': obj.display_name,
                 'username': obj.username,
                 'password': obj.password,
-                'toggle_login': obj.toggle_login
+                'toggle_login': obj.toggle_login,
+                'bio_message': obj.bio_message
             }
         return obj
 
@@ -383,7 +384,9 @@ class HomePage(tk.Frame):
 
         user_bio = tk.Label(user_info_section, highlightbackground='black', highlightthickness=1)
         user_bio.config(width=75, height=10)
-        self.user_bio_info = tk.Text(user_info_section, width=39, height=4, font=('helvetica', 18), state='disabled', highlightbackground='black', highlightthickness=1)
+        self.user_bio_info = tk.Text(user_info_section, width=39, height=4, font=('helvetica', 18), state='normal', highlightbackground='black', highlightthickness=1)
+        self.user_bio_info.insert('1.0', users['user'].bio_message)
+        self.user_bio_info.config(state='disabled')
         edit_bio = tk.Button(user_info_section, text='Edit', font=('helvetica', 7), command=self.edit_bio_info)
         self.confirm_bio = tk.Button(user_info_section, text='Confirm', font=('helvetica', 7), command=self.confirm_bio_info)
 
@@ -432,6 +435,8 @@ class HomePage(tk.Frame):
         self.confirm_bio.place(x=480, y=155)
 
     def confirm_bio_info(self):
+        users['user'].bio_message = self.user_bio_info.get('1.0', 'end')
+        self.controller.update_user_save()
         self.user_bio_info.config(state='disabled')
         self.confirm_bio.place_forget()
 

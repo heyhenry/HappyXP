@@ -3,6 +3,7 @@
         "display_name": "Henry.HD",
         "username": "henry",
         "password": "hens1234",
-        "toggle_login": true
+        "toggle_login": true,
+        "bio_message": "The beauty of this world we live in.yes\n"
     }
 }
