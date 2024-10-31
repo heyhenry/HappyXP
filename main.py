@@ -421,22 +421,6 @@ class HomePage(tk.Frame):
         self.user_profile_pic.config(image=new_image)
         self.user_profile_pic.image = new_image
 
-    # # highlight nav options upon hover
-    # def on_hover(self, mouse_event, widget_name):
-    #     widget_name.config(foreground='lightblue')
-
-    # # return nav option text colour to original state found
-    # def off_hover(self, mouse_event, widget_name):
-    #     # if the widget in question is the login_status toggle text, then chnage to original state based on current status colour
-    #     if widget_name == self.login_status:
-    #         if self.controller.login_status_var.get():
-    #             widget_name.config(foreground='green')
-    #         else:
-    #             widget_name.config(foreground='red')
-    #     # otherwise can assume original text's state colour is black (at this current time)
-    #     else:
-    #         widget_name.config(foreground='black')
-
 class NewEntryPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -498,12 +482,26 @@ class SettingsPage(tk.Frame):
 
         self.login_status.place(x=15, y=300)
 
+        # when option is clicked in the navbar
         home_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, HomePage))
         search_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, SearchPage))
         entries_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, EntriesPage))
         settings_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, SettingsPage))
 
         self.login_status.bind("<Button-1>", lambda mouse_event: self.toggle_login(mouse_event))
+
+        # when option is hovered over in the navbar
+        home_navtitle.bind("<Enter>", lambda mouse_event: self.controller.on_hover(mouse_event, home_navtitle))
+        home_navtitle.bind("<Leave>", lambda mouse_event: self.controller.off_hover(mouse_event, home_navtitle))
+        search_navtitle.bind("<Enter>", lambda mouse_event: self.controller.on_hover(mouse_event, search_navtitle))
+        search_navtitle.bind("<Leave>", lambda mouse_event: self.controller.off_hover(mouse_event, search_navtitle))
+        entries_navtitle.bind("<Enter>", lambda mouse_event: self.controller.on_hover(mouse_event, entries_navtitle))
+        entries_navtitle.bind("<Leave>", lambda mouse_event: self.controller.off_hover(mouse_event, entries_navtitle))
+        settings_navtitle.bind("<Enter>", lambda mouse_event: self.controller.on_hover(mouse_event, settings_navtitle))
+        settings_navtitle.bind("<Leave>", lambda mouse_event: self.controller.off_hover(mouse_event, settings_navtitle))
+
+        self.login_status.bind("<Enter>", lambda mouse_event: self.controller.on_hover(mouse_event, self.login_status))
+        self.login_status.bind("<Leave>", lambda mouse_event: self.controller.off_hover(mouse_event, self.login_status))
 
         # edit section
         edit_section = tk.Frame(settings_window, highlightbackground='black', highlightthickness=1)
