@@ -324,7 +324,7 @@ class HomePage(tk.Frame):
         home_window.propagate(0)
         home_window.config(width=1100, height=700)
 
-        # navigation bar
+        # region - navigation bar
         nav_bar = tk.Frame(home_window, highlightbackground='grey', highlightthickness=1)
         nav_bar.place(x=10, y=50)
         nav_bar.propagate(0)
@@ -372,8 +372,9 @@ class HomePage(tk.Frame):
 
         self.login_status.bind("<Enter>", lambda mouse_event: self.controller.on_hover(mouse_event, self.login_status))
         self.login_status.bind("<Leave>", lambda mouse_event: self.controller.off_hover(mouse_event, self.login_status))
+        # endregion
 
-        # bio and profile 
+        # region - bio and profile 
         user_info_section = tk.Frame(home_window, highlightbackground='black', highlightthickness=1)
         user_info_section.place(x=250, y=50)
         user_info_section.propagate(0)
@@ -384,17 +385,18 @@ class HomePage(tk.Frame):
 
         user_bio = tk.Label(user_info_section, highlightbackground='black', highlightthickness=1)
         user_bio.config(width=75, height=10)
-        self.user_bio_info = tk.Text(user_info_section, width=39, height=4, font=('helvetica', 18), state='normal', highlightbackground='black', highlightthickness=1)
+        self.user_bio_info = tk.Text(user_info_section, width=39, height=4, font=('helvetica', 18), state='normal', background='#f0f0f0')
         self.user_bio_info.insert('1.0', users['user'].bio_message)
         self.user_bio_info.config(state='disabled')
-        edit_bio = tk.Button(user_info_section, text='Edit', font=('helvetica', 7), command=self.edit_bio_info)
-        self.confirm_bio = tk.Button(user_info_section, text='Confirm', font=('helvetica', 7), command=self.confirm_bio_info)
+        edit_bio = tk.Button(user_info_section, text='Edit', font=('helvetica', 9), command=self.edit_bio_info)
+        self.confirm_bio = tk.Button(user_info_section, text='Confirm', font=('helvetica', 9), command=self.confirm_bio_info)
 
         user_bio.place(x=25, y=25)
         self.user_bio_info.place(x=30, y=30)
-        edit_bio.place(x=450, y=155)
-        self.confirm_bio.place(x=480, y=155)
+        edit_bio.place(x=445, y=150)
+        self.confirm_bio.place(x=480, y=150)
         self.confirm_bio.place_forget()
+        # endregion
 
         # favourite entries
         fav_entries_section = tk.Frame(home_window, highlightbackground='black', highlightthickness=1)
@@ -432,7 +434,7 @@ class HomePage(tk.Frame):
 
     def edit_bio_info(self):
         self.user_bio_info.config(state='normal')
-        self.confirm_bio.place(x=480, y=155)
+        self.confirm_bio.place(x=480, y=150)
 
     def confirm_bio_info(self):
         users['user'].bio_message = self.user_bio_info.get('1.0', 'end')

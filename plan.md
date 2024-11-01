@@ -18,7 +18,7 @@
     1.1.2 Home Page
         1.1.2.0/1 display top 5 favourite entries
         1.1.2.2 display user profile image x
-        1.1.2.3 small section for personal bio
+        1.1.2.3 small section for personal bio x
         1.1.2.4 option to stay logged in toggle x 
         1.1.2.5 display some achievement badges
         1.1.2.6 navigation bar (home, entries) x
