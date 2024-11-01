@@ -132,6 +132,16 @@ class MainApp(tk.Tk):
                 widget_name.config(foreground='green')
             else:
                 widget_name.config(foreground='red')
+        elif widget_name == self.pages[SettingsPage].login_status:
+            if self.login_status_var.get():
+                widget_name.config(foreground='green')
+            else:
+                widget_name.config(foreground='red')
+        elif widget_name == self.pages[SearchPage].login_status:
+            if self.login_status_var.get():
+                widget_name.config(foreground='green')
+            else:
+                widget_name.config(foreground='red')
         # otherwise can assume original text's state colour is black (at this current time)
         else:
             widget_name.config(foreground='black')
@@ -385,7 +395,7 @@ class HomePage(tk.Frame):
 
         user_bio = tk.Label(user_info_section, highlightbackground='black', highlightthickness=1)
         user_bio.config(width=75, height=10)
-        self.user_bio_info = tk.Text(user_info_section, width=39, height=4, font=('helvetica', 18), state='normal', background='#f0f0f0')
+        self.user_bio_info = tk.Text(user_info_section, width=39, height=4, font=('helvetica', 18), state='normal', background='#f0f0f0', relief='flat')
         self.user_bio_info.insert('1.0', users['user'].bio_message)
         self.user_bio_info.config(state='disabled')
         edit_bio = tk.Button(user_info_section, text='Edit', font=('helvetica', 9), command=self.edit_bio_info)
@@ -685,6 +695,82 @@ class SearchPage(tk.Frame):
         tk.Frame.__init__(self, parent)
 
         self.controller = controller
+
+        self.create_widgets()
+
+    def create_widgets(self):
+        search_window = tk.Frame(self, highlightbackground='black', highlightthickness=2)
+        search_window.place(relx=0.5, rely=0.5, anchor='center')
+        search_window.propagate(0)
+        search_window.config(width=1100, height=700)
+
+        # region - navigation bar
+        nav_bar = tk.Frame(search_window, highlightbackground='grey', highlightthickness=1)
+        nav_bar.place(x=10, y=50)
+        nav_bar.propagate(0)
+        nav_bar.config(width=200, height=600)
+
+        home_navtitle = tk.Label(nav_bar, text='Home', font=('helvetica', 18))
+        search_navtitle = tk.Label(nav_bar, text='Search', font=('helvetica', 18))
+        entries_navtitle = tk.Label(nav_bar, text='Entries', font=('helvetica', 18))
+        settings_navtitle = tk.Label(nav_bar, text='Settings', font=('helvetica', 18))
+
+        self.login_status = tk.Label(nav_bar, text='Stay Logged In', font=('helvetica', 18))
+
+        # determines which colour should be showcasing the toggled or  not login text
+        if self.controller.login_status_var.get():
+            self.login_status.config(foreground='green')
+        else:
+            self.login_status.config(foreground='red')
+
+        self.controller.login_status_var.trace_add('write', lambda *args: self.controller.update_login(self.login_status))
+
+        home_navtitle.place(x=50, y=50)
+        search_navtitle.place(x=50, y=100)
+        entries_navtitle.place(x=50, y=150)
+        settings_navtitle.place(x=50, y=200)
+
+        self.login_status.place(x=15, y=300)
+
+        # when option is cliced in the navbar
+        home_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, HomePage))
+        search_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, SearchPage))
+        entries_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, EntriesPage))
+        settings_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, SettingsPage))
+
+        self.login_status.bind("<Button-1>", lambda mouse_event: self.toggle_login(mouse_event))
+
+        # when option is hovered over in the navbar
+        home_navtitle.bind("<Enter>", lambda mouse_event: self.controller.on_hover(mouse_event, home_navtitle))
+        home_navtitle.bind("<Leave>", lambda mouse_event: self.controller.off_hover(mouse_event, home_navtitle))
+        search_navtitle.bind("<Enter>", lambda mouse_event: self.controller.on_hover(mouse_event, search_navtitle))
+        search_navtitle.bind("<Leave>", lambda mouse_event: self.controller.off_hover(mouse_event, search_navtitle))
+        entries_navtitle.bind("<Enter>", lambda mouse_event: self.controller.on_hover(mouse_event, entries_navtitle))
+        entries_navtitle.bind("<Leave>", lambda mouse_event: self.controller.off_hover(mouse_event, entries_navtitle))
+        settings_navtitle.bind("<Enter>", lambda mouse_event: self.controller.on_hover(mouse_event, settings_navtitle))
+        settings_navtitle.bind("<Leave>", lambda mouse_event: self.controller.off_hover(mouse_event, settings_navtitle))
+
+        self.login_status.bind("<Enter>", lambda mouse_event: self.controller.on_hover(mouse_event, self.login_status))
+        self.login_status.bind("<Leave>", lambda mouse_event: self.controller.off_hover(mouse_event, self.login_status))
+
+
+    # redirects user to the selected apge from the navbar
+    def redirect_page(self, mouse_event, page_name):
+        self.controller.show_page(page_name)
+
+    # toggling the status of the login's 'stay on' feature
+    def toggle_login(self, mouse_event):
+        if self.controller.login_status_var.get():
+            users['user'].toggle_login = False
+            self.login_status.config(foreground='red')
+            self.controller.update_user_save()
+            self.controller.login_status_var.set(False)
+        else:
+            users['user'].toggle_login = True
+            self.login_status.config(foreground='green')
+            self.controller.update_user_save()
+            self.controller.login_status_var.set(True)
+    
 
 if __name__ == "__main__":
     app = MainApp()
