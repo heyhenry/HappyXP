@@ -538,10 +538,6 @@ class NewEntryPage(tk.Frame):
             self.controller.update_user_save()
             self.controller.login_status_var.set(True)
 
-    
-
-
-
 class EntriesPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -631,7 +627,7 @@ class EntriesPage(tk.Frame):
         entries_details_title = tk.Label(entries_window, text='Entry Details', font=('helvetica', 18))
         entries_details_title.place(x=700, y=50)
 
-        new_entries_btn = tk.Button(entries_window, text='+ Add New Entry', font=('helvetica', 10))
+        new_entries_btn = tk.Button(entries_window, text='+ Add New Entry', font=('helvetica', 10), command=lambda: self.controller.show_page(NewEntryPage))
         new_entries_btn.place(x=950, y=50)
 
         # entry details window
