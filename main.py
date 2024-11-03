@@ -527,7 +527,7 @@ class EntriesPage(tk.Frame):
         self.login_status.bind("<Leave>", lambda mouse_event: self.controller.off_hover(mouse_event, self.login_status))
         # endregion
 
-        # region - list of entries section
+        # region - list of entries section (left side)
         entries_title = tk.Label(entries_window, text='List Of Entries', font=('helvetica', 18))
         entries_title.place(x=250, y=50)
         entries_lb = tk.Listbox(entries_window)
@@ -546,6 +546,14 @@ class EntriesPage(tk.Frame):
 
         update_entries_btn.place(x=250, y=530, width=250)
         delete_entries_btn.place(x=250, y=600, width=250)
+        # endregion
+
+        # region - entry details (right side)
+        entries_details_title = tk.Label(entries_window, text='Entry Details', font=('helvetica', 18))
+        entries_details_title.place(x=700, y=50)
+
+        new_entries_btn = tk.Button(entries_window, text='+ Add New Entry', font=('helvetica', 10))
+        new_entries_btn.place(x=950, y=50)
 
         # endregion
 
