@@ -555,10 +555,46 @@ class EntriesPage(tk.Frame):
         new_entries_btn = tk.Button(entries_window, text='+ Add New Entry', font=('helvetica', 10))
         new_entries_btn.place(x=950, y=50)
 
+        # entry details window
         edetails_window = tk.Frame(entries_window, highlightbackground='black', highlightthickness=1)
         edetails_window.place(x=550, y=100)
         edetails_window.propagate(0)
         edetails_window.config(width=500, height=550)
+
+        # entry subtitles
+        entry_title = tk.Label(edetails_window, text='Title:', font=('helvetica', 18))
+        entry_ctype = tk.Label(edetails_window, text='Content Type:', font=('helvetica', 18))
+        entry_rating = tk.Label(edetails_window, text='User Rating:', font=('helvetica', 18))
+        entry_progress = tk.Label(edetails_window, text='User Progress:', font=('helvetica', 18))
+        entry_status = tk.Label(edetails_window, text='Status:', font=('helvetica', 18))
+        entry_start_date = tk.Label(edetails_window, text='Start Date:', font=('helvetica', 18))
+        entry_end_date = tk.Label(edetails_window, text='End Date:', font=('helvetica', 18))
+
+        entry_title.place(x=50, y=50)
+        entry_ctype.place(x=50, y=100)
+        entry_rating.place(x=50, y=150)
+        entry_progress.place(x=50, y=200)
+        entry_status.place(x=50, y=250)
+        entry_start_date.place(x=50, y=300)
+        entry_end_date.place(x=50, y=350)
+
+        # entry information
+        # current text is dummy text
+        entry_title_info = tk.Label(edetails_window, text='Title of a Title of', font=('helvetica', 18))
+        entry_ctype_info = tk.Label(edetails_window, text='Anime', font=('helvetica', 18))
+        entry_rating_info = tk.Label(edetails_window, text='0/10', font=('helvetica', 18))
+        entry_progress_info = tk.Label(edetails_window, text='13/24', font=('helvetica', 18))
+        entry_status_info = tk.Label(edetails_window, text='Watching', font=('helvetica', 18))
+        entry_start_date_info = tk.Label(edetails_window, text='01-20-30', font=('helvetica', 18))
+        entry_end_date_info = tk.Label(edetails_window, text='-', font=('helvetica', 18))
+
+        entry_title_info.place(x=250, y=50)
+        entry_ctype_info.place(x=250, y=100)
+        entry_rating_info.place(x=250, y=150)
+        entry_progress_info.place(x=250, y=200)
+        entry_status_info.place(x=250, y=250)
+        entry_start_date_info.place(x=250, y=300)
+        entry_end_date_info.place(x=250, y=350) 
         # endregion
 
     # redirects user to the selected page from the navbar
