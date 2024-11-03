@@ -464,6 +464,9 @@ class NewEntryPage(tk.Frame):
         self.controller = controller
 
         self.selected_ctype = tk.StringVar()
+        self.selected_rating = tk.IntVar()
+        self.current_progress = tk.IntVar()
+        self.total_progress = tk.IntVar()
 
         self.create_widgets()
 
@@ -550,6 +553,7 @@ class NewEntryPage(tk.Frame):
         new_entry_end_date.place(x=150, y=400)
 
         new_entry_title_info = tk.Entry(new_entry_form, font=('helvetica', 18))
+
         ctype_options = [
             "Book",
             "Anime",
@@ -562,8 +566,30 @@ class NewEntryPage(tk.Frame):
         self.selected_ctype.set("Select Content Type")
         new_entry_ctype_info = tk.OptionMenu(new_entry_form, self.selected_ctype, *ctype_options)
         new_entry_ctype_info.config(font=('helvetica', 12), indicatoron=0)
-        new_entry_rating_info = tk.Entry(new_entry_form, font=('helvetica', 18))
-        new_entry_progress_info = tk.Entry(new_entry_form, font=('helvetica', 18))
+
+        rating_options = [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+        ]
+        self.selected_rating.set('Select Rating')
+        new_entry_rating_info = tk.OptionMenu(new_entry_form, self.selected_rating, *rating_options)
+        new_entry_rating_info.config(font=('helvetica', 12), indicatoron=0)
+
+
+        new_entry_progress_info_current = tk.Entry(new_entry_form, font=('helvetica', 18))
+        new_entry_progress_info_current.config(width=5)
+        new_entry_progress_info_divider = tk.Label(new_entry_form, text='/', font=('helvetica', 18))
+        new_entry_progress_info_total = tk.Entry(new_entry_form, font=('helvetica', 18))
+        new_entry_progress_info_total.config(width=5)
+
         new_entry_status_info = tk.Entry(new_entry_form, font=('helvetica', 18))
         new_entry_start_date_info = tk.Entry(new_entry_form, font=('helvetica', 18))
         new_entry_end_date_info = tk.Entry(new_entry_form, font=('helvetica', 18))
@@ -571,7 +597,9 @@ class NewEntryPage(tk.Frame):
         new_entry_title_info.place(x=350, y=100)
         new_entry_ctype_info.place(x=350, y=150)
         new_entry_rating_info.place(x=350, y=200)
-        new_entry_progress_info.place(x=350, y=250)
+        new_entry_progress_info_current.place(x=350, y=250)
+        new_entry_progress_info_divider.place(x=445, y=250)
+        new_entry_progress_info_total.place(x=480, y=250)
         new_entry_status_info.place(x=350, y=300)
         new_entry_start_date_info.place(x=350, y=350)
         new_entry_end_date_info.place(x=350, y=400)
