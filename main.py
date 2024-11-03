@@ -527,16 +527,27 @@ class EntriesPage(tk.Frame):
         self.login_status.bind("<Leave>", lambda mouse_event: self.controller.off_hover(mouse_event, self.login_status))
         # endregion
 
+        # region - list of entries section
+        entries_title = tk.Label(entries_window, text='List Of Entries', font=('helvetica', 18))
+        entries_title.place(x=250, y=50)
         entries_lb = tk.Listbox(entries_window)
-        entries_lb.place(x=250, y=50)
+        entries_lb.place(x=250, y=100)
         entries_sb = tk.Scrollbar(entries_window)
-        entries_sb.place(x=490, y=50, height=400)
+        entries_sb.place(x=490, y=100, height=400)
         entries_lb.config(yscrollcommand=entries_sb.set, height=25, width=40)
         entries_sb.config(command=entries_lb.yview)
-        
+
         # filler content for the time being
         for values in range(100):
             entries_lb.insert('end', values)
+
+        update_entries_btn = tk.Button(entries_window, text='Update An Entry', font=('helvetica', 18))
+        delete_entries_btn = tk.Button(entries_window, text='Delete An Entry', font=('helvetica', 18))
+
+        update_entries_btn.place(x=250, y=530, width=250)
+        delete_entries_btn.place(x=250, y=600, width=250)
+
+        # endregion
 
     # redirects user to the selected page from the navbar
     def redirect_page(self, mouse_event, page_name):
