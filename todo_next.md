@@ -9,4 +9,41 @@
     - Showcase retrieved results
 4. See if there is a way to make the text widget's presentation more natural like a label
 5. Find 5-10 badge images for showcase
-6. 
+
+
+# This the updated one
+- Create the Entry Page
+    - Title
+    - Content type (Drop Down Limited Options)
+        - Book
+        - Anime
+        - Manga
+        - Manhwa
+        - TV Show
+        - Movie
+    - Rating (Drop Down Limited Options)
+        - 1 - 10
+    - Progress (text setup like [[]/[]])
+        - If content type is books, manga or manhwa - automatically attach chapters to progress
+        - If content type is movie, tv show or anime - automatically attach episodes to progress
+    - Status (Drop Down Limited Options)
+        - Planned
+        - Viewing
+        - Paused
+        - Dropped
+        - Finished
+    - Start Date
+        - [[dd]-[mm]-[yyyy]] (Temporary method)
+    - End Date
+        - [[dd]-[mm]-[yyyy]]
+    - Submit button
+    - Cancel or Go Back(?) button
+- Link Entry Page with the '+ New Entry' button
+- Create the Entry Object Class
+- Implement Entry Object to the existing functions i.e. custom_serializer
+- Create entries save file
+- Populate the entries_listbox with the submitted entries
+- Create the update entry button and related stuff
+- Create the delete entry function
+- Create the Search bar in the SearchPage
+- Link up the Jikan API to the SearchPage for Results (or atleast look at its viability)
