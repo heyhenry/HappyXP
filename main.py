@@ -463,6 +463,8 @@ class NewEntryPage(tk.Frame):
 
         self.controller = controller
 
+        self.selected_ctype = tk.StringVar()
+
         self.create_widgets()
 
     def create_widgets(self):
@@ -521,6 +523,59 @@ class NewEntryPage(tk.Frame):
         self.login_status.bind("<Button-1>", lambda mouse_event: self.controller.off_hover(mouse_event, self.login_status))
         # endregion
     
+        # region - new entry form
+        new_entry_form = tk.Frame(new_entry_window, highlightbackground='black', highlightthickness=1)
+        new_entry_form.place(x=250, y=50)
+        new_entry_form.propagate(0)
+        new_entry_form.config(width=800, height=600)
+
+        new_entry_section_title = tk.Label(new_entry_form, text='New Entry', font=('helvetica', 18))
+
+        new_entry_title = tk.Label(new_entry_form, text='Title:', font=('helvetica', 18))
+        new_entry_ctype = tk.Label(new_entry_form, text='Content Type:', font=('helvetica', 18))
+        new_entry_rating = tk.Label(new_entry_form, text='Rating:', font=('helvetica', 18))
+        new_entry_progress = tk.Label(new_entry_form, text='Progress:', font=('helvetica', 18))
+        new_entry_status = tk.Label(new_entry_form, text='Status:', font=('helvetica', 18))
+        new_entry_start_date = tk.Label(new_entry_form, text='Start Date:', font=('helvetica', 18))
+        new_entry_end_date = tk.Label(new_entry_form, text='End Date:', font=('helvetica', 18))
+
+        new_entry_section_title.place(x=300, y=50)
+
+        new_entry_title.place(x=150, y=100)
+        new_entry_ctype.place(x=150, y=150)
+        new_entry_rating.place(x=150, y=200)
+        new_entry_progress.place(x=150, y=250)
+        new_entry_status.place(x=150, y=300)
+        new_entry_start_date.place(x=150, y=350)
+        new_entry_end_date.place(x=150, y=400)
+
+        new_entry_title_info = tk.Entry(new_entry_form, font=('helvetica', 18))
+        ctype_options = [
+            "Book",
+            "Anime",
+            "Manga",
+            "Manhwa",
+            "TV Show",
+            "Movie",
+            "OVA"
+        ]
+        self.selected_ctype.set("Select Content Type")
+        new_entry_ctype_info = tk.OptionMenu(new_entry_form, self.selected_ctype, *ctype_options)
+        new_entry_ctype_info.config(font=('helvetica', 12), indicatoron=0)
+        new_entry_rating_info = tk.Entry(new_entry_form, font=('helvetica', 18))
+        new_entry_progress_info = tk.Entry(new_entry_form, font=('helvetica', 18))
+        new_entry_status_info = tk.Entry(new_entry_form, font=('helvetica', 18))
+        new_entry_start_date_info = tk.Entry(new_entry_form, font=('helvetica', 18))
+        new_entry_end_date_info = tk.Entry(new_entry_form, font=('helvetica', 18))
+
+        new_entry_title_info.place(x=350, y=100)
+        new_entry_ctype_info.place(x=350, y=150)
+        new_entry_rating_info.place(x=350, y=200)
+        new_entry_progress_info.place(x=350, y=250)
+        new_entry_status_info.place(x=350, y=300)
+        new_entry_start_date_info.place(x=350, y=350)
+        new_entry_end_date_info.place(x=350, y=400)
+
     # redirects user to the selected page from the navbar
     def redirect_page(self, mouse_event, page_name):
         self.controller.show_page(page_name)
