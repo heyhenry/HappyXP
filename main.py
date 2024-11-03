@@ -555,6 +555,10 @@ class EntriesPage(tk.Frame):
         new_entries_btn = tk.Button(entries_window, text='+ Add New Entry', font=('helvetica', 10))
         new_entries_btn.place(x=950, y=50)
 
+        edetails_window = tk.Frame(entries_window, highlightbackground='black', highlightthickness=1)
+        edetails_window.place(x=550, y=100)
+        edetails_window.propagate(0)
+        edetails_window.config(width=500, height=550)
         # endregion
 
     # redirects user to the selected page from the navbar
