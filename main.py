@@ -609,6 +609,9 @@ class NewEntryPage(tk.Frame):
         new_entry_end_date_info = DateEntry(new_entry_form, date_pattern='dd-mm-yyyy')
         new_entry_end_date_info.config(font=('helvetica', 12))
 
+        new_entry_submit = tk.Button(new_entry_form, text='Submit Entry', font=('helvetica', 18))
+        new_entry_cancel = tk.Button(new_entry_form, text='Cancel Entry', font=('helvetica', 18))
+
         new_entry_title_info.place(x=350, y=100)
         new_entry_ctype_info.place(x=350, y=150)
         new_entry_rating_info.place(x=350, y=200)
@@ -618,6 +621,9 @@ class NewEntryPage(tk.Frame):
         new_entry_status_info.place(x=350, y=300)
         new_entry_start_date_info.place(x=350, y=350)
         new_entry_end_date_info.place(x=350, y=400)
+
+        new_entry_submit.place(x=150, y=480)
+        new_entry_cancel.place(x=350, y=480)
 
     # redirects user to the selected page from the navbar
     def redirect_page(self, mouse_event, page_name):
