@@ -4,6 +4,7 @@ import json
 import os
 from PIL import Image, ImageTk
 from tkinter import filedialog
+from tkcalendar import DateEntry
 
 # save data 
 users = {}
@@ -467,6 +468,9 @@ class NewEntryPage(tk.Frame):
         self.selected_rating = tk.IntVar()
         self.current_progress = tk.IntVar()
         self.total_progress = tk.IntVar()
+        self.selected_status = tk.StringVar()
+        self.selected_start_date = tk.StringVar()
+        self.selected_end_date = tk.StringVar()
 
         self.create_widgets()
 
@@ -583,16 +587,27 @@ class NewEntryPage(tk.Frame):
         new_entry_rating_info = tk.OptionMenu(new_entry_form, self.selected_rating, *rating_options)
         new_entry_rating_info.config(font=('helvetica', 12), indicatoron=0)
 
-
         new_entry_progress_info_current = tk.Entry(new_entry_form, font=('helvetica', 18))
         new_entry_progress_info_current.config(width=5)
         new_entry_progress_info_divider = tk.Label(new_entry_form, text='/', font=('helvetica', 18))
         new_entry_progress_info_total = tk.Entry(new_entry_form, font=('helvetica', 18))
         new_entry_progress_info_total.config(width=5)
 
-        new_entry_status_info = tk.Entry(new_entry_form, font=('helvetica', 18))
-        new_entry_start_date_info = tk.Entry(new_entry_form, font=('helvetica', 18))
-        new_entry_end_date_info = tk.Entry(new_entry_form, font=('helvetica', 18))
+        status_options = [
+            'Planned',
+            'Viewing', 
+            'Paused',
+            'Dropped',
+            'Finished'
+        ]
+        self.selected_status.set('Select Status')
+        new_entry_status_info = tk.OptionMenu(new_entry_form, self.selected_status, *status_options)
+        new_entry_status_info.config(font=('helvetica', 12), indicatoron=0)
+
+        new_entry_start_date_info = DateEntry(new_entry_form, date_pattern='dd-mm-yyyy')
+        new_entry_start_date_info.config(font=('helvetica', 12))
+        new_entry_end_date_info = DateEntry(new_entry_form, date_pattern='dd-mm-yyyy')
+        new_entry_end_date_info.config(font=('helvetica', 12))
 
         new_entry_title_info.place(x=350, y=100)
         new_entry_ctype_info.place(x=350, y=150)
