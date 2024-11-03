@@ -464,10 +464,11 @@ class NewEntryPage(tk.Frame):
 
         self.controller = controller
 
+        self.given_title = tk.StringVar()
         self.selected_ctype = tk.StringVar()
         self.selected_rating = tk.IntVar()
-        self.current_progress = tk.IntVar()
-        self.total_progress = tk.IntVar()
+        self.current_progress = tk.StringVar()
+        self.total_progress = tk.StringVar()
         self.selected_status = tk.StringVar()
         self.selected_start_date = tk.StringVar()
         self.selected_end_date = tk.StringVar()
@@ -556,7 +557,7 @@ class NewEntryPage(tk.Frame):
         new_entry_start_date.place(x=150, y=350)
         new_entry_end_date.place(x=150, y=400)
 
-        new_entry_title_info = tk.Entry(new_entry_form, font=('helvetica', 18))
+        new_entry_title_info = tk.Entry(new_entry_form, font=('helvetica', 18), textvariable=self.given_title)
 
         ctype_options = [
             "Book",
@@ -587,10 +588,10 @@ class NewEntryPage(tk.Frame):
         new_entry_rating_info = tk.OptionMenu(new_entry_form, self.selected_rating, *rating_options)
         new_entry_rating_info.config(font=('helvetica', 12), indicatoron=0)
 
-        new_entry_progress_info_current = tk.Entry(new_entry_form, font=('helvetica', 18))
+        new_entry_progress_info_current = tk.Entry(new_entry_form, font=('helvetica', 18), textvariable=self.current_progress)
         new_entry_progress_info_current.config(width=5)
         new_entry_progress_info_divider = tk.Label(new_entry_form, text='/', font=('helvetica', 18))
-        new_entry_progress_info_total = tk.Entry(new_entry_form, font=('helvetica', 18))
+        new_entry_progress_info_total = tk.Entry(new_entry_form, font=('helvetica', 18), textvariable=self.total_progress)
         new_entry_progress_info_total.config(width=5)
 
         status_options = [
@@ -604,12 +605,12 @@ class NewEntryPage(tk.Frame):
         new_entry_status_info = tk.OptionMenu(new_entry_form, self.selected_status, *status_options)
         new_entry_status_info.config(font=('helvetica', 12), indicatoron=0)
 
-        new_entry_start_date_info = DateEntry(new_entry_form, date_pattern='dd-mm-yyyy')
-        new_entry_start_date_info.config(font=('helvetica', 12))
-        new_entry_end_date_info = DateEntry(new_entry_form, date_pattern='dd-mm-yyyy')
-        new_entry_end_date_info.config(font=('helvetica', 12))
+        self.new_entry_start_date_info = DateEntry(new_entry_form, date_pattern='dd-mm-yyyy')
+        self.new_entry_start_date_info.config(font=('helvetica', 12))
+        self.new_entry_end_date_info = DateEntry(new_entry_form, date_pattern='dd-mm-yyyy')
+        self.new_entry_end_date_info.config(font=('helvetica', 12))
 
-        new_entry_submit = tk.Button(new_entry_form, text='Submit Entry', font=('helvetica', 18))
+        new_entry_submit = tk.Button(new_entry_form, text='Submit Entry', font=('helvetica', 18), command=self.get_details)
         new_entry_cancel = tk.Button(new_entry_form, text='Cancel Entry', font=('helvetica', 18))
 
         new_entry_title_info.place(x=350, y=100)
@@ -619,8 +620,8 @@ class NewEntryPage(tk.Frame):
         new_entry_progress_info_divider.place(x=445, y=250)
         new_entry_progress_info_total.place(x=480, y=250)
         new_entry_status_info.place(x=350, y=300)
-        new_entry_start_date_info.place(x=350, y=350)
-        new_entry_end_date_info.place(x=350, y=400)
+        self.new_entry_start_date_info.place(x=350, y=350)
+        self.new_entry_end_date_info.place(x=350, y=400)
 
         new_entry_submit.place(x=150, y=480)
         new_entry_cancel.place(x=350, y=480)
@@ -641,6 +642,16 @@ class NewEntryPage(tk.Frame):
             self.login_status.config(foreground='green')
             self.controller.update_user_save()
             self.controller.login_status_var.set(True)
+
+    def get_details(self):
+        print(self.given_title.get())
+        print(self.selected_ctype.get())
+        print(self.selected_rating.get())
+        print(self.current_progress.get())
+        print(self.total_progress.get())
+        print(self.selected_status.get())
+        print(self.new_entry_start_date_info.get())
+        print(self.new_entry_end_date_info.get())
 
 class EntriesPage(tk.Frame):
     def __init__(self, parent, controller):
