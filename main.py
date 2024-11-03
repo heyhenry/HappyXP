@@ -527,6 +527,17 @@ class EntriesPage(tk.Frame):
         self.login_status.bind("<Leave>", lambda mouse_event: self.controller.off_hover(mouse_event, self.login_status))
         # endregion
 
+        entries_lb = tk.Listbox(entries_window)
+        entries_lb.place(x=250, y=50)
+        entries_sb = tk.Scrollbar(entries_window)
+        entries_sb.place(x=490, y=50, height=400)
+        entries_lb.config(yscrollcommand=entries_sb.set, height=25, width=40)
+        entries_sb.config(command=entries_lb.yview)
+        
+        # filler content for the time being
+        for values in range(100):
+            entries_lb.insert('end', values)
+
     # redirects user to the selected page from the navbar
     def redirect_page(self, mouse_event, page_name):
         self.controller.show_page(page_name)
