@@ -37,13 +37,18 @@
     - End Date x
         - [[dd]-[mm]-[yyyy]]
     - Submit button x
-    - Cancel or Go Back(?) button
-- Link Entry Page with the '+ New Entry' button
-- Create the Entry Object Class
-- Implement Entry Object to the existing functions i.e. custom_serializer
-- Create entries save file
+    - Cancel or Go Back(?) button x
+- Link Entry Page with the '+ New Entry' button x
+- Create the Entry Object Class x
+- Implement Entry Object to the existing functions i.e. custom_serializer x
+- Create entries save file x
 - Populate the entries_listbox with the submitted entries
 - Create the update entry button and related stuff
 - Create the delete entry function
 - Create the Search bar in the SearchPage
 - Link up the Jikan API to the SearchPage for Results (or atleast look at its viability)
+- Create validations for the user input for the new entry page
+    - valid user inputs
+    - ensure all fields are filed
+    - else if there are some fields that don't require filling, have a preset default value that will take its place
+    - error message to go along with the validation checking

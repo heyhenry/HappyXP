@@ -95,17 +95,22 @@ class MainApp(tk.Tk):
         if os.path.exists(user_savefile):
             # opens the save file and reads its data
             with open(user_savefile, 'r') as file:
-                # save the data into a dictionary variable
+                # save the data into a dictionary 
                 users_data = json.load(file)
-                # populate the users dictionary with the save file data
+                # populate the users dictionary with the save file's data
                 for user, user_info in users_data.items():
                     users[user] = UserInfo(user_info['display_name'], user_info['username'], user_info['password'], user_info['toggle_login'], user_info['bio_message'])
 
+    # load the user's entries' saved data and update entries dictionary
     def load_entries(self):
         global entries
+        # check if the save file can be located
         if os.path.exists(entries_savefile):
+            # open the save file and read its data
             with open(entries_savefile, 'r') as file:
+                # save the data intoa dictionary
                 entries_data = json.load(file)
+                # populate the entries dictionary with the save file's data
                 for entry, entry_info in entries_data.items():
                     entries[entry] = EntryInfo(entry_info['title'], entry_info['content_type'], entry_info['rating'], entry_info['current_progress'],
                                                entry_info['total_progress'], entry_info['status'], entry_info['start_date'], entry_info['end_date'])
@@ -652,6 +657,7 @@ class NewEntryPage(tk.Frame):
 
         new_entry_submit.place(x=150, y=480)
         new_entry_cancel.place(x=350, y=480)
+        # endregion
 
     # redirects user to the selected page from the navbar
     def redirect_page(self, mouse_event, page_name):
@@ -670,6 +676,7 @@ class NewEntryPage(tk.Frame):
             self.controller.update_user_save()
             self.controller.login_status_var.set(True)
 
+    # temp func to see the retrieved results for a new entry
     def get_details(self):
         print(self.given_title.get())
         print(self.selected_ctype.get())
@@ -681,13 +688,11 @@ class NewEntryPage(tk.Frame):
         print(self.new_entry_end_date_info.get())
         self.create_new_entry()
 
+    # create a new entry
     def create_new_entry(self):
-
         new_entry = EntryInfo(self.given_title.get(), self.selected_ctype.get(), self.selected_rating.get(), self.current_progress.get(),
                               self.total_progress.get(), self.selected_status.get(), self.new_entry_start_date_info.get(), self.new_entry_end_date_info.get())
-
         entries[self.given_title.get()] = new_entry
-
         self.controller.update_entries_save()
 
 class EntriesPage(tk.Frame):
@@ -757,16 +762,15 @@ class EntriesPage(tk.Frame):
         # region - list of entries section (left side)
         entries_title = tk.Label(entries_window, text='List Of Entries', font=('helvetica', 18))
         entries_title.place(x=250, y=50)
-        entries_lb = tk.Listbox(entries_window)
-        entries_lb.place(x=250, y=100)
+        self.entries_lb = tk.Listbox(entries_window)
+        self.entries_lb.place(x=250, y=100)
         entries_sb = tk.Scrollbar(entries_window)
-        entries_sb.place(x=490, y=100, height=400)
-        entries_lb.config(yscrollcommand=entries_sb.set, height=25, width=40)
-        entries_sb.config(command=entries_lb.yview)
+        entries_sb.place(x=488, y=100, height=400)
+        self.entries_lb.config(yscrollcommand=entries_sb.set, height=21, width=26, font=('helvetica', 12))
+        entries_sb.config(command=self.entries_lb.yview, width=20)
 
-        # filler content for the time being
-        for values in range(100):
-            entries_lb.insert('end', values)
+        # populate the entries list with all of the user's entries
+        self.populate_entries()
 
         update_entries_btn = tk.Button(entries_window, text='Update An Entry', font=('helvetica', 18))
         delete_entries_btn = tk.Button(entries_window, text='Delete An Entry', font=('helvetica', 18))
@@ -840,6 +844,11 @@ class EntriesPage(tk.Frame):
             self.login_status.config(foreground='green')
             self.controller.update_user_save()
             self.controller.login_status_var.set(True)
+
+    # fill in the entries listbox with all of the user's entries from the saved data
+    def populate_entries(self):
+        for entry_name in entries.keys():
+            self.entries_lb.insert('end', entry_name)
 
 class SettingsPage(tk.Frame):
     def __init__(self, parent, controller):
