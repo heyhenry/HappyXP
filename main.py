@@ -609,23 +609,6 @@ class NewEntryPage(tk.Frame):
         new_entry_cancel.place(x=350, y=480)
         # endregion
 
-    # redirects user to the selected page from the navbar
-    def redirect_page(self, mouse_event, page_name):
-        self.controller.show_page(page_name)
-    
-    # toggling the status of the login's 'stay on' feature
-    def toggle_login(self, mouse_event):
-        if self.controller.login_status_var.get():
-            users['user'].toggle_login = False
-            self.login_status.config(foreground='red')
-            self.controller.update_user_save()
-            self.controller.login_status_var.set(False)
-        else:
-            users['user'].toggle_login = True
-            self.login_status.config(foreground='green')
-            self.controller.update_user_save()
-            self.controller.login_status_var.set(True)
-
     # temp func to see the retrieved results for a new entry
     def get_details(self):
         print(self.given_title.get())
@@ -651,6 +634,15 @@ class UpdateEntryPage(tk.Frame):
 
         self.controller = controller
 
+        self.given_title = tk.StringVar()
+        self.selected_ctype = tk.StringVar()
+        self.selected_rating = tk.IntVar()
+        self.current_progress = tk.StringVar()
+        self.total_progress = tk.StringVar()
+        self.selected_status = tk.StringVar()
+        self.selected_start_date = tk.StringVar()
+        self.selected_end_date = tk.StringVar()
+
         self.create_widgets()
 
     def create_widgets(self):
@@ -659,22 +651,111 @@ class UpdateEntryPage(tk.Frame):
         update_entry_window.propagate(0)
         update_entry_window.config(width=1100, height=700)
 
-    # redirects user to the selected apge from the navbar
-    def redirect_page(self, mouse_event, page_name):
-        self.controller.show_page(page_name)
+        # region - entry form for update
+        update_entry_form = tk.Frame(update_entry_window, highlightbackground='black', highlightthickness=1)
+        update_entry_form.place(relx=0.5, rely=0.5, anchor='center')
+        update_entry_form.propagate(0)
+        update_entry_form.config(width=800, height=600)
 
-    # toggling the status of the login's 'stay on' feature
-    def toggle_login(self, mouse_event):
-        if self.controller.login_status_var.get():
-            users['user'].toggle_login = False
-            self.login_status.config(foreground='red')
-            self.controller.update_user_save()
-            self.controller.login_status_var.set(False)
-        else:
-            users['user'].toggle_login = True
-            self.login_status.config(foreground='green')
-            self.controller.update_user_save()
-            self.controller.login_status_var.set(True)
+        update_entry_section_title = tk.Label(update_entry_form, text='Update Entry', font=('helvetica', 18))
+
+        update_entry_title = tk.Label(update_entry_form, text='Title:', font=('helvetica', 18))
+        update_entry_ctype = tk.Label(update_entry_form, text='Content Type:', font=('helvetica', 18))
+        update_entry_rating = tk.Label(update_entry_form, text='Rating:', font=('helvetica', 18))
+        update_entry_progress = tk.Label(update_entry_form, text='Progress:', font=('helvetica', 18))
+        update_entry_status = tk.Label(update_entry_form, text='Status:', font=('helvetica', 18))
+        update_entry_start_date = tk.Label(update_entry_form, text='Start Date:', font=('helvetica', 18))
+        update_entry_end_date = tk.Label(update_entry_form, text='End Date:', font=('helvetica', 18))
+
+        update_entry_section_title.place(x=300, y=50)
+
+        update_entry_title.place(x=150, y=100)
+        update_entry_ctype.place(x=150, y=150)
+        update_entry_rating.place(x=150, y=200)
+        update_entry_progress.place(x=150, y=250)
+        update_entry_status.place(x=150, y=300)
+        update_entry_start_date.place(x=150, y=350)
+        update_entry_end_date.place(x=150, y=400)
+
+        update_entry_title_info = tk.Entry(update_entry_form, font=('helvetica', 18), textvariable=self.given_title)
+
+        ctype_options = [
+            "Book",
+            "Anime",
+            "Manga",
+            "Manhwa",
+            "TV Show",
+            "Movie",
+            "OVA"
+        ]
+        self.selected_ctype.set("Select Content Type")
+        update_entry_ctype_info = tk.OptionMenu(update_entry_form, self.selected_ctype, *ctype_options)
+        update_entry_ctype_info.config(font=('helvetica', 12), indicatoron=0)
+
+        rating_options = [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+        ]
+        self.selected_rating.set('Select Rating')
+        update_entry_rating_info = tk.OptionMenu(update_entry_form, self.selected_rating, *rating_options)
+        update_entry_rating_info.config(font=('helvetica', 12), indicatoron=0)
+
+        update_entry_progress_info_current = tk.Entry(update_entry_form, font=('helvetica', 18), textvariable=self.current_progress)
+        update_entry_progress_info_current.config(width=5)
+        update_entry_progress_info_divider = tk.Label(update_entry_form, text='/', font=('helvetica', 18))
+        update_entry_progress_info_total = tk.Entry(update_entry_form, font=('helvetica', 18), textvariable=self.total_progress)
+        update_entry_progress_info_total.config(width=5)
+
+        status_options = [
+            'Planned',
+            'Viewing', 
+            'Paused',
+            'Dropped',
+            'Finished'
+        ]
+        self.selected_status.set('Select Status')
+        update_entry_status_info = tk.OptionMenu(update_entry_form, self.selected_status, *status_options)
+        update_entry_status_info.config(font=('helvetica', 12), indicatoron=0)
+
+        self.update_entry_start_date_info = DateEntry(update_entry_form, date_pattern='dd-mm-yyyy')
+        self.update_entry_start_date_info.config(font=('helvetica', 12))
+        self.update_entry_end_date_info = DateEntry(update_entry_form, date_pattern='dd-mm-yyyy')
+        self.update_entry_end_date_info.config(font=('helvetica', 12))
+
+        update_entry_submit = tk.Button(update_entry_form, text='Submit Entry', font=('helvetica', 18), command=self.get_details)
+        update_entry_cancel = tk.Button(update_entry_form, text='Cancel Entry', font=('helvetica', 18), command=lambda:self.controller.show_page(EntriesPage))
+
+        update_entry_title_info.place(x=350, y=100)
+        update_entry_ctype_info.place(x=350, y=150)
+        update_entry_rating_info.place(x=350, y=200)
+        update_entry_progress_info_current.place(x=350, y=250)
+        update_entry_progress_info_divider.place(x=445, y=250)
+        update_entry_progress_info_total.place(x=480, y=250)
+        update_entry_status_info.place(x=350, y=300)
+        self.update_entry_start_date_info.place(x=350, y=350)
+        self.update_entry_end_date_info.place(x=350, y=400)
+
+        update_entry_submit.place(x=150, y=480)
+        update_entry_cancel.place(x=350, y=480)
+        # endregion
+
+    def get_details(self):
+        print(self.given_title.get())
+        print(self.selected_ctype.get())
+        print(self.selected_rating.get())
+        print(self.current_progress.get())
+        print(self.total_progress.get())
+        print(self.selected_status.get())
+        print(self.update_entry_start_date_info.get())
+        print(self.update_entry_end_date_info.get())
 
 class EntriesPage(tk.Frame):
     def __init__(self, parent, controller):
