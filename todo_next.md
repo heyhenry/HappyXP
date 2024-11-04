@@ -43,7 +43,9 @@
 - Implement Entry Object to the existing functions i.e. custom_serializer x
 - Create entries save file x
 - Populate the entries_listbox with the submitted entries x
-- Display the information as per selected entry
+- Display the information as per selected entry x
+- Make sure that the displayed information does not go past the borders
+- Ensure to add in the type of metric is being used to measure the progress i.e. book = chapters, anime = episodes (preset during the new entry creation(?))
 - Create the update entry button and related stuff 
 - Create the delete entry function 
 - Create the Search bar in the SearchPage
