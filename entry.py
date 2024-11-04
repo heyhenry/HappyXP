@@ -1,4 +1,4 @@
-class Entry:
+class EntryInfo:
     def __init__(self, title, content_type, rating, current_progess, total_progress, status, start_date, end_date):
         self.title = title
         self.content_type = content_type

@@ -5,6 +5,7 @@ import os
 from PIL import Image, ImageTk
 from tkinter import filedialog
 from tkcalendar import DateEntry
+from entry import EntryInfo
 
 # save data 
 users = {}
@@ -84,6 +85,17 @@ class MainApp(tk.Tk):
                 'password': obj.password,
                 'toggle_login': obj.toggle_login,
                 'bio_message': obj.bio_message
+            }
+        elif isinstance(obj, EntryInfo):
+            return {
+                'title': obj.title,
+                'content_type': obj.content_type,
+                'rating': obj.rating,
+                'current_progress': obj.current_progress,
+                'total_progress': obj.total_progress,
+                'status': obj.status,
+                'start_date': obj.start_date,
+                'end_date': obj.end_date
             }
         return obj
 
