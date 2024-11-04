@@ -30,6 +30,7 @@ class MainApp(tk.Tk):
         self.geometry('1200x800+350+100')
 
         self.load_users()
+        self.load_entries()
 
         self.login_status_var = tk.BooleanVar(value=users['user'].toggle_login)
         self.current_user_image_var = tk.StringVar(value='img/default_pic.png')
@@ -64,19 +65,6 @@ class MainApp(tk.Tk):
         page = self.pages[cont]
         page.tkraise()
 
-    # load the user saved data and update users dictionary
-    def load_users(self):
-        global users
-        # checks if the save file can be located
-        if os.path.exists(user_savefile):
-            # opens the save file and reads its data
-            with open(user_savefile, 'r') as file:
-                # save the data into a dictionary variable
-                users_data = json.load(file)
-                # populate the users dictionary with the save file data
-                for user, user_info in users_data.items():
-                    users[user] = UserInfo(user_info['display_name'], user_info['username'], user_info['password'], user_info['toggle_login'], user_info['bio_message'])
-
     # json customised serializer
     def custom_serializer(self, obj):
         if isinstance(obj, UserInfo):
@@ -99,6 +87,28 @@ class MainApp(tk.Tk):
                 'end_date': obj.end_date
             }
         return obj
+
+    # load the user saved data and update users dictionary
+    def load_users(self):
+        global users
+        # checks if the save file can be located
+        if os.path.exists(user_savefile):
+            # opens the save file and reads its data
+            with open(user_savefile, 'r') as file:
+                # save the data into a dictionary variable
+                users_data = json.load(file)
+                # populate the users dictionary with the save file data
+                for user, user_info in users_data.items():
+                    users[user] = UserInfo(user_info['display_name'], user_info['username'], user_info['password'], user_info['toggle_login'], user_info['bio_message'])
+
+    def load_entries(self):
+        global entries
+        if os.path.exists(entries_savefile):
+            with open(entries_savefile, 'r') as file:
+                entries_data = json.load(file)
+                for entry, entry_info in entries_data.items():
+                    entries[entry] = EntryInfo(entry_info['title'], entry_info['content_type'], entry_info['rating'], entry_info['current_progress'],
+                                               entry_info['total_progress'], entry_info['status'], entry_info['start_date'], entry_info['end_date'])
 
     # update the user save file
     def update_user_save(self):
