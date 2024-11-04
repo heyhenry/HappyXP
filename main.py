@@ -13,6 +13,7 @@ entries = {}
 
 # save file names
 user_savefile = 'user_save.json'
+entries_savefile = 'entries_save.json'
 
 class MainApp(tk.Tk):
     # initiate MainApp class
@@ -101,10 +102,14 @@ class MainApp(tk.Tk):
 
     # update the user save file
     def update_user_save(self):
-
         json_object = json.dumps(users, indent=4, default=self.custom_serializer)
-
         with open(user_savefile, 'w') as outfile:
+            outfile.write(json_object)
+
+    # update the entries save file
+    def update_entries_save(self):
+        json_object = json.dumps(entries, indent=4, default=self.custom_serializer)
+        with open(entries_savefile, 'w') as outfile:
             outfile.write(json_object)
 
     # updates the login toggle status
@@ -664,6 +669,16 @@ class NewEntryPage(tk.Frame):
         print(self.selected_status.get())
         print(self.new_entry_start_date_info.get())
         print(self.new_entry_end_date_info.get())
+        self.create_new_entry()
+
+    def create_new_entry(self):
+
+        new_entry = EntryInfo(self.given_title.get(), self.selected_ctype.get(), self.selected_rating.get(), self.current_progress.get(),
+                              self.total_progress.get(), self.selected_status.get(), self.new_entry_start_date_info.get(), self.new_entry_end_date_info.get())
+
+        entries[self.given_title.get()] = new_entry
+
+        self.controller.update_entries_save()
 
 class EntriesPage(tk.Frame):
     def __init__(self, parent, controller):
