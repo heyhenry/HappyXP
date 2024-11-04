@@ -777,6 +777,9 @@ class EntriesPage(tk.Frame):
 
         update_entries_btn.place(x=250, y=530, width=250)
         delete_entries_btn.place(x=250, y=600, width=250)
+
+        self.entries_lb.bind('<<ListboxSelect>>', lambda mouse_event: self.display_entry_details(mouse_event))
+
         # endregion
 
         # region - entry details (right side)
@@ -811,21 +814,21 @@ class EntriesPage(tk.Frame):
 
         # entry information
         # current text is dummy text
-        entry_title_info = tk.Label(edetails_window, text='Title of a Title of', font=('helvetica', 18))
-        entry_ctype_info = tk.Label(edetails_window, text='Anime', font=('helvetica', 18))
-        entry_rating_info = tk.Label(edetails_window, text='0/10', font=('helvetica', 18))
-        entry_progress_info = tk.Label(edetails_window, text='13/24', font=('helvetica', 18))
-        entry_status_info = tk.Label(edetails_window, text='Watching', font=('helvetica', 18))
-        entry_start_date_info = tk.Label(edetails_window, text='01-20-30', font=('helvetica', 18))
-        entry_end_date_info = tk.Label(edetails_window, text='-', font=('helvetica', 18))
+        self.entry_title_info = tk.Label(edetails_window, text='Title of a Title of', font=('helvetica', 18))
+        self.entry_ctype_info = tk.Label(edetails_window, text='Anime', font=('helvetica', 18))
+        self.entry_rating_info = tk.Label(edetails_window, text='0/10', font=('helvetica', 18))
+        self.entry_progress_info = tk.Label(edetails_window, text='13/24', font=('helvetica', 18))
+        self.entry_status_info = tk.Label(edetails_window, text='Watching', font=('helvetica', 18))
+        self.entry_start_date_info = tk.Label(edetails_window, text='01-20-30', font=('helvetica', 18))
+        self.entry_end_date_info = tk.Label(edetails_window, text='-', font=('helvetica', 18))
 
-        entry_title_info.place(x=250, y=50)
-        entry_ctype_info.place(x=250, y=100)
-        entry_rating_info.place(x=250, y=150)
-        entry_progress_info.place(x=250, y=200)
-        entry_status_info.place(x=250, y=250)
-        entry_start_date_info.place(x=250, y=300)
-        entry_end_date_info.place(x=250, y=350) 
+        self.entry_title_info.place(x=250, y=50)
+        self.entry_ctype_info.place(x=250, y=100)
+        self.entry_rating_info.place(x=250, y=150)
+        self.entry_progress_info.place(x=250, y=200)
+        self.entry_status_info.place(x=250, y=250)
+        self.entry_start_date_info.place(x=250, y=300)
+        self.entry_end_date_info.place(x=250, y=350) 
         # endregion
 
     # redirects user to the selected page from the navbar
@@ -849,6 +852,17 @@ class EntriesPage(tk.Frame):
     def populate_entries(self):
         for entry_name in entries.keys():
             self.entries_lb.insert('end', entry_name)
+
+    # select and display entry details
+    def display_entry_details(self, mouse_event):
+
+        entry_id = ''
+
+        for i in self.entries_lb.curselection():
+            entry_id = self.entries_lb.get(i)
+
+        self.entry_title_info.config(text=entries[entry_id].title)
+
 
 class SettingsPage(tk.Frame):
     def __init__(self, parent, controller):

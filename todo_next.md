@@ -42,9 +42,10 @@
 - Create the Entry Object Class x
 - Implement Entry Object to the existing functions i.e. custom_serializer x
 - Create entries save file x
-- Populate the entries_listbox with the submitted entries
-- Create the update entry button and related stuff
-- Create the delete entry function
+- Populate the entries_listbox with the submitted entries x
+- Display the information as per selected entry
+- Create the update entry button and related stuff 
+- Create the delete entry function 
 - Create the Search bar in the SearchPage
 - Link up the Jikan API to the SearchPage for Results (or atleast look at its viability)
 - Create validations for the user input for the new entry page
