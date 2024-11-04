@@ -856,13 +856,21 @@ class EntriesPage(tk.Frame):
     # select and display entry details
     def display_entry_details(self, mouse_event):
 
+        # selected entry's reference variable
         entry_id = ''
 
+        # find user's selected item (otherwise known as entry)
         for i in self.entries_lb.curselection():
             entry_id = self.entries_lb.get(i)
 
+        # display the selected entry's details on the right side of the entries page
         self.entry_title_info.config(text=entries[entry_id].title)
-
+        self.entry_ctype_info.config(text=entries[entry_id].content_type)
+        self.entry_rating_info.config(text=entries[entry_id].rating)
+        self.entry_progress_info.config(text=f'{entries[entry_id].current_progress} / {entries[entry_id].total_progress}')
+        self.entry_status_info.config(text=entries[entry_id].status)
+        self.entry_start_date_info.config(text=entries[entry_id].start_date)
+        self.entry_end_date_info.config(text=entries[entry_id].end_date)
 
 class SettingsPage(tk.Frame):
     def __init__(self, parent, controller):
