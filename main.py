@@ -638,7 +638,7 @@ class NewEntryPage(tk.Frame):
         self.new_entry_end_date_info.config(font=('helvetica', 12))
 
         new_entry_submit = tk.Button(new_entry_form, text='Submit Entry', font=('helvetica', 18), command=self.get_details)
-        new_entry_cancel = tk.Button(new_entry_form, text='Cancel Entry', font=('helvetica', 18))
+        new_entry_cancel = tk.Button(new_entry_form, text='Cancel Entry', font=('helvetica', 18), command=lambda:self.controller.show_page(EntriesPage))
 
         new_entry_title_info.place(x=350, y=100)
         new_entry_ctype_info.place(x=350, y=150)

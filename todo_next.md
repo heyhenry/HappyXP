@@ -12,31 +12,31 @@
 
 
 # This the updated one
-- Create the Entry Page
-    - Title
-    - Content type (Drop Down Limited Options)
+- Create the Entry Page x
+    - Title x
+    - Content type (Drop Down Limited Options) x
         - Book
         - Anime
         - Manga
         - Manhwa
         - TV Show
         - Movie
-    - Rating (Drop Down Limited Options)
+    - Rating (Drop Down Limited Options) x
         - 1 - 10
-    - Progress (text setup like [[]/[]])
+    - Progress (text setup like [[]/[]]) x
         - If content type is books, manga or manhwa - automatically attach chapters to progress
         - If content type is movie, tv show or anime - automatically attach episodes to progress
-    - Status (Drop Down Limited Options)
+    - Status (Drop Down Limited Options) x
         - Planned
         - Viewing
         - Paused
         - Dropped
         - Finished
-    - Start Date
+    - Start Date x
         - [[dd]-[mm]-[yyyy]] (Temporary method)
-    - End Date
+    - End Date x
         - [[dd]-[mm]-[yyyy]]
-    - Submit button
+    - Submit button x
     - Cancel or Go Back(?) button
 - Link Entry Page with the '+ New Entry' button
 - Create the Entry Object Class
