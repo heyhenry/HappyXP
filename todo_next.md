@@ -55,3 +55,8 @@
     - ensure all fields are filed
     - else if there are some fields that don't require filling, have a preset default value that will take its place
     - error message to go along with the validation checking
+
+
+# Do these today (5th nov), when you come back from a break
+- Display the new entries in the entries list right after a new entry has been created
+- 

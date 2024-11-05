@@ -627,6 +627,7 @@ class NewEntryPage(tk.Frame):
                               self.total_progress.get(), self.selected_status.get(), self.new_entry_start_date_info.get(), self.new_entry_end_date_info.get())
         entries[self.given_title.get()] = new_entry
         self.controller.update_entries_save()
+        self.controller.show_page(EntriesPage)
 
 class UpdateEntryPage(tk.Frame):
     def __init__(self, parent, controller):
