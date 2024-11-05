@@ -646,8 +646,6 @@ class UpdateEntryPage(tk.Frame):
         self.selected_end_date = tk.StringVar()
 
         self.create_widgets()
-        
-        self.controller.entry_id_var.trace_add('write', self.load_existing_entry_info)
 
     def create_widgets(self):
         update_entry_window = tk.Frame(self, highlightbackground='black', highlightthickness=2)
@@ -764,6 +762,7 @@ class UpdateEntryPage(tk.Frame):
 
         print(self.controller.entry_id_var.get())
 
+    
     def load_existing_entry_info(self, *args):
         print(self.controller.entry_id_var.get())
 
@@ -945,9 +944,13 @@ class EntriesPage(tk.Frame):
         self.entry_start_date_info.config(text=entries[entry_id].start_date)
         self.entry_end_date_info.config(text=entries[entry_id].end_date)
 
+    # loads the details for the selected entry that will be getting updated
     def load_update_entry(self):
+        # get the selected entry's id
         for i in self.entries_lb.curselection():
+            # set the global variable for entry_id_var to the selected entry id
             self.controller.entry_id_var.set(self.entries_lb.get(i))
+        # redirect to the update entry page
         self.controller.show_page(UpdateEntryPage)
 
 class SettingsPage(tk.Frame):
