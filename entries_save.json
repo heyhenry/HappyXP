@@ -18,5 +18,15 @@
         "status": "Paused",
         "start_date": "05-08-2024",
         "end_date": "12-11-2024"
+    },
+    "New Man": {
+        "title": "New Man",
+        "content_type": "Book",
+        "rating": 10,
+        "current_progress": "1",
+        "total_progress": "10",
+        "status": "Viewing",
+        "start_date": "05-11-2024",
+        "end_date": "21-11-2024"
     }
 }

@@ -504,8 +504,6 @@ class NewEntryPage(tk.Frame):
         self.current_progress = tk.StringVar()
         self.total_progress = tk.StringVar()
         self.selected_status = tk.StringVar()
-        self.selected_start_date = tk.StringVar()
-        self.selected_end_date = tk.StringVar()
 
         self.create_widgets()
 
@@ -642,10 +640,10 @@ class UpdateEntryPage(tk.Frame):
         self.current_progress = tk.StringVar()
         self.total_progress = tk.StringVar()
         self.selected_status = tk.StringVar()
-        self.selected_start_date = tk.StringVar()
-        self.selected_end_date = tk.StringVar()
 
         self.create_widgets()
+
+        self.controller.entry_id_var.trace_add('write', self.load_existing_entry_info)
 
     def create_widgets(self):
         update_entry_window = tk.Frame(self, highlightbackground='black', highlightthickness=2)
@@ -762,10 +760,17 @@ class UpdateEntryPage(tk.Frame):
 
         print(self.controller.entry_id_var.get())
 
-    
+    # load the existing entry's details as prefilled information and set relevant variables
     def load_existing_entry_info(self, *args):
-        print(self.controller.entry_id_var.get())
-
+        entry_id = self.controller.entry_id_var.get()
+        self.given_title.set(entries[entry_id].title)
+        self.selected_ctype.set(entries[entry_id].content_type)
+        self.selected_rating.set(entries[entry_id].rating)
+        self.current_progress.set(entries[entry_id].current_progress)
+        self.total_progress.set(entries[entry_id].total_progress)
+        self.selected_status.set(entries[entry_id].status)
+        self.update_entry_start_date_info.set_date(entries[entry_id].start_date)
+        self.update_entry_end_date_info.set_date(entries[entry_id].end_date)
 
 class EntriesPage(tk.Frame):
     def __init__(self, parent, controller):
