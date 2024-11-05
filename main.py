@@ -38,6 +38,8 @@ class MainApp(tk.Tk):
         # tracer to find changes to the current_user_image_var variable, if found - execute the update_profile_image function
         self.current_user_image_var.trace_add('write', self.update_profile_image)
 
+        self.entry_id_var = tk.StringVar()
+
         # store the frames (pages)
         self.pages = {}
 
@@ -150,7 +152,7 @@ class MainApp(tk.Tk):
         self.user_profile_img = ImageTk.PhotoImage(self.user_profile_img)
         self.user_profile_img.image = self.user_profile_img
 
-        # specifically trigge the HomePage's func to update it's page's profile image display
+        # specifically trigger the HomePage's func to update it's page's profile image display
         self.pages[HomePage].update_image(self.user_profile_img)
 
     # highlight nav options upon hover
@@ -644,6 +646,8 @@ class UpdateEntryPage(tk.Frame):
         self.selected_end_date = tk.StringVar()
 
         self.create_widgets()
+        
+        self.controller.entry_id_var.trace_add('write', self.load_existing_entry_info)
 
     def create_widgets(self):
         update_entry_window = tk.Frame(self, highlightbackground='black', highlightthickness=2)
@@ -677,7 +681,7 @@ class UpdateEntryPage(tk.Frame):
         update_entry_start_date.place(x=150, y=350)
         update_entry_end_date.place(x=150, y=400)
 
-        update_entry_title_info = tk.Entry(update_entry_form, font=('helvetica', 18), textvariable=self.given_title)
+        self.update_entry_title_info = tk.Entry(update_entry_form, font=('helvetica', 18), textvariable=self.given_title)
 
         ctype_options = [
             "Book",
@@ -689,8 +693,8 @@ class UpdateEntryPage(tk.Frame):
             "OVA"
         ]
         self.selected_ctype.set("Select Content Type")
-        update_entry_ctype_info = tk.OptionMenu(update_entry_form, self.selected_ctype, *ctype_options)
-        update_entry_ctype_info.config(font=('helvetica', 12), indicatoron=0)
+        self.update_entry_ctype_info = tk.OptionMenu(update_entry_form, self.selected_ctype, *ctype_options)
+        self.update_entry_ctype_info.config(font=('helvetica', 12), indicatoron=0)
 
         rating_options = [
             1,
@@ -705,14 +709,14 @@ class UpdateEntryPage(tk.Frame):
             10
         ]
         self.selected_rating.set('Select Rating')
-        update_entry_rating_info = tk.OptionMenu(update_entry_form, self.selected_rating, *rating_options)
-        update_entry_rating_info.config(font=('helvetica', 12), indicatoron=0)
+        self.update_entry_rating_info = tk.OptionMenu(update_entry_form, self.selected_rating, *rating_options)
+        self.update_entry_rating_info.config(font=('helvetica', 12), indicatoron=0)
 
-        update_entry_progress_info_current = tk.Entry(update_entry_form, font=('helvetica', 18), textvariable=self.current_progress)
-        update_entry_progress_info_current.config(width=5)
-        update_entry_progress_info_divider = tk.Label(update_entry_form, text='/', font=('helvetica', 18))
-        update_entry_progress_info_total = tk.Entry(update_entry_form, font=('helvetica', 18), textvariable=self.total_progress)
-        update_entry_progress_info_total.config(width=5)
+        self.update_entry_progress_info_current = tk.Entry(update_entry_form, font=('helvetica', 18), textvariable=self.current_progress)
+        self.update_entry_progress_info_current.config(width=5)
+        self.update_entry_progress_info_divider = tk.Label(update_entry_form, text='/', font=('helvetica', 18))
+        self.update_entry_progress_info_total = tk.Entry(update_entry_form, font=('helvetica', 18), textvariable=self.total_progress)
+        self.update_entry_progress_info_total.config(width=5)
 
         status_options = [
             'Planned',
@@ -722,24 +726,24 @@ class UpdateEntryPage(tk.Frame):
             'Finished'
         ]
         self.selected_status.set('Select Status')
-        update_entry_status_info = tk.OptionMenu(update_entry_form, self.selected_status, *status_options)
-        update_entry_status_info.config(font=('helvetica', 12), indicatoron=0)
+        self.update_entry_status_info = tk.OptionMenu(update_entry_form, self.selected_status, *status_options)
+        self.update_entry_status_info.config(font=('helvetica', 12), indicatoron=0)
 
         self.update_entry_start_date_info = DateEntry(update_entry_form, date_pattern='dd-mm-yyyy')
         self.update_entry_start_date_info.config(font=('helvetica', 12))
         self.update_entry_end_date_info = DateEntry(update_entry_form, date_pattern='dd-mm-yyyy')
         self.update_entry_end_date_info.config(font=('helvetica', 12))
 
-        update_entry_submit = tk.Button(update_entry_form, text='Submit Entry', font=('helvetica', 18), command=self.get_details)
+        update_entry_submit = tk.Button(update_entry_form, text='Submit Entry', font=('helvetica', 18))
         update_entry_cancel = tk.Button(update_entry_form, text='Cancel Entry', font=('helvetica', 18), command=lambda:self.controller.show_page(EntriesPage))
 
-        update_entry_title_info.place(x=350, y=100)
-        update_entry_ctype_info.place(x=350, y=150)
-        update_entry_rating_info.place(x=350, y=200)
-        update_entry_progress_info_current.place(x=350, y=250)
-        update_entry_progress_info_divider.place(x=445, y=250)
-        update_entry_progress_info_total.place(x=480, y=250)
-        update_entry_status_info.place(x=350, y=300)
+        self.update_entry_title_info.place(x=350, y=100)
+        self.update_entry_ctype_info.place(x=350, y=150)
+        self.update_entry_rating_info.place(x=350, y=200)
+        self.update_entry_progress_info_current.place(x=350, y=250)
+        self.update_entry_progress_info_divider.place(x=445, y=250)
+        self.update_entry_progress_info_total.place(x=480, y=250)
+        self.update_entry_status_info.place(x=350, y=300)
         self.update_entry_start_date_info.place(x=350, y=350)
         self.update_entry_end_date_info.place(x=350, y=400)
 
@@ -747,6 +751,7 @@ class UpdateEntryPage(tk.Frame):
         update_entry_cancel.place(x=350, y=480)
         # endregion
 
+    # temp* check info retrieved
     def get_details(self):
         print(self.given_title.get())
         print(self.selected_ctype.get())
@@ -756,6 +761,12 @@ class UpdateEntryPage(tk.Frame):
         print(self.selected_status.get())
         print(self.update_entry_start_date_info.get())
         print(self.update_entry_end_date_info.get())
+
+        print(self.controller.entry_id_var.get())
+
+    def load_existing_entry_info(self, *args):
+        print(self.controller.entry_id_var.get())
+
 
 class EntriesPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -834,7 +845,7 @@ class EntriesPage(tk.Frame):
         # populate the entries list with all of the user's entries
         self.populate_entries()
 
-        update_entries_btn = tk.Button(entries_window, text='Update An Entry', font=('helvetica', 18), command=lambda: self.controller.show_page(UpdateEntryPage))
+        update_entries_btn = tk.Button(entries_window, text='Update An Entry', font=('helvetica', 18), command=self.load_update_entry)
         delete_entries_btn = tk.Button(entries_window, text='Delete An Entry', font=('helvetica', 18))
 
         update_entries_btn.place(x=250, y=530, width=250)
@@ -933,6 +944,11 @@ class EntriesPage(tk.Frame):
         self.entry_status_info.config(text=entries[entry_id].status)
         self.entry_start_date_info.config(text=entries[entry_id].start_date)
         self.entry_end_date_info.config(text=entries[entry_id].end_date)
+
+    def load_update_entry(self):
+        for i in self.entries_lb.curselection():
+            self.controller.entry_id_var.set(self.entries_lb.get(i))
+        self.controller.show_page(UpdateEntryPage)
 
 class SettingsPage(tk.Frame):
     def __init__(self, parent, controller):
