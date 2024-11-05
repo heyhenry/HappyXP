@@ -609,7 +609,7 @@ class NewEntryPage(tk.Frame):
         new_entry_cancel.place(x=350, y=480)
         # endregion
 
-    # temp func to see the retrieved results for a new entry
+    # temp func to see the retrieved results for a new entry ** LATER REMOVE THIS FUNC AND ASSIGN 'create_new_entry()' TO THE SUBMIT BUTTON
     def get_details(self):
         print(self.given_title.get())
         print(self.selected_ctype.get())
