@@ -742,7 +742,7 @@ class UpdateEntryPage(tk.Frame):
         self.update_entry_end_date_info = DateEntry(update_entry_form, date_pattern='dd-mm-yyyy')
         self.update_entry_end_date_info.config(font=('helvetica', 12))
 
-        update_entry_submit = tk.Button(update_entry_form, text='Submit Entry', font=('helvetica', 18), command=self.update_entry)
+        update_entry_submit = tk.Button(update_entry_form, text='Update Entry', font=('helvetica', 18), command=self.update_entry)
         update_entry_cancel = tk.Button(update_entry_form, text='Cancel Entry', font=('helvetica', 18), command=lambda:self.controller.show_page(EntriesPage))
 
         self.update_entry_title_info.place(x=350, y=100)
