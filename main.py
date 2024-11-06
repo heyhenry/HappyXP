@@ -6,6 +6,7 @@ from PIL import Image, ImageTk
 from tkinter import filedialog
 from tkcalendar import DateEntry
 from entry import EntryInfo
+from datetime import datetime
 
 # save data 
 users = {}
@@ -603,7 +604,7 @@ class NewEntryPage(tk.Frame):
         self.new_entry_end_date_info.config(font=('helvetica', 12))
 
         new_entry_submit = tk.Button(new_entry_form, text='Submit Entry', font=('helvetica', 18), command=self.get_details)
-        new_entry_cancel = tk.Button(new_entry_form, text='Cancel Entry', font=('helvetica', 18), command=lambda:self.controller.show_page(EntriesPage))
+        new_entry_cancel = tk.Button(new_entry_form, text='Cancel Entry', font=('helvetica', 18), command=self.cancel_new_entry)
 
         new_entry_title_info.place(x=350, y=100)
         new_entry_ctype_info.place(x=350, y=150)
@@ -667,6 +668,17 @@ class NewEntryPage(tk.Frame):
             return False
         return True
             
+    # resets new entry's input fields
+    def cancel_new_entry(self):
+        today = datetime.today().strftime('%d/%m/%Y')
+        self.given_title.set('')
+        self.selected_ctype.set('Select Content Type')
+        self.selected_rating.set('Select Rating')
+        self.current_progress.set('')
+        self.total_progress.set('')
+        self.new_entry_start_date_info.set_date(today)
+        self.new_entry_end_date_info.set_date(today)
+        self.controller.show_page(EntriesPage)
 
 class UpdateEntryPage(tk.Frame):
     def __init__(self, parent, controller):
