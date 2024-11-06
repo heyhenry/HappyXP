@@ -11,13 +11,18 @@ lb.insert(3, 'Steven')
 lb.insert(4, 'Albert')
 lb.insert(5, 'Arman')
 
-def selected_item():
-    for i in lb.curselection():
-        print(lb.get(i))
+# def selected_item():
+#     for i in lb.curselection():
+#         print(lb.get(i))
 
-btn = tk.Button(root, text='Print Selected', command=selected_item)
+def delete_items():
+    lb.delete(0, 'end')
+
+btn = tk.Button(root, text='Print Selected')
 
 btn.pack(side='bottom')
 lb.pack()
+
+print(delete_items())
 
 root.mainloop()

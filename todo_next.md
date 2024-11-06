@@ -81,3 +81,9 @@ So..
     - If its a movie have the total_progress at 1
     - Should you allow the total_progress to be editable when the user is updating an entry
     - Should i bother creating a function to automatically change the status of an entry to completed/finished when current_progress == total_progress?
+
+# Bugs to debug and take note of
+- When selecting an item from the entries listbox and then going to say.. the add_new_entry button, bind trigger gets error
+    - It pops up in terminal, almost always when i click in the progress entry boxes... but the error does show that it gets triggerd from the start aka entry_title
+
+    

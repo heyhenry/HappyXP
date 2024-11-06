@@ -186,6 +186,13 @@ class MainApp(tk.Tk):
         else:
             widget_name.config(foreground='black')
 
+    # fill in the entries listbox with all of the user's entries from the saved data
+    def populate_entries(self, widget_name):
+        if widget_name.size():
+            widget_name.delete(0, 'end')
+        for entry_name in entries.keys():
+            widget_name.insert('end', entry_name)
+
 class SetupPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -628,6 +635,8 @@ class NewEntryPage(tk.Frame):
         entries[self.given_title.get()] = new_entry
         self.controller.update_entries_save()
         self.controller.show_page(EntriesPage)
+        # update the entries list with the addition of the new entry
+        self.controller.populate_entries(self.controller.pages[EntriesPage].entries_lb)
 
 class UpdateEntryPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -848,7 +857,7 @@ class EntriesPage(tk.Frame):
         entries_sb.config(command=self.entries_lb.yview, width=20)
 
         # populate the entries list with all of the user's entries
-        self.populate_entries()
+        self.controller.populate_entries(self.entries_lb)
 
         update_entries_btn = tk.Button(entries_window, text='Update An Entry', font=('helvetica', 18), command=self.load_update_entry)
         delete_entries_btn = tk.Button(entries_window, text='Delete An Entry', font=('helvetica', 18))
@@ -925,11 +934,6 @@ class EntriesPage(tk.Frame):
             self.login_status.config(foreground='green')
             self.controller.update_user_save()
             self.controller.login_status_var.set(True)
-
-    # fill in the entries listbox with all of the user's entries from the saved data
-    def populate_entries(self):
-        for entry_name in entries.keys():
-            self.entries_lb.insert('end', entry_name)
 
     # select and display entry details
     def display_entry_details(self, mouse_event):
