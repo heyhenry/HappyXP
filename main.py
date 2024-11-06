@@ -742,7 +742,7 @@ class UpdateEntryPage(tk.Frame):
         self.update_entry_end_date_info = DateEntry(update_entry_form, date_pattern='dd-mm-yyyy')
         self.update_entry_end_date_info.config(font=('helvetica', 12))
 
-        update_entry_submit = tk.Button(update_entry_form, text='Submit Entry', font=('helvetica', 18))
+        update_entry_submit = tk.Button(update_entry_form, text='Submit Entry', font=('helvetica', 18), command=self.update_entry)
         update_entry_cancel = tk.Button(update_entry_form, text='Cancel Entry', font=('helvetica', 18), command=lambda:self.controller.show_page(EntriesPage))
 
         self.update_entry_title_info.place(x=350, y=100)
@@ -783,6 +783,23 @@ class UpdateEntryPage(tk.Frame):
         self.selected_status.set(entries[entry_id].status)
         self.update_entry_start_date_info.set_date(entries[entry_id].start_date)
         self.update_entry_end_date_info.set_date(entries[entry_id].end_date)
+
+    def update_entry(self):
+        entry_id = self.controller.entry_id_var.get()
+        entries[entry_id].title = self.given_title.get()
+        entries[entry_id].content_type = self.selected_ctype.get()
+        entries[entry_id].rating = self.selected_rating.get()
+        entries[entry_id].current_progress = self.current_progress.get()
+        entries[entry_id].total_progress = self.total_progress.get()
+        entries[entry_id].status = self.selected_status.get()
+        entries[entry_id].start_date = self.update_entry_start_date_info.get()
+        entries[entry_id].end_date = self.update_entry_end_date_info.get()
+        # if the entry's title is updated, update the key name for the given entry
+        if self.given_title.get() != entry_id:
+            entries[self.given_title.get()] = entries.pop(entry_id)
+        self.controller.update_entries_save()
+        self.controller.populate_entries(self.controller.pages[EntriesPage].entries_lb)
+        self.controller.show_page(EntriesPage)
 
 class EntriesPage(tk.Frame):
     def __init__(self, parent, controller):

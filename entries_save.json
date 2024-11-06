@@ -49,26 +49,6 @@
         "start_date": "28-10-2024",
         "end_date": "12-11-2024"
     },
-    "Tandem Punches": {
-        "title": "Tandem Punches",
-        "content_type": "Anime",
-        "rating": 1,
-        "current_progress": "1",
-        "total_progress": "12",
-        "status": "Paused",
-        "start_date": "06-11-2024",
-        "end_date": "19-11-2024"
-    },
-    "Bear Wars": {
-        "title": "Bear Wars",
-        "content_type": "Anime",
-        "rating": 3,
-        "current_progress": "1",
-        "total_progress": "12",
-        "status": "Viewing",
-        "start_date": "06-11-2024",
-        "end_date": "13-11-2024"
-    },
     "Lucky Meejo": {
         "title": "Lucky Meejo",
         "content_type": "Manga",
@@ -78,5 +58,25 @@
         "status": "Dropped",
         "start_date": "28-10-2024",
         "end_date": "28-11-2024"
+    },
+    "RockyaSock": {
+        "title": "RockyaSock",
+        "content_type": "Anime",
+        "rating": 1,
+        "current_progress": "1",
+        "total_progress": "12",
+        "status": "Paused",
+        "start_date": "06-11-2024",
+        "end_date": "19-11-2024"
+    },
+    "Beaver Wars": {
+        "title": "Beaver Wars",
+        "content_type": "Anime",
+        "rating": 3,
+        "current_progress": "1",
+        "total_progress": "12",
+        "status": "Viewing",
+        "start_date": "06-11-2024",
+        "end_date": "13-11-2024"
     }
 }

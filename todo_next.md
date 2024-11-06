@@ -63,7 +63,7 @@
 - Display updated entry information when selected upon in the entries list
 
 So.. 
-1. In the EntriesPage class, go and make sure the changes are shown in real time on relevant pages (i.e. Displays on the Entries Listbox)
+1. In the EntriesPage class, go and make sure the changes are shown in real time on relevant pages (i.e. Displays on the Entries Listbox) x
 2. In the UpdateEntryPage class, save/update the new entry information to the entries_savefile and existing variables (?)
 3. In the EntriesPage class, make sure the updated entry's information is being shown in realtime when user decides to browse through the entries listbox post-update of an entry
 
@@ -86,4 +86,3 @@ So..
 - When selecting an item from the entries listbox and then going to say.. the add_new_entry button, bind trigger gets error
     - It pops up in terminal, almost always when i click in the progress entry boxes... but the error does show that it gets triggerd from the start aka entry_title
 
-    
