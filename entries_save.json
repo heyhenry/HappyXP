@@ -9,24 +9,14 @@
         "start_date": "06-11-2024",
         "end_date": "06-11-2024"
     },
-    "asdfasdf": {
-        "title": "asdfasdf",
-        "content_type": "Anime",
-        "rating": "4",
+    "Dragon Martial Arts": {
+        "title": "Dragon Martial Arts",
+        "content_type": "Book",
+        "rating": "9",
         "current_progress": "12",
-        "total_progress": "asdf2",
-        "status": "Select Status",
+        "total_progress": "24",
+        "status": "Viewing",
         "start_date": "06-11-2024",
-        "end_date": "06-11-2024"
-    },
-    "asdfadsf": {
-        "title": "asdfadsf",
-        "content_type": "Manga",
-        "rating": "4",
-        "current_progress": "12",
-        "total_progress": "12",
-        "status": "Select Status",
-        "start_date": "06-11-2024",
-        "end_date": "06-11-2024"
+        "end_date": "27-11-2024"
     }
 }

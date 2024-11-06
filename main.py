@@ -603,7 +603,7 @@ class NewEntryPage(tk.Frame):
         self.new_entry_end_date_info = DateEntry(new_entry_form, date_pattern='dd-mm-yyyy')
         self.new_entry_end_date_info.config(font=('helvetica', 12))
 
-        new_entry_submit = tk.Button(new_entry_form, text='Submit Entry', font=('helvetica', 18), command=self.get_details)
+        new_entry_submit = tk.Button(new_entry_form, text='Submit Entry', font=('helvetica', 18), command=self.create_new_entry)
         new_entry_cancel = tk.Button(new_entry_form, text='Cancel Entry', font=('helvetica', 18), command=self.cancel_new_entry)
 
         new_entry_title_info.place(x=350, y=100)
@@ -623,18 +623,6 @@ class NewEntryPage(tk.Frame):
         self.error_message = tk.Label(new_entry_form, text='', font=('helvetica', 18), foreground='red')
         self.error_message.place(x=300, y=550)
         # endregion
-
-    # temp func to see the retrieved results for a new entry ** LATER REMOVE THIS FUNC AND ASSIGN 'create_new_entry()' TO THE SUBMIT BUTTON
-    def get_details(self):
-        # print(self.given_title.get())
-        # print(self.selected_ctype.get())
-        # print(self.selected_rating.get())
-        # print(self.current_progress.get())
-        # print(self.total_progress.get())
-        # print(self.selected_status.get())
-        # print(self.new_entry_start_date_info.get())
-        # print(self.new_entry_end_date_info.get())
-        self.create_new_entry()
 
     # create a new entry
     def create_new_entry(self):
