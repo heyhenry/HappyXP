@@ -1,62 +1,32 @@
 {
-    "Wakaerer": {
-        "title": "Wakaerer",
-        "content_type": "Manga",
-        "rating": 2,
-        "current_progress": "1",
-        "total_progress": "12",
-        "status": "Viewing",
-        "start_date": "04-11-2024",
-        "end_date": "19-11-2024"
-    },
-    "Army of Rok": {
-        "title": "Army of Rok",
-        "content_type": "Manhwa",
-        "rating": 4,
-        "current_progress": "1",
-        "total_progress": "12",
-        "status": "Paused",
-        "start_date": "05-08-2024",
-        "end_date": "12-11-2024"
-    },
-    "New Man": {
-        "title": "New Man",
-        "content_type": "Book",
-        "rating": 10,
-        "current_progress": "1",
-        "total_progress": "10",
-        "status": "Viewing",
-        "start_date": "05-11-2024",
-        "end_date": "21-11-2024"
-    },
-    "Alabasta Arc": {
-        "title": "Alabasta Arc",
+    "Alabastion": {
+        "title": "Alabastion",
         "content_type": "Anime",
-        "rating": 7,
-        "current_progress": "1",
-        "total_progress": "12",
-        "status": "Paused",
-        "start_date": "28-10-2024",
-        "end_date": "12-11-2024"
-    },
-    "Lucky Meejo": {
-        "title": "Lucky Meejo",
-        "content_type": "Manga",
-        "rating": 3,
+        "rating": "8",
         "current_progress": "12",
         "total_progress": "24",
-        "status": "Dropped",
-        "start_date": "28-10-2024",
-        "end_date": "28-11-2024"
-    },
-    "RockyaSock": {
-        "title": "RockyaSock",
-        "content_type": "Anime",
-        "rating": 1,
-        "current_progress": "1",
-        "total_progress": "12",
-        "status": "Paused",
+        "status": "Viewing",
         "start_date": "06-11-2024",
-        "end_date": "19-11-2024"
+        "end_date": "06-11-2024"
+    },
+    "asdfasdf": {
+        "title": "asdfasdf",
+        "content_type": "Anime",
+        "rating": "4",
+        "current_progress": "12",
+        "total_progress": "asdf2",
+        "status": "Select Status",
+        "start_date": "06-11-2024",
+        "end_date": "06-11-2024"
+    },
+    "asdfadsf": {
+        "title": "asdfadsf",
+        "content_type": "Manga",
+        "rating": "4",
+        "current_progress": "12",
+        "total_progress": "12",
+        "status": "Select Status",
+        "start_date": "06-11-2024",
+        "end_date": "06-11-2024"
     }
 }

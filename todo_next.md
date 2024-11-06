@@ -69,7 +69,7 @@ So..
 
 # If all is good after those 3 points...
 (Priority)
-- Create the delete entry functionality/feature
+- Create the delete entry functionality/feature x
 
 (FlowingPriority)
 - Implement validation related features to the new entries and entries that are going to get update aka (NewEntryPage & UpdateEntryPage)

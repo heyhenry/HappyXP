@@ -509,7 +509,7 @@ class NewEntryPage(tk.Frame):
 
         self.given_title = tk.StringVar()
         self.selected_ctype = tk.StringVar()
-        self.selected_rating = tk.IntVar()
+        self.selected_rating = tk.StringVar()
         self.current_progress = tk.StringVar()
         self.total_progress = tk.StringVar()
         self.selected_status = tk.StringVar()
@@ -584,6 +584,7 @@ class NewEntryPage(tk.Frame):
         new_entry_progress_info_divider = tk.Label(new_entry_form, text='/', font=('helvetica', 18))
         new_entry_progress_info_total = tk.Entry(new_entry_form, font=('helvetica', 18), textvariable=self.total_progress)
         new_entry_progress_info_total.config(width=5)
+        new_entry_progress_metric = tk.Label(new_entry_form, text='Episodes/Chapters', font=('helvetica', 12))
 
         status_options = [
             'Planned',
@@ -610,35 +611,56 @@ class NewEntryPage(tk.Frame):
         new_entry_progress_info_current.place(x=350, y=250)
         new_entry_progress_info_divider.place(x=445, y=250)
         new_entry_progress_info_total.place(x=480, y=250)
+        new_entry_progress_metric.place(x=580, y=250)
         new_entry_status_info.place(x=350, y=300)
         self.new_entry_start_date_info.place(x=350, y=350)
         self.new_entry_end_date_info.place(x=350, y=400)
 
         new_entry_submit.place(x=150, y=480)
         new_entry_cancel.place(x=350, y=480)
+
+        self.error_message = tk.Label(new_entry_form, text='', font=('helvetica', 18), foreground='red')
+        self.error_message.place(x=300, y=550)
         # endregion
 
     # temp func to see the retrieved results for a new entry ** LATER REMOVE THIS FUNC AND ASSIGN 'create_new_entry()' TO THE SUBMIT BUTTON
     def get_details(self):
-        print(self.given_title.get())
-        print(self.selected_ctype.get())
-        print(self.selected_rating.get())
-        print(self.current_progress.get())
-        print(self.total_progress.get())
-        print(self.selected_status.get())
-        print(self.new_entry_start_date_info.get())
-        print(self.new_entry_end_date_info.get())
+        # print(self.given_title.get())
+        # print(self.selected_ctype.get())
+        # print(self.selected_rating.get())
+        # print(self.current_progress.get())
+        # print(self.total_progress.get())
+        # print(self.selected_status.get())
+        # print(self.new_entry_start_date_info.get())
+        # print(self.new_entry_end_date_info.get())
         self.create_new_entry()
 
     # create a new entry
     def create_new_entry(self):
-        new_entry = EntryInfo(self.given_title.get(), self.selected_ctype.get(), self.selected_rating.get(), self.current_progress.get(),
-                              self.total_progress.get(), self.selected_status.get(), self.new_entry_start_date_info.get(), self.new_entry_end_date_info.get())
-        entries[self.given_title.get()] = new_entry
-        self.controller.update_entries_save()
-        self.controller.show_page(EntriesPage)
-        # update the entries list with the addition of the new entry
-        self.controller.populate_entries(self.controller.pages[EntriesPage].entries_lb)
+        if not self.validate_entry():
+            new_entry = EntryInfo(self.given_title.get(), self.selected_ctype.get(), self.selected_rating.get(), self.current_progress.get(),
+                                self.total_progress.get(), self.selected_status.get(), self.new_entry_start_date_info.get(), self.new_entry_end_date_info.get())
+            entries[self.given_title.get()] = new_entry
+            self.controller.update_entries_save()
+            self.controller.show_page(EntriesPage)
+            # update the entries list with the addition of the new entry
+            self.controller.populate_entries(self.controller.pages[EntriesPage].entries_lb)
+
+    def validate_entry(self):
+        if len(self.given_title.get()) < 1 or self.given_title.get() == len(self.given_title.get())*' ':
+            self.error_message.config(text='Invalid Title Provided.')
+        elif self.selected_ctype.get() == 'Select Content Type':
+            self.error_message.config(text='Content Type Selection Required.')
+        elif self.selected_rating.get() == 'Select Rating':
+            self.error_message.config(text='Rating Selection Required.')
+        elif not self.current_progress.get().isdigit() or not self.total_progress.get().isdigit():
+            self.error_message.config(text='Progress Accepts Integers Only.')
+        elif self.selected_status.get() == 'Select Status':
+            self.error_message.config(text='Status Selection Required.')
+        else:
+            return False
+        return True
+            
 
 class UpdateEntryPage(tk.Frame):
     def __init__(self, parent, controller):
