@@ -1,6 +1,5 @@
-num = '0.0'
+d = {'water': 'va', 'fire': 'val2'}
+a = 'waTeR'
 
-if num.isdigit():
-    print('its a digit')
-else:
-    print('nah')
+if a in d.keys():
+    print('found')

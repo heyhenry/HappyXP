@@ -646,9 +646,15 @@ class NewEntryPage(tk.Frame):
             # update the entries list with the addition of the new entry
             self.controller.populate_entries(self.controller.pages[EntriesPage].entries_lb)
 
+    # validation checks for new entries
     def validate_entry(self):
+        entry_titles = []
+        for i in entries.keys():
+            entry_titles.append(i.lower())
         if len(self.given_title.get()) < 1 or self.given_title.get() == len(self.given_title.get())*' ':
             self.error_message.config(text='Invalid Title Provided.')
+        elif self.given_title.get().lower() in entry_titles:
+            self.error_message.config(text='Entry Already Exists.')
         elif self.selected_ctype.get() == 'Select Content Type':
             self.error_message.config(text='Content Type Selection Required.')
         elif self.selected_rating.get() == 'Select Rating':
