@@ -879,7 +879,7 @@ class EntriesPage(tk.Frame):
         self.controller.populate_entries(self.entries_lb)
 
         update_entries_btn = tk.Button(entries_window, text='Update An Entry', font=('helvetica', 18), command=self.load_update_entry)
-        delete_entries_btn = tk.Button(entries_window, text='Delete An Entry', font=('helvetica', 18))
+        delete_entries_btn = tk.Button(entries_window, text='Delete An Entry', font=('helvetica', 18), command=self.delete_entry)
 
         update_entries_btn.place(x=250, y=530, width=250)
         delete_entries_btn.place(x=250, y=600, width=250)
@@ -974,6 +974,7 @@ class EntriesPage(tk.Frame):
         self.entry_end_date_info.config(text=entries[entry_id].end_date)
 
     # loads the details for the selected entry that will be getting updated
+    # redirects to the update entry page
     def load_update_entry(self):
         # get the selected entry's id
         for i in self.entries_lb.curselection():
@@ -981,6 +982,15 @@ class EntriesPage(tk.Frame):
             self.controller.entry_id_var.set(self.entries_lb.get(i))
         # redirect to the update entry page
         self.controller.show_page(UpdateEntryPage)
+
+    # delete the selected entry in the the entries list
+    def delete_entry(self):
+        for i in self.entries_lb.curselection():
+            del entries[self.entries_lb.get(i)]
+            self.entries_lb.delete(i)
+
+        # update the entries save data
+        self.controller.update_entries_save()
 
 class SettingsPage(tk.Frame):
     def __init__(self, parent, controller):

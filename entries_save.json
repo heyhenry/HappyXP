@@ -29,16 +29,6 @@
         "start_date": "05-11-2024",
         "end_date": "21-11-2024"
     },
-    "Ricky Bojangles": {
-        "title": "Ricky Bojangles",
-        "content_type": "Movie",
-        "rating": 4,
-        "current_progress": "1",
-        "total_progress": "12",
-        "status": "Paused",
-        "start_date": "05-11-2024",
-        "end_date": "19-11-2024"
-    },
     "Alabasta Arc": {
         "title": "Alabasta Arc",
         "content_type": "Anime",
@@ -68,15 +58,5 @@
         "status": "Paused",
         "start_date": "06-11-2024",
         "end_date": "19-11-2024"
-    },
-    "Beaver Wars": {
-        "title": "Beaver Wars",
-        "content_type": "Anime",
-        "rating": 3,
-        "current_progress": "1",
-        "total_progress": "12",
-        "status": "Viewing",
-        "start_date": "06-11-2024",
-        "end_date": "13-11-2024"
     }
 }
