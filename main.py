@@ -188,8 +188,10 @@ class MainApp(tk.Tk):
 
     # fill in the entries listbox with all of the user's entries from the saved data
     def populate_entries(self, widget_name):
+        # if the listbox is already populated, remove all items
         if widget_name.size():
             widget_name.delete(0, 'end')
+        # loop through the entries dictionary's keys and add as the reference points for each entry
         for entry_name in entries.keys():
             widget_name.insert('end', entry_name)
 
