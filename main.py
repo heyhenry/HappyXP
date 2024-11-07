@@ -67,10 +67,8 @@ class MainApp(tk.Tk):
     def show_page(self, cont):
         page = self.pages[cont]
         if cont == EntriesPage:
-            print('poop')
             self.pages[EntriesPage].entries_lb.bind('<<ListboxSelect>>', lambda mouse_event: self.pages[EntriesPage].display_entry_details(mouse_event))
         else:
-            print('pee')
             self.pages[EntriesPage].entries_lb.unbind('<<ListboxSelect>>')
         page.tkraise()
 

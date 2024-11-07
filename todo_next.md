@@ -82,17 +82,28 @@ So..
     - Should you allow the total_progress to be editable when the user is updating an entry
     - Should i bother creating a function to automatically change the status of an entry to completed/finished when current_progress == total_progress?
 
-# nov 6th
+# completed nov 7th
 
 # After completing nov 5ths points of work..
 - Implement validation to the update entry page akin to new entry page x
-- Find a way to stop title from cutting into the border on the details section of the entries page
+- Find a way to stop title from cutting into the border on the details section of the entries page x
+- Debugged the error trigger related to the the binding of the listboxselection x
+- Proper cleaning/resetting of the entry field post entry creation x
+
+# Bugs to debug and take note of
+- When selecting an item from the entries listbox and then going to say.. the add_new_entry button, bind trigger gets error x
+    - It pops up in terminal, almost always when i click in the progress entry boxes... but the error does show that it gets triggerd from the start aka entry_title x
+
+# nov 7th todo next
+
+Discuss and potentially overhaul search feature and replace with Discover?
 - Create the search bar on the search page
 - Look at using the jikan api? Should I even bother having a search page?
 
-# Bugs to debug and take note of
-- When selecting an item from the entries listbox and then going to say.. the add_new_entry button, bind trigger gets error
-    - It pops up in terminal, almost always when i click in the progress entry boxes... but the error does show that it gets triggerd from the start aka entry_title
+Potential of the Discover Page:
+- Provide maybe ... 1 - 3 'fun' buttons for search results i.e. [Random Anime] [Random Manga] [Random Anything]
+- Maybe provide an allowance to search based on genre [Action] [Adventure] [Romance] <--- Maybe its better to do this later as an expansion post creation of a working model and code
+- For the time being maybe just have a discover feature using the MyAnimeList's database i.e. Jikan API
 
 
 
