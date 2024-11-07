@@ -785,6 +785,9 @@ class UpdateEntryPage(tk.Frame):
 
         update_entry_submit.place(x=150, y=480)
         update_entry_cancel.place(x=350, y=480)
+
+        self.error_message = tk.Label(update_entry_form, text='', font=('helvetica', 18), foreground='red')
+        self.error_message.place(x=300, y=550)
         # endregion
 
     # temp* check info retrieved
@@ -813,21 +816,44 @@ class UpdateEntryPage(tk.Frame):
         self.update_entry_end_date_info.set_date(entries[entry_id].end_date)
 
     def update_entry(self):
+        if not self.validate_entry():
+            entry_id = self.controller.entry_id_var.get()
+            entries[entry_id].title = self.given_title.get()
+            entries[entry_id].content_type = self.selected_ctype.get()
+            entries[entry_id].rating = self.selected_rating.get()
+            entries[entry_id].current_progress = self.current_progress.get()
+            entries[entry_id].total_progress = self.total_progress.get()
+            entries[entry_id].status = self.selected_status.get()
+            entries[entry_id].start_date = self.update_entry_start_date_info.get()
+            entries[entry_id].end_date = self.update_entry_end_date_info.get()
+            # if the entry's title is updated, update the key name for the given entry
+            if self.given_title.get() != entry_id:
+                entries[self.given_title.get()] = entries.pop(entry_id)
+            self.controller.update_entries_save()
+            self.controller.populate_entries(self.controller.pages[EntriesPage].entries_lb)
+            self.controller.show_page(EntriesPage)
+
+    # validation checks for entry updates
+    def validate_entry(self):
         entry_id = self.controller.entry_id_var.get()
-        entries[entry_id].title = self.given_title.get()
-        entries[entry_id].content_type = self.selected_ctype.get()
-        entries[entry_id].rating = self.selected_rating.get()
-        entries[entry_id].current_progress = self.current_progress.get()
-        entries[entry_id].total_progress = self.total_progress.get()
-        entries[entry_id].status = self.selected_status.get()
-        entries[entry_id].start_date = self.update_entry_start_date_info.get()
-        entries[entry_id].end_date = self.update_entry_end_date_info.get()
-        # if the entry's title is updated, update the key name for the given entry
-        if self.given_title.get() != entry_id:
-            entries[self.given_title.get()] = entries.pop(entry_id)
-        self.controller.update_entries_save()
-        self.controller.populate_entries(self.controller.pages[EntriesPage].entries_lb)
-        self.controller.show_page(EntriesPage)
+        entry_titles = []
+        for i in entries.keys():
+            entry_titles.append(i.lower())
+        if len(self.given_title.get()) < 1 or self.given_title.get() == len(self.given_title.get())*' ':
+            self.error_message.config(text='Invalid Title Provided.')
+        elif self.given_title.get().lower() in entry_titles and self.given_title.get().lower() != entry_id.lower():
+            self.error_message.config(text='Entry Already Exists.')
+        elif self.selected_ctype.get() == 'Select Content Type':
+            self.error_message.config(text='Content Type Selection Required')
+        elif self.selected_rating.get() == 'Select Rating':
+            self.error_message.config(text='Rating Selection Required.')
+        elif not self.current_progress.get().isdigit() or not self.total_progress.get().isdigit():
+            self.error_message.config(text='Progress Accepts Integers Only.')
+        elif self.selected_status.get() == 'Select Status':
+            self.error_message.config(text='Status Selection Required.')
+        else:
+            return False
+        return True
 
 class EntriesPage(tk.Frame):
     def __init__(self, parent, controller):

@@ -45,12 +45,12 @@
 - Populate the entries_listbox with the submitted entries x
 - Display the information as per selected entry x
 - Make sure that the displayed information does not go past the borders
-- Ensure to add in the type of metric is being used to measure the progress i.e. book = chapters, anime = episodes (preset during the new entry creation(?))
-- Create the update entry button and related stuff 
-- Create the delete entry function 
+- Ensure to add in the type of metric is being used to measure the progress i.e. book = chapters, anime = episodes (preset during the new entry creation(?)) -
+- Create the update entry button and related stuff x
+- Create the delete entry function x
 - Create the Search bar in the SearchPage
 - Link up the Jikan API to the SearchPage for Results (or atleast look at its viability)
-- Create validations for the user input for the new entry page
+- Create validations for the user input for the new entry page x
     - valid user inputs
     - ensure all fields are filed
     - else if there are some fields that don't require filling, have a preset default value that will take its place
@@ -72,7 +72,7 @@ So..
 - Create the delete entry functionality/feature x
 
 (FlowingPriority)
-- Implement validation related features to the new entries and entries that are going to get update aka (NewEntryPage & UpdateEntryPage)
+- Implement validation related features to the new entries and entries that are going to get update aka (NewEntryPage & UpdateEntryPage) x/o
 
 # TO THINK ABOUT THROUGHOUT THE PROCESSES OF THE ABOVE
 - What metrics do I want to implement and have shown automatically based on the users decisions during the new entry creation? I.e
@@ -82,8 +82,18 @@ So..
     - Should you allow the total_progress to be editable when the user is updating an entry
     - Should i bother creating a function to automatically change the status of an entry to completed/finished when current_progress == total_progress?
 
+# nov 6th
+
+# After completing nov 5ths points of work..
+- Implement validation to the update entry page akin to new entry page
+- Find a way to stop title from cutting into the border on the details section of the entries page
+- Create the search bar on the search page
+- Look at using the jikan api? Should I even bother having a search page?
+
 # Bugs to debug and take note of
 - When selecting an item from the entries listbox and then going to say.. the add_new_entry button, bind trigger gets error
     - It pops up in terminal, almost always when i click in the progress entry boxes... but the error does show that it gets triggerd from the start aka entry_title
+
+
 
 
