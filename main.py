@@ -849,7 +849,12 @@ class UpdateEntryPage(tk.Frame):
             self.error_message.config(text='Current Progress Cannot Exceed Total Progress.')
         else:
             return False
+        self.error_message.after(1000, self.clear_error_message)
         return True
+    
+    # clear the error message
+    def clear_error_message(self):
+        self.error_message.config(text='')
 
 class EntriesPage(tk.Frame):
     def __init__(self, parent, controller):
