@@ -787,7 +787,7 @@ class UpdateEntryPage(tk.Frame):
         update_entry_cancel.place(x=350, y=480)
 
         self.error_message = tk.Label(update_entry_form, text='', font=('helvetica', 18), foreground='red')
-        self.error_message.place(x=300, y=550)
+        self.error_message.place(x=200, y=550)
         # endregion
 
     # temp* check info retrieved
@@ -843,14 +843,10 @@ class UpdateEntryPage(tk.Frame):
             self.error_message.config(text='Invalid Title Provided.')
         elif self.given_title.get().lower() in entry_titles and self.given_title.get().lower() != entry_id.lower():
             self.error_message.config(text='Entry Already Exists.')
-        elif self.selected_ctype.get() == 'Select Content Type':
-            self.error_message.config(text='Content Type Selection Required')
-        elif self.selected_rating.get() == 'Select Rating':
-            self.error_message.config(text='Rating Selection Required.')
         elif not self.current_progress.get().isdigit() or not self.total_progress.get().isdigit():
             self.error_message.config(text='Progress Accepts Integers Only.')
-        elif self.selected_status.get() == 'Select Status':
-            self.error_message.config(text='Status Selection Required.')
+        elif int(self.current_progress.get()) > int(self.total_progress.get()):
+            self.error_message.config(text='Current Progress Cannot Exceed Total Progress.')
         else:
             return False
         return True
