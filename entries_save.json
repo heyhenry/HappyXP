@@ -28,5 +28,25 @@
         "status": "Viewing",
         "start_date": "06-11-2024",
         "end_date": "27-11-2024"
+    },
+    "Marc The Mark": {
+        "title": "Marc The Mark",
+        "content_type": "Book",
+        "rating": "4",
+        "current_progress": "12",
+        "total_progress": "30",
+        "status": "Viewing",
+        "start_date": "07-11-2024",
+        "end_date": "20-11-2024"
+    },
+    "Joe Bushin": {
+        "title": "Joe Bushin",
+        "content_type": "Book",
+        "rating": "1",
+        "current_progress": "1",
+        "total_progress": "12",
+        "status": "Planned",
+        "start_date": "07-11-2024",
+        "end_date": "19-11-2024"
     }
 }

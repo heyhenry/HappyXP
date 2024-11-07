@@ -66,6 +66,12 @@ class MainApp(tk.Tk):
 
     def show_page(self, cont):
         page = self.pages[cont]
+        if cont == EntriesPage:
+            print('poop')
+            self.pages[EntriesPage].entries_lb.bind('<<ListboxSelect>>', lambda mouse_event: self.pages[EntriesPage].display_entry_details(mouse_event))
+        else:
+            print('pee')
+            self.pages[EntriesPage].entries_lb.unbind('<<ListboxSelect>>')
         page.tkraise()
 
     # json customised serializer
@@ -944,7 +950,7 @@ class EntriesPage(tk.Frame):
         update_entries_btn.place(x=250, y=530, width=250)
         delete_entries_btn.place(x=250, y=600, width=250)
 
-        self.entries_lb.bind('<<ListboxSelect>>', lambda mouse_event: self.display_entry_details(mouse_event))
+        # self.entries_lb.bind('<<ListboxSelect>>', lambda mouse_event: self.display_entry_details(mouse_event))
 
         # endregion
 
