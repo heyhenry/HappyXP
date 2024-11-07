@@ -621,7 +621,7 @@ class NewEntryPage(tk.Frame):
         new_entry_cancel.place(x=350, y=480)
 
         self.error_message = tk.Label(new_entry_form, text='', font=('helvetica', 18), foreground='red')
-        self.error_message.place(x=300, y=550)
+        self.error_message.place(x=200, y=550)
         # endregion
 
     # create a new entry
@@ -654,6 +654,7 @@ class NewEntryPage(tk.Frame):
             self.error_message.config(text='Status Selection Required.')
         else:
             return False
+        self.error_message.after(1000, self.clear_error_message)
         return True
             
     # resets new entry's input fields
@@ -667,6 +668,10 @@ class NewEntryPage(tk.Frame):
         self.new_entry_start_date_info.set_date(today)
         self.new_entry_end_date_info.set_date(today)
         self.controller.show_page(EntriesPage)
+
+    # clears the error message
+    def clear_error_message(self):
+        self.error_message.config(text='')
 
 class UpdateEntryPage(tk.Frame):
     def __init__(self, parent, controller):
