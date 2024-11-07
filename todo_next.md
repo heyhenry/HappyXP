@@ -85,7 +85,7 @@ So..
 # nov 6th
 
 # After completing nov 5ths points of work..
-- Implement validation to the update entry page akin to new entry page
+- Implement validation to the update entry page akin to new entry page x
 - Find a way to stop title from cutting into the border on the details section of the entries page
 - Create the search bar on the search page
 - Look at using the jikan api? Should I even bother having a search page?

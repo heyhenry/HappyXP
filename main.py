@@ -980,13 +980,13 @@ class EntriesPage(tk.Frame):
 
         # entry information
         # current text is dummy text
-        self.entry_title_info = tk.Label(edetails_window, text='Title of a Title of', font=('helvetica', 18))
-        self.entry_ctype_info = tk.Label(edetails_window, text='Anime', font=('helvetica', 18))
-        self.entry_rating_info = tk.Label(edetails_window, text='0/10', font=('helvetica', 18))
-        self.entry_progress_info = tk.Label(edetails_window, text='13/24', font=('helvetica', 18))
-        self.entry_status_info = tk.Label(edetails_window, text='Watching', font=('helvetica', 18))
-        self.entry_start_date_info = tk.Label(edetails_window, text='01-20-30', font=('helvetica', 18))
-        self.entry_end_date_info = tk.Label(edetails_window, text='-', font=('helvetica', 18))
+        self.entry_title_info = tk.Label(edetails_window, text='', font=('helvetica', 18), width=16, anchor='w')
+        self.entry_ctype_info = tk.Label(edetails_window, text='', font=('helvetica', 18))
+        self.entry_rating_info = tk.Label(edetails_window, text='', font=('helvetica', 18))
+        self.entry_progress_info = tk.Label(edetails_window, text='', font=('helvetica', 18))
+        self.entry_status_info = tk.Label(edetails_window, text='', font=('helvetica', 18))
+        self.entry_start_date_info = tk.Label(edetails_window, text='', font=('helvetica', 18))
+        self.entry_end_date_info = tk.Label(edetails_window, text='', font=('helvetica', 18))
 
         self.entry_title_info.place(x=250, y=50)
         self.entry_ctype_info.place(x=250, y=100)
