@@ -637,6 +637,7 @@ class NewEntryPage(tk.Frame):
                                 self.total_progress.get(), self.selected_status.get(), self.new_entry_start_date_info.get(), self.new_entry_end_date_info.get())
             entries[self.given_title.get()] = new_entry
             self.controller.update_entries_save()
+            self.clear_entry_fields()
             self.controller.show_page(EntriesPage)
             # update the entries list with the addition of the new entry
             self.controller.populate_entries(self.controller.pages[EntriesPage].entries_lb)
@@ -665,15 +666,20 @@ class NewEntryPage(tk.Frame):
             
     # resets new entry's input fields
     def cancel_new_entry(self):
+        self.clear_entry_fields()
+        self.controller.show_page(EntriesPage)
+
+    # clears the input fields for the entry form
+    def clear_entry_fields(self):
         today = datetime.today().strftime('%d/%m/%Y')
         self.given_title.set('')
         self.selected_ctype.set('Select Content Type')
         self.selected_rating.set('Select Rating')
         self.current_progress.set('')
         self.total_progress.set('')
+        self.selected_status.set('Select Status')
         self.new_entry_start_date_info.set_date(today)
         self.new_entry_end_date_info.set_date(today)
-        self.controller.show_page(EntriesPage)
 
     # clears the error message
     def clear_error_message(self):
@@ -949,8 +955,6 @@ class EntriesPage(tk.Frame):
 
         update_entries_btn.place(x=250, y=530, width=250)
         delete_entries_btn.place(x=250, y=600, width=250)
-
-        # self.entries_lb.bind('<<ListboxSelect>>', lambda mouse_event: self.display_entry_details(mouse_event))
 
         # endregion
 
