@@ -45,7 +45,7 @@ class MainApp(tk.Tk):
         self.pages = {}
 
         # iterate through the various pages found in the app
-        for P in (SetupPage, LoginPage, HomePage, NewEntryPage, EntriesPage, SettingsPage, SearchPage, UpdateEntryPage):
+        for P in (SetupPage, LoginPage, HomePage, NewEntryPage, EntriesPage, SettingsPage, DiscoverPage, UpdateEntryPage):
             page = P(container, self)
             # initialise frame of each page
             self.pages[P] = page
@@ -177,7 +177,7 @@ class MainApp(tk.Tk):
                 widget_name.config(foreground='green')
             else:
                 widget_name.config(foreground='red')
-        elif widget_name == self.pages[SearchPage].login_status:
+        elif widget_name == self.pages[DiscoverPage].login_status:
             if self.login_status_var.get():
                 widget_name.config(foreground='green')
             else:
@@ -395,7 +395,7 @@ class HomePage(tk.Frame):
         nav_bar.config(width=200, height=600)
 
         home_navtitle = tk.Label(nav_bar, text='Home', font=('helvetica', 18))
-        search_navtitle = tk.Label(nav_bar, text='Search', font=('helvetica', 18))
+        discover_navtitle = tk.Label(nav_bar, text='Discover', font=('helvetica', 18))
         entries_navtitle = tk.Label(nav_bar, text='Entries', font=('helvetica', 18))
         settings_navtitle = tk.Label(nav_bar, text='Settings', font=('helvetica', 18))
 
@@ -410,7 +410,7 @@ class HomePage(tk.Frame):
         self.controller.login_status_var.trace_add('write', lambda *args: self.controller.update_login(self.login_status))
 
         home_navtitle.place(x=50, y=50)
-        search_navtitle.place(x=50, y=100)
+        discover_navtitle.place(x=50, y=100)
         entries_navtitle.place(x=50, y=150)
         settings_navtitle.place(x=50, y=200)
 
@@ -418,7 +418,7 @@ class HomePage(tk.Frame):
 
         # when option is clicked in the navbar
         home_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, HomePage))
-        search_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, SearchPage))
+        discover_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, DiscoverPage))
         entries_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, EntriesPage))
         settings_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, SettingsPage))
 
@@ -427,8 +427,8 @@ class HomePage(tk.Frame):
         # when option is hovered over in the navbar
         home_navtitle.bind("<Enter>", lambda mouse_event: self.controller.on_hover(mouse_event, home_navtitle))
         home_navtitle.bind("<Leave>", lambda mouse_event: self.controller.off_hover(mouse_event, home_navtitle))
-        search_navtitle.bind("<Enter>", lambda mouse_event: self.controller.on_hover(mouse_event, search_navtitle))
-        search_navtitle.bind("<Leave>", lambda mouse_event: self.controller.off_hover(mouse_event, search_navtitle))
+        discover_navtitle.bind("<Enter>", lambda mouse_event: self.controller.on_hover(mouse_event, discover_navtitle))
+        discover_navtitle.bind("<Leave>", lambda mouse_event: self.controller.off_hover(mouse_event, discover_navtitle))
         entries_navtitle.bind("<Enter>", lambda mouse_event: self.controller.on_hover(mouse_event, entries_navtitle))
         entries_navtitle.bind("<Leave>", lambda mouse_event: self.controller.off_hover(mouse_event, entries_navtitle))
         settings_navtitle.bind("<Enter>", lambda mouse_event: self.controller.on_hover(mouse_event, settings_navtitle))
@@ -892,7 +892,7 @@ class EntriesPage(tk.Frame):
         nav_bar.config(width=200, height=600)
 
         home_navtitle = tk.Label(nav_bar, text='Home', font=('helvetica', 18))
-        search_navtitle = tk.Label(nav_bar, text='Search', font=('helvetica', 18))
+        discover_navtitle = tk.Label(nav_bar, text='Discover', font=('helvetica', 18))
         entries_navtitle = tk.Label(nav_bar, text='Entries', font=('helvetica', 18))
         settings_navtitle = tk.Label(nav_bar, text='Settings', font=('helvetica', 18))
 
@@ -907,7 +907,7 @@ class EntriesPage(tk.Frame):
         self.controller.login_status_var.trace_add('write', lambda *args: self.controller.update_login(self.login_status))
                                                    
         home_navtitle.place(x=50, y=50)
-        search_navtitle.place(x=50, y=100)
+        discover_navtitle.place(x=50, y=100)
         entries_navtitle.place(x=50, y=150)
         settings_navtitle.place(x=50, y=200)
 
@@ -915,7 +915,7 @@ class EntriesPage(tk.Frame):
 
         # when option is clicked in the navbar
         home_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, HomePage))
-        search_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, SearchPage))
+        discover_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, DiscoverPage))
         entries_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, EntriesPage))
         settings_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, SettingsPage))
 
@@ -924,8 +924,8 @@ class EntriesPage(tk.Frame):
         # when option is hovered over in the navbar
         home_navtitle.bind("<Enter>", lambda mouse_event: self.controller.on_hover(mouse_event, home_navtitle))
         home_navtitle.bind("<Leave>", lambda mouse_event: self.controller.off_hover(mouse_event, home_navtitle))
-        search_navtitle.bind("<Enter>", lambda mouse_event: self.controller.on_hover(mouse_event, search_navtitle))
-        search_navtitle.bind("<Leave>", lambda mouse_event: self.controller.off_hover(mouse_event, search_navtitle))
+        discover_navtitle.bind("<Enter>", lambda mouse_event: self.controller.on_hover(mouse_event, discover_navtitle))
+        discover_navtitle.bind("<Leave>", lambda mouse_event: self.controller.off_hover(mouse_event, discover_navtitle))
         entries_navtitle.bind("<Enter>", lambda mouse_event: self.controller.on_hover(mouse_event, entries_navtitle))
         entries_navtitle.bind("<Leave>", lambda mouse_event: self.controller.off_hover(mouse_event, entries_navtitle))
         settings_navtitle.bind("<Enter>", lambda mouse_event: self.controller.on_hover(mouse_event, settings_navtitle))
@@ -1087,7 +1087,7 @@ class SettingsPage(tk.Frame):
         nav_bar.config(width=200, height=600)
 
         home_navtitle = tk.Label(nav_bar, text='Home', font=('helvetica', 18))
-        search_navtitle = tk.Label(nav_bar, text='Search', font=('helvetica', 18))
+        discover_navtitle = tk.Label(nav_bar, text='Discover', font=('helvetica', 18))
         entries_navtitle = tk.Label(nav_bar, text='Entries', font=('helvetica', 18))
         settings_navtitle = tk.Label(nav_bar, text='Settings', font=('helvetica', 18))
 
@@ -1103,7 +1103,7 @@ class SettingsPage(tk.Frame):
         self.controller.login_status_var.trace_add('write', lambda *args: self.controller.update_login(self.login_status))
 
         home_navtitle.place(x=50, y=50)
-        search_navtitle.place(x=50, y=100)
+        discover_navtitle.place(x=50, y=100)
         entries_navtitle.place(x=50, y=150)
         settings_navtitle.place(x=50, y=200)
 
@@ -1111,7 +1111,7 @@ class SettingsPage(tk.Frame):
 
         # when option is clicked in the navbar
         home_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, HomePage))
-        search_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, SearchPage))
+        discover_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, DiscoverPage))
         entries_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, EntriesPage))
         settings_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, SettingsPage))
 
@@ -1120,8 +1120,8 @@ class SettingsPage(tk.Frame):
         # when option is hovered over in the navbar
         home_navtitle.bind("<Enter>", lambda mouse_event: self.controller.on_hover(mouse_event, home_navtitle))
         home_navtitle.bind("<Leave>", lambda mouse_event: self.controller.off_hover(mouse_event, home_navtitle))
-        search_navtitle.bind("<Enter>", lambda mouse_event: self.controller.on_hover(mouse_event, search_navtitle))
-        search_navtitle.bind("<Leave>", lambda mouse_event: self.controller.off_hover(mouse_event, search_navtitle))
+        discover_navtitle.bind("<Enter>", lambda mouse_event: self.controller.on_hover(mouse_event, discover_navtitle))
+        discover_navtitle.bind("<Leave>", lambda mouse_event: self.controller.off_hover(mouse_event, discover_navtitle))
         entries_navtitle.bind("<Enter>", lambda mouse_event: self.controller.on_hover(mouse_event, entries_navtitle))
         entries_navtitle.bind("<Leave>", lambda mouse_event: self.controller.off_hover(mouse_event, entries_navtitle))
         settings_navtitle.bind("<Enter>", lambda mouse_event: self.controller.on_hover(mouse_event, settings_navtitle))
@@ -1263,7 +1263,7 @@ class SettingsPage(tk.Frame):
             self.success_message.config(text='Successfully Updated!')
             self.success_message.after(1000, self.clear_success_message)
 
-    # open and search for image file
+    # open and discover for image file
     def open_image(self):
         file_path = filedialog.askopenfilename(title='Update User Image File', filetypes=[('Image Files', '*.png *.jpg *jpeg')])
         # if image file is valid, save the image as the new profile pic
@@ -1286,7 +1286,7 @@ class SettingsPage(tk.Frame):
         self.display_image_preview.image = profile_image
         self.selected_file_path.set(file_path)
 
-class SearchPage(tk.Frame):
+class DiscoverPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
@@ -1295,19 +1295,19 @@ class SearchPage(tk.Frame):
         self.create_widgets()
 
     def create_widgets(self):
-        search_window = tk.Frame(self, highlightbackground='black', highlightthickness=2)
-        search_window.place(relx=0.5, rely=0.5, anchor='center')
-        search_window.propagate(0)
-        search_window.config(width=1100, height=700)
+        discover_window = tk.Frame(self, highlightbackground='black', highlightthickness=2)
+        discover_window.place(relx=0.5, rely=0.5, anchor='center')
+        discover_window.propagate(0)
+        discover_window.config(width=1100, height=700)
 
         # region - navigation bar
-        nav_bar = tk.Frame(search_window, highlightbackground='grey', highlightthickness=1)
+        nav_bar = tk.Frame(discover_window, highlightbackground='grey', highlightthickness=1)
         nav_bar.place(x=10, y=50)
         nav_bar.propagate(0)
         nav_bar.config(width=200, height=600)
 
         home_navtitle = tk.Label(nav_bar, text='Home', font=('helvetica', 18))
-        search_navtitle = tk.Label(nav_bar, text='Search', font=('helvetica', 18))
+        discover_navtitle = tk.Label(nav_bar, text='Discover', font=('helvetica', 18))
         entries_navtitle = tk.Label(nav_bar, text='Entries', font=('helvetica', 18))
         settings_navtitle = tk.Label(nav_bar, text='Settings', font=('helvetica', 18))
 
@@ -1322,7 +1322,7 @@ class SearchPage(tk.Frame):
         self.controller.login_status_var.trace_add('write', lambda *args: self.controller.update_login(self.login_status))
 
         home_navtitle.place(x=50, y=50)
-        search_navtitle.place(x=50, y=100)
+        discover_navtitle.place(x=50, y=100)
         entries_navtitle.place(x=50, y=150)
         settings_navtitle.place(x=50, y=200)
 
@@ -1330,7 +1330,7 @@ class SearchPage(tk.Frame):
 
         # when option is clicked in the navbar
         home_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, HomePage))
-        search_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, SearchPage))
+        discover_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, DiscoverPage))
         entries_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, EntriesPage))
         settings_navtitle.bind("<Button-1>", lambda mouse_event: self.redirect_page(mouse_event, SettingsPage))
 
@@ -1339,8 +1339,8 @@ class SearchPage(tk.Frame):
         # when option is hovered over in the navbar
         home_navtitle.bind("<Enter>", lambda mouse_event: self.controller.on_hover(mouse_event, home_navtitle))
         home_navtitle.bind("<Leave>", lambda mouse_event: self.controller.off_hover(mouse_event, home_navtitle))
-        search_navtitle.bind("<Enter>", lambda mouse_event: self.controller.on_hover(mouse_event, search_navtitle))
-        search_navtitle.bind("<Leave>", lambda mouse_event: self.controller.off_hover(mouse_event, search_navtitle))
+        discover_navtitle.bind("<Enter>", lambda mouse_event: self.controller.on_hover(mouse_event, discover_navtitle))
+        discover_navtitle.bind("<Leave>", lambda mouse_event: self.controller.off_hover(mouse_event, discover_navtitle))
         entries_navtitle.bind("<Enter>", lambda mouse_event: self.controller.on_hover(mouse_event, entries_navtitle))
         entries_navtitle.bind("<Leave>", lambda mouse_event: self.controller.off_hover(mouse_event, entries_navtitle))
         settings_navtitle.bind("<Enter>", lambda mouse_event: self.controller.on_hover(mouse_event, settings_navtitle))
