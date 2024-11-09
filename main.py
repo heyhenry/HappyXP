@@ -1350,6 +1350,19 @@ class DiscoverPage(tk.Frame):
         self.login_status.bind("<Leave>", lambda mouse_event: self.controller.off_hover(mouse_event, self.login_status))
         # endregion
 
+        # region - discover content section
+        search_random_anime = tk.Button(discover_window, text='Random Anime', font=('helvetica', 18))
+        search_random_manga = tk.Button(discover_window, text='Random Manga', font=('helvetica', 18))
+
+        search_random_anime.place(x=500, y=50)
+        search_random_manga.place(x=500, y=100)
+
+        first_anime_image = Image.open('')
+
+        first_anime_display = tk.Label(discover_window)
+
+        # endregion
+
     # redirects user to the selected page from the navbar
     def redirect_page(self, mouse_event, page_name):
         self.controller.show_page(page_name)
