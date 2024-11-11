@@ -19,7 +19,7 @@ def fetch_anime_by_id(anime_id):
             title = anime_data['title']
             genres = ', '.join(poop['name'] for poop in anime_data['genres'])
             score = anime_data['score']
-            image_urls = anime_data['images']['jpg']['image_url'] or anime_data['images']['webp']
+            image_urls = anime_data['images']['jpg'] or anime_data['images']['webp']
 
             print(f'Title: {title}')
             print(f'Genres: {genres}')
