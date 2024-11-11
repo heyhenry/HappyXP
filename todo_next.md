@@ -105,6 +105,14 @@ Potential of the Discover Page:
 - Maybe provide an allowance to search based on genre [Action] [Adventure] [Romance] <--- Maybe its better to do this later as an expansion post creation of a working model and code
 - For the time being maybe just have a discover feature using the MyAnimeList's database i.e. Jikan API
 
+# nov 10th
 
+Played around with the anilist graphql api and was able to get it to retrieve and display what I wanted for the most part, however, at some point I recieved a status_code of 403 which in HTTP means 'Forbidden', the server understood the request but refused to authorise it. Most likely in my case it is to do with rate-limiting. Will need to get it out further.
+
+- Through playing around and testing, I was able to achieve what I wanted but need to confirm if I can still continue with anilist or require a different api that doesnt have finicky rate limit issues. (fyi, anilist notes it allows up to 90 requests per hour or something)
+
+    # Tasks for today: 
+        - Confirm anilist api's stability
+        - Proceed with its usage if its stable and create the first randomised anime results component
 
 
