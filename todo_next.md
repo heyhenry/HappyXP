@@ -116,3 +116,7 @@ Played around with the anilist graphql api and was able to get it to retrieve an
         - Proceed with its usage if its stable and create the first randomised anime results component
 
 
+# 11 Nov going onto 12...
+- Create random manga functionality
+- Provide better ui for the discover page
+- Potentially create a search page for simple anime, manga searches
