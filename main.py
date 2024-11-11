@@ -7,6 +7,7 @@ from tkinter import filedialog
 from tkcalendar import DateEntry
 from entry import EntryInfo
 from datetime import datetime
+import requests
 
 # save data 
 users = {}
@@ -1351,16 +1352,21 @@ class DiscoverPage(tk.Frame):
         # endregion
 
         # region - discover content section
-        search_random_anime = tk.Button(discover_window, text='Random Anime', font=('helvetica', 18))
+        search_random_anime = tk.Button(discover_window, text='Random Anime', font=('helvetica', 18), command=self.process_random_anime)
         search_random_manga = tk.Button(discover_window, text='Random Manga', font=('helvetica', 18))
 
         search_random_anime.place(x=500, y=50)
         search_random_manga.place(x=500, y=100)
 
-        first_anime_image = Image.open('')
+        self.title_result = tk.Label(discover_window, font=('helvetica', 12))
+        self.genres_result = tk.Label(discover_window, font=('helvetica', 12))
+        self.score_result = tk.Label(discover_window, font=('helvetica', 12))
+        self.cover_result = tk.Label(discover_window)
 
-        first_anime_display = tk.Label(discover_window)
-
+        self.title_result.place(x=500, y=150)
+        self.genres_result.place(x=500, y=200)
+        self.score_result.place(x=500, y=250)
+        self.cover_result.place(x=500, y=300)
         # endregion
 
     # redirects user to the selected page from the navbar
@@ -1379,7 +1385,69 @@ class DiscoverPage(tk.Frame):
             self.login_status.config(foreground='green')
             self.controller.update_user_save()
             self.controller.login_status_var.set(True)
-    
+
+    # retrieve a random anime
+    def fetch_random_anime(self):
+        url = 'https://api.jikan.moe/v4/random/anime'
+        try:
+            # make a get request
+            response = requests.get(url) 
+            # check if the request is valid/successful (status code 200)
+            if response.status_code == 200:
+                # parse the response as json
+                data = response.json()
+                # check if 'data' parmeter is foun din the json file
+                if 'data' in data:
+                    # access the 'data' field from the json response
+                    anime_data = data['data']
+                    # directly access the information via anime_data
+                    title = anime_data['title']
+                    genres = ', '.join(genre['name'] for genre in anime_data['genres'])
+                    score = anime_data['score']
+                    image_url = anime_data['images']['jpg']['image_url'] or anime_data['images']['jpg']['small_image_url'] or anime_data['images']['jpg']['large_image_url']
+                    return [title, genres, score, image_url]
+                else:
+                    # provide error message and return None
+                    print(f'Data parameter not found.')
+                    return None
+            else:
+                # provide error message and return None
+                print(f'Failed to fetch data. Status code: {response.status_code}')
+                return None
+        except requests.exceptions.RequestException as e:
+            # provide error message and return None
+            print(f'An error occurred: {e}')
+            return None
+
+    # process anime results
+    def process_random_anime(self):
+        # if an anime is not fetched
+        if self.fetch_random_anime is None:
+            # re-run the process function (recursion)
+            self.process_random_anime()
+        else:
+            # if all goes well, store returned data as a list
+            anime_info = self.fetch_random_anime()
+
+            # if there is no genre listed, result in 'N/A'
+            if anime_info[1] == '':
+                anime_info[1] = 'N/A'
+            # if there is no score given, result in 'N/A'
+            if anime_info[2] == None:
+                anime_info[2] = 'N/A' 
+
+            # get anime image cover
+            anime_img = Image.open(requests.get(anime_info[3], stream='True').raw)
+            # transform to be compatible with tkinter
+            anime_img = ImageTk.PhotoImage(anime_img)
+
+            # showcase the retrieved anime's details
+            self.title_result.config(text=f'Title: {anime_info[0]}')
+            self.genres_result.config(text=f'Genres: {anime_info[1]}')
+            self.score_result.config(text=f'Score: {anime_info[2]} / 10.00')
+            self.cover_result.config(image=anime_img)
+            self.cover_result.image = anime_img
+
 if __name__ == "__main__":
     app = MainApp()
     app.mainloop()
