@@ -1353,7 +1353,7 @@ class DiscoverPage(tk.Frame):
 
         # region - discover content section
         search_random_anime = tk.Button(discover_window, text='Random Anime', font=('helvetica', 18), command=self.process_random_anime)
-        search_random_manga = tk.Button(discover_window, text='Random Manga', font=('helvetica', 18))
+        search_random_manga = tk.Button(discover_window, text='Random Manga', font=('helvetica', 18), command=self.process_random_manga)
 
         search_random_anime.place(x=500, y=50)
         search_random_manga.place(x=500, y=100)
@@ -1396,7 +1396,7 @@ class DiscoverPage(tk.Frame):
             if response.status_code == 200:
                 # parse the response as json
                 data = response.json()
-                # check if 'data' parmeter is foun din the json file
+                # check if 'data' parmeter is found in the json file
                 if 'data' in data:
                     # access the 'data' field from the json response
                     anime_data = data['data']
@@ -1419,10 +1419,10 @@ class DiscoverPage(tk.Frame):
             print(f'An error occurred: {e}')
             return None
 
-    # process anime results
+    # process anime result
     def process_random_anime(self):
         # if an anime is not fetched
-        if self.fetch_random_anime is None:
+        if self.fetch_random_anime() is None:
             # re-run the process function (recursion)
             self.process_random_anime()
         else:
@@ -1447,6 +1447,62 @@ class DiscoverPage(tk.Frame):
             self.score_result.config(text=f'Score: {anime_info[2]} / 10.00')
             self.cover_result.config(image=anime_img)
             self.cover_result.image = anime_img
+
+    # retrieve a random manga
+    def fetch_random_manga(self):
+        url = 'https://api.jikan.moe/v4/random/manga'
+        try: 
+            # make a get request to the api
+            response = requests.get(url)
+            # check if the request is successful
+            if response.status_code == 200:
+                # parse the response as json
+                data = response.json()
+                # check if 'data' parameter is found in the data
+                if 'data' in data:
+                    # access the 'data' field from the json response
+                    manga_data = data['data']
+                    # directly access and retrieve information via anime_data
+                    title = manga_data['title']
+                    genres = ', '.join(genre['name'] for genre in manga_data['genres'])
+                    score = manga_data['score']
+                    image_url = manga_data['images']['jpg']['image_url'] or manga_data['images']['jpg']['small_img_url'] or manga_data['images']['jpg']['large_img_url']
+                    return [title, genres, score, image_url]
+                else:
+                    print(f'Data parameter not found.')
+                    return None
+            else:
+                print(f'Fetch data failed. Error status code: {response.status_code}')
+                return None
+        except requests.exceptions.RequestException as e:
+            print(f'Exceptions error occurred: {e}')
+            return None
+
+    # process manga result 
+    def process_random_manga(self):
+        # check if fetch was successful
+        if self.fetch_random_manga() is None:
+            # fetch another manga result
+            self.process_random_manga()
+        else:
+            manga_info = self.fetch_random_manga()
+
+            # set default values when results are non-specifc
+            if manga_info[1] == '':
+                manga_info[1] = 'N/A'
+            if manga_info[2] == None:
+                manga_info[2] = 'N/A'
+            
+            # process manga's image cover for display
+            manga_img = Image.open(requests.get(manga_info[3], stream='True').raw)
+            manga_img = ImageTk.PhotoImage(manga_img)
+
+            # display the returned results
+            self.title_result.config(text=f'Title: {manga_info[0]}')
+            self.genres_result.config(text=f'Genres: {manga_info[1]}')
+            self.score_result.config(text=f'Score: {manga_info[2]} / 10.00')
+            self.cover_result.config(image=manga_img)
+            self.cover_result.image = manga_img
 
 if __name__ == "__main__":
     app = MainApp()
