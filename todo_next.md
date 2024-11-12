@@ -118,12 +118,12 @@ Played around with the anilist graphql api and was able to get it to retrieve an
 
 # 11 Nov going onto 12...
 - Create random manga functionality x
-- Add additional information for random anime/manga results 
-    - Type (i.e. manga, manhua, anime, ona, movie)
-    - Status (i.e. Finished, Hiatus, On-going)
+- Add additional information for random anime/manga results x
+    - Type (i.e. manga, manhua, anime, ona, movie) x
+    - Status (i.e. Finished, Hiatus, On-going) x
     - Desc?
-    - Episodes/Chapters
-- Provide better ui for the discover page
+    - Episodes/Chapters x
+- Provide better ui for the discover page x
     - Have the anime/manga image display on the right side meanwhile details are displayed on the left side
 - Potentially create a search page for simple anime, manga searches
 - Ensure only animes and mangas are shown, no music?

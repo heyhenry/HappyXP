@@ -1399,6 +1399,60 @@ class DiscoverPage(tk.Frame):
             self.controller.update_user_save()
             self.controller.login_status_var.set(True)
 
+    # search anime or manga in MAL database
+    def search_animanga(self, search_value):
+        url = f'https://api.jikan.moe/v4/anime?q={search_value}'
+        try:
+            response = requests.get(url)
+            if response.status_code == 200:
+                data = response.json()
+                if 'data' in data:
+                    content_data = data['data']
+                    title = content_data['title']
+                    genres = ', '.join(genre['name'] for genre in content_data['genres'])
+                    score = content_data['score']
+                    content_type = content_data['type']
+                    status = content_data['status']
+                    content_count = content_data['episodes'] or content_data['chapters']
+                    image_url = content_data['images']['jpg']['image_url'] or content_data['images']['jpg']['small_image_url'] or content_data['images']['jpg']['large_image_url']
+                    return [title, genres, score, content_type, status, content_count, image_url]
+                else:
+                    print(f'Data parameter not found')
+                    return None
+            else:
+                print(f'Failed to fetch data. Status code: {response.status_code}')
+                return None
+        except requests.exceptions.RequestException as e:
+            print(f'An error occurred: {e}')
+            return None
+        
+    def process_animanga(self, search_value):
+        if self.search_animanga(search_value) is None:
+            self.process_animanga(search_value)
+        else:
+            content_info = self.search_animanga(search_value)
+            
+            if content_info[1] == '':
+                content_info[1] = 'N/A'
+            if content_info[2] == None:
+                content_info[2] = 'N/A'
+
+            content_img = Image.open(requests.get(content_info[6], stream='True').raw)
+            content_img = ImageTk.PhotoImage(content_img)
+
+            self.title_result.config(text=f'Title: {content_info[0]}')
+            self.genres_result.config(text=f'Genres: {content_info[1]}')
+            self.score_result.config(text=f'Score: {content_info[2]} / 10.00')
+            self.type_result.config(text=f'Content Type: {content_info[3]}')
+            self.status_result.config(text=f'Status: {content_info[4]}')
+            if content_info[3] in ['Manga', 'Novel', 'Light Novel', 'One-shot', 'Doujinshi', 'Manhua', 'Manhwa', 'OEL']:
+                self.installment_result.config(text=f'Total Chapters: {content_info[3]}')
+            else:
+                self.installment_result.config(text=f'Total Episodes: {content_info[3]}')
+
+            self.cover_result.config(image=content_img)
+            self.cover_result.image = content_img
+
     # retrieve a random anime
     def fetch_random_anime(self):
         url = 'https://api.jikan.moe/v4/random/anime'
