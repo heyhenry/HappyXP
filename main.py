@@ -1416,10 +1416,12 @@ class DiscoverPage(tk.Frame):
             self.controller.update_user_save()
             self.controller.login_status_var.set(True)
 
+    # when clicked inside the search field, remove prefilled text
     def on_entry_mode_search(self, mouse_event):
         self.search_animanga_entry.delete(0, 'end')
         self.search_animanga_entry.config(foreground='black')
 
+    # reset the search field with prefilled text
     def off_entry_mode_search(self, mouse_event):
         if len(self.search_animanga_entry.get()) < 1:
             self.search_animanga_entry.insert(0, 'Search Anime or Manga')
