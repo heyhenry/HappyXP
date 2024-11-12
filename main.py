@@ -1386,6 +1386,17 @@ class DiscoverPage(tk.Frame):
 
         self.cover_result.place(x=700, y=150)
 
+        self.search_animanga_entry.bind('<Button-1>', lambda mouse_event: self.on_entry_mode_search(mouse_event))
+        self.bind('<Button-1>', lambda mouse_event: self.off_entry_mode_search(mouse_event))
+        nav_bar.bind('<Button-1>', lambda mouse_event: self.off_entry_mode_search(mouse_event))
+        discover_window.bind('<Button-1>', lambda mouse_event: self.off_entry_mode_search(mouse_event))
+        home_navtitle.bind('<Button-1>', lambda mouse_event: self.off_entry_mode_search(mouse_event))
+        discover_navtitle.bind('<Button-1>', lambda mouse_event: self.off_entry_mode_search(mouse_event))
+        entries_navtitle.bind('<Button-1>', lambda mouse_event: self.off_entry_mode_search(mouse_event))
+        settings_navtitle.bind('<Button-1>', lambda mouse_event: self.off_entry_mode_search(mouse_event))
+        self.login_status.bind('<Button-1>', lambda mouse_event: self.off_entry_mode_search(mouse_event))
+        search_random_anime.bind('<Button-1>', lambda mouse_event: self.off_entry_mode_search(mouse_event))
+        search_random_manga.bind('<Button-1>', lambda mouse_event: self.off_entry_mode_search(mouse_event))
         self.search_animanga_entry.bind('<Return>', lambda mouse_event: self.process_animanga(mouse_event, self.search_animanga_entry.get()))
         # endregion
 
@@ -1405,6 +1416,15 @@ class DiscoverPage(tk.Frame):
             self.login_status.config(foreground='green')
             self.controller.update_user_save()
             self.controller.login_status_var.set(True)
+
+    def on_entry_mode_search(self, mouse_event):
+        self.search_animanga_entry.delete(0, 'end')
+        self.search_animanga_entry.config(foreground='black')
+
+    def off_entry_mode_search(self, mouse_event):
+        if len(self.search_animanga_entry.get()) < 1:
+            self.search_animanga_entry.insert(0, 'Search Anime or Manga')
+            self.search_animanga_entry.config(foreground='grey')
 
     # search anime or manga in MAL database
     def search_animanga(self, search_value):

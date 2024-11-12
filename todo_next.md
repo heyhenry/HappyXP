@@ -124,6 +124,6 @@ Played around with the anilist graphql api and was able to get it to retrieve an
     - Desc?
     - Episodes/Chapters x
 - Provide better ui for the discover page x
-    - Have the anime/manga image display on the right side meanwhile details are displayed on the left side
-- Potentially create a search page for simple anime, manga searches
+    - Have the anime/manga image display on the right side meanwhile details are displayed on the left side x
+- Potentially create a search page for simple anime, manga searches x
 - Ensure only animes and mangas are shown, no music?
