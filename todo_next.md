@@ -116,7 +116,7 @@ Played around with the anilist graphql api and was able to get it to retrieve an
         - Proceed with its usage if its stable and create the first randomised anime results component
 
 
-# 11 Nov going onto 12...
+# 11 Nov going onto 12... (all below done on the 12th)
 - Create random manga functionality x
 - Add additional information for random anime/manga results x
     - Type (i.e. manga, manhua, anime, ona, movie) x
@@ -147,3 +147,18 @@ This lead me to create the following (deeper dive) all done on the discover page
 - implemented on_search_entry function
 - implemented off_search_entry function
 - bunch of tweaking code throughout + testings
+
+
+# Nov 12th todo list for tomorrow (maybe later today included)
+- create achievement badges
+    - find 5-7 images for badges
+    - figure out 5-7 achievements
+    - need for an edit page.....? maybe not so.. just show 5 recent badges. but store all of them with a date attached (hidden or otherwise)
+- add additional user competitive metrics like:
+    - total episodes watched
+    - total chapters read
+    - other metrics required to confirm achievements
+- ability to showcase top ... 5? favourite entries (for now its just anime/manga content)
+    - need for a edit page for favourites? (EditFavouritesPage?)
+    - search query for anime/manga that will also confirm its in their list? or maybe dont bother confirming. ppl like to exasperate.
+- App colour scheme (i.e. like kandayo)
