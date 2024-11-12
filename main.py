@@ -1353,13 +1353,13 @@ class DiscoverPage(tk.Frame):
 
         # region - discover content section
         search_animanga_title = tk.Label(discover_window, text='Search:', font=('helvetica', 18))
-        search_animanga = tk.Entry(discover_window, font=('helvetica', 18), foreground='grey', width=25)
-        search_animanga.insert(0, 'Search Anime or Manga')
+        self.search_animanga_entry = tk.Entry(discover_window, font=('helvetica', 18), foreground='grey', width=25)
+        self.search_animanga_entry.insert(0, 'Search Anime or Manga')
         search_random_anime = tk.Button(discover_window, text='Random Anime', font=('helvetica', 12), command=self.process_random_anime)
         search_random_manga = tk.Button(discover_window, text='Random Manga', font=('helvetica', 12), command=self.process_random_manga)
 
         search_animanga_title.place(x=300, y=50)
-        search_animanga.place(x=400, y=50)
+        self.search_animanga_entry.place(x=400, y=50)
         search_random_anime.place(x=750, y=50)
         search_random_manga.place(x=900, y=50)
 
@@ -1380,6 +1380,8 @@ class DiscoverPage(tk.Frame):
         self.installment_result.place(x=300, y=400)
 
         self.cover_result.place(x=700, y=150)
+
+        self.search_animanga_entry.bind('<Return>', lambda mouse_event: self.process_animanga(mouse_event, self.search_animanga_entry.get()))
         # endregion
 
     # redirects user to the selected page from the navbar
@@ -1407,7 +1409,7 @@ class DiscoverPage(tk.Frame):
             if response.status_code == 200:
                 data = response.json()
                 if 'data' in data:
-                    content_data = data['data']
+                    content_data = data['data'][0]
                     title = content_data['title']
                     genres = ', '.join(genre['name'] for genre in content_data['genres'])
                     score = content_data['score']
@@ -1426,7 +1428,7 @@ class DiscoverPage(tk.Frame):
             print(f'An error occurred: {e}')
             return None
         
-    def process_animanga(self, search_value):
+    def process_animanga(self, mouse_event, search_value):
         if self.search_animanga(search_value) is None:
             self.process_animanga(search_value)
         else:
