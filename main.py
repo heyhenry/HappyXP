@@ -1355,23 +1355,31 @@ class DiscoverPage(tk.Frame):
         search_animanga_title = tk.Label(discover_window, text='Search:', font=('helvetica', 18))
         search_animanga = tk.Entry(discover_window, font=('helvetica', 18), foreground='grey', width=25)
         search_animanga.insert(0, 'Search Anime or Manga')
-        search_random_anime = tk.Button(discover_window, text='Random Anime', font=('helvetica', 18), command=self.process_random_anime)
-        search_random_manga = tk.Button(discover_window, text='Random Manga', font=('helvetica', 18), command=self.process_random_manga)
+        search_random_anime = tk.Button(discover_window, text='Random Anime', font=('helvetica', 12), command=self.process_random_anime)
+        search_random_manga = tk.Button(discover_window, text='Random Manga', font=('helvetica', 12), command=self.process_random_manga)
 
         search_animanga_title.place(x=300, y=50)
         search_animanga.place(x=400, y=50)
-        # search_random_anime.place(x=500, y=50)
-        # search_random_manga.place(x=500, y=100)
+        search_random_anime.place(x=750, y=50)
+        search_random_manga.place(x=900, y=50)
 
-        self.title_result = tk.Label(discover_window, font=('helvetica', 12))
-        self.genres_result = tk.Label(discover_window, font=('helvetica', 12))
-        self.score_result = tk.Label(discover_window, font=('helvetica', 12))
+        self.title_result = tk.Label(discover_window, font=('helvetica', 14))
+        self.genres_result = tk.Label(discover_window, font=('helvetica', 14))
+        self.score_result = tk.Label(discover_window, font=('helvetica', 14))
+        self.type_result = tk.Label(discover_window, font=('helvetica', 14))
+        self.status_result = tk.Label(discover_window, font=('helvetica', 14))
+        self.installment_result = tk.Label(discover_window, font=('helvetica', 14))
+
         self.cover_result = tk.Label(discover_window)
 
-        self.title_result.place(x=500, y=150)
-        self.genres_result.place(x=500, y=200)
-        self.score_result.place(x=500, y=250)
-        self.cover_result.place(x=500, y=300)
+        self.title_result.place(x=300, y=150)
+        self.genres_result.place(x=300, y=200)
+        self.score_result.place(x=300, y=250)
+        self.type_result.place(x=300, y=300)
+        self.status_result.place(x=300, y=350)
+        self.installment_result.place(x=300, y=400)
+
+        self.cover_result.place(x=700, y=150)
         # endregion
 
     # redirects user to the selected page from the navbar
@@ -1409,8 +1417,11 @@ class DiscoverPage(tk.Frame):
                     title = anime_data['title']
                     genres = ', '.join(genre['name'] for genre in anime_data['genres'])
                     score = anime_data['score']
+                    anime_type = anime_data['type']
+                    status = anime_data['status']
+                    episode_count = anime_data['episodes']
                     image_url = anime_data['images']['jpg']['image_url'] or anime_data['images']['jpg']['small_image_url'] or anime_data['images']['jpg']['large_image_url']
-                    return [title, genres, score, image_url]
+                    return [title, genres, score, anime_type, status, episode_count, image_url]
                 else:
                     # provide error message and return None
                     print(f'Data parameter not found.')
@@ -1442,14 +1453,18 @@ class DiscoverPage(tk.Frame):
                 anime_info[2] = 'N/A' 
 
             # get anime image cover
-            anime_img = Image.open(requests.get(anime_info[3], stream='True').raw)
+            anime_img = Image.open(requests.get(anime_info[6], stream='True').raw)
             # transform to be compatible with tkinter
             anime_img = ImageTk.PhotoImage(anime_img)
 
             # showcase the retrieved anime's details
-            self.title_result.config(text=f'Title: {anime_info[0]}')
+            self.title_result.config(text=f'Title: {anime_info[0][:35]}')
             self.genres_result.config(text=f'Genres: {anime_info[1]}')
             self.score_result.config(text=f'Score: {anime_info[2]} / 10.00')
+            self.type_result.config(text=f'Content Type: {anime_info[3]}')
+            self.status_result.config(text=f'Status: {anime_info[4]}')
+            self.installment_result.config(text=f'Total Episodes: {anime_info[5]}')
+
             self.cover_result.config(image=anime_img)
             self.cover_result.image = anime_img
 
@@ -1471,8 +1486,11 @@ class DiscoverPage(tk.Frame):
                     title = manga_data['title']
                     genres = ', '.join(genre['name'] for genre in manga_data['genres'])
                     score = manga_data['score']
+                    manga_type = manga_data['type']
+                    status = manga_data['status']
+                    chapter_count = manga_data['chapters']
                     image_url = manga_data['images']['jpg']['image_url'] or manga_data['images']['jpg']['small_img_url'] or manga_data['images']['jpg']['large_img_url']
-                    return [title, genres, score, image_url]
+                    return [title, genres, score, manga_type, status, chapter_count, image_url]
                 else:
                     print(f'Data parameter not found.')
                     return None
@@ -1497,15 +1515,21 @@ class DiscoverPage(tk.Frame):
                 manga_info[1] = 'N/A'
             if manga_info[2] == None:
                 manga_info[2] = 'N/A'
+            if manga_info[5] == None:
+                manga_info[5] = 'N/A'
             
             # process manga's image cover for display
-            manga_img = Image.open(requests.get(manga_info[3], stream='True').raw)
+            manga_img = Image.open(requests.get(manga_info[6], stream='True').raw)
             manga_img = ImageTk.PhotoImage(manga_img)
 
             # display the returned results
-            self.title_result.config(text=f'Title: {manga_info[0]}')
+            self.title_result.config(text=f'Title: {manga_info[0][:35]}')
             self.genres_result.config(text=f'Genres: {manga_info[1]}')
             self.score_result.config(text=f'Score: {manga_info[2]} / 10.00')
+            self.type_result.config(text=f'Content Type: {manga_info[3]}')
+            self.status_result.config(text=f'Status: {manga_info[4]}')
+            self.installment_result.config(text=f'Total Chapters: {manga_info[5]}')
+
             self.cover_result.config(image=manga_img)
             self.cover_result.image = manga_img
 

@@ -126,3 +126,4 @@ Played around with the anilist graphql api and was able to get it to retrieve an
 - Provide better ui for the discover page
     - Have the anime/manga image display on the right side meanwhile details are displayed on the left side
 - Potentially create a search page for simple anime, manga searches
+- Ensure only animes and mangas are shown, no music?
