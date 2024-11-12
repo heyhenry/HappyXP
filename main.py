@@ -1444,7 +1444,7 @@ class DiscoverPage(tk.Frame):
     def process_animanga(self, mouse_event, search_value):
         self.error_message.config(text='')
         if self.search_animanga(search_value) is None:
-            self.error_message.config(text='The search found no results.')
+            self.error_message.config(text=f'The search found no results for:\n{search_value}')
         else:
             content_info = self.search_animanga(search_value)
             
