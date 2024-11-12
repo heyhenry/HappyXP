@@ -127,3 +127,22 @@ Played around with the anilist graphql api and was able to get it to retrieve an
     - Have the anime/manga image display on the right side meanwhile details are displayed on the left side x
 - Potentially create a search page for simple anime, manga searches x
 - Ensure only animes and mangas are shown, no music?
+
+What I accomplished today: 
+- Full implementation of the random manga recommendation feature
+- Updated the UI of the Discover Page
+- Full implementation of the search feature for anime and mangas (amongst other content)
+
+This lead me to create the following (deeper dive) all done on the discover page:
+- implemented fetch random manga function
+- implemented process random manga function
+- updated the layout of information
+- added additional result information to the display/showcase
+- implemented search_animanga function
+- implemented process_animanga function
+- implemented bind events for the search feature (Pressing 'Enter' to execute search)
+- learning more about data manipulation within confines of an api
+- implemented error message for unfounded search results from manual searching
+- implemented additional event bindings related to the search feature
+- implemented on_search_entry function
+- implemented off_search_entry function

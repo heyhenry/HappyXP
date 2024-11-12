@@ -1390,11 +1390,6 @@ class DiscoverPage(tk.Frame):
         self.bind('<Button-1>', lambda mouse_event: self.off_entry_mode_search(mouse_event))
         nav_bar.bind('<Button-1>', lambda mouse_event: self.off_entry_mode_search(mouse_event))
         discover_window.bind('<Button-1>', lambda mouse_event: self.off_entry_mode_search(mouse_event))
-        home_navtitle.bind('<Button-1>', lambda mouse_event: self.off_entry_mode_search(mouse_event))
-        discover_navtitle.bind('<Button-1>', lambda mouse_event: self.off_entry_mode_search(mouse_event))
-        entries_navtitle.bind('<Button-1>', lambda mouse_event: self.off_entry_mode_search(mouse_event))
-        settings_navtitle.bind('<Button-1>', lambda mouse_event: self.off_entry_mode_search(mouse_event))
-        self.login_status.bind('<Button-1>', lambda mouse_event: self.off_entry_mode_search(mouse_event))
         search_random_anime.bind('<Button-1>', lambda mouse_event: self.off_entry_mode_search(mouse_event))
         search_random_manga.bind('<Button-1>', lambda mouse_event: self.off_entry_mode_search(mouse_event))
         self.search_animanga_entry.bind('<Return>', lambda mouse_event: self.process_animanga(mouse_event, self.search_animanga_entry.get()))
@@ -1402,10 +1397,14 @@ class DiscoverPage(tk.Frame):
 
     # redirects user to the selected page from the navbar
     def redirect_page(self, mouse_event, page_name):
+        # reset the search field in the discover page
+        self.off_entry_mode_search(mouse_event)
         self.controller.show_page(page_name)
 
     # toggling the status of the login's 'stay on' feature
     def toggle_login(self, mouse_event):
+        # reset the search field in the discover page
+        self.off_entry_mode_search(mouse_event)
         if self.controller.login_status_var.get():
             users['user'].toggle_login = False
             self.login_status.config(foreground='red')
