@@ -1352,11 +1352,16 @@ class DiscoverPage(tk.Frame):
         # endregion
 
         # region - discover content section
+        search_animanga_title = tk.Label(discover_window, text='Search:', font=('helvetica', 18))
+        search_animanga = tk.Entry(discover_window, font=('helvetica', 18), foreground='grey', width=25)
+        search_animanga.insert(0, 'Search Anime or Manga')
         search_random_anime = tk.Button(discover_window, text='Random Anime', font=('helvetica', 18), command=self.process_random_anime)
         search_random_manga = tk.Button(discover_window, text='Random Manga', font=('helvetica', 18), command=self.process_random_manga)
 
-        search_random_anime.place(x=500, y=50)
-        search_random_manga.place(x=500, y=100)
+        search_animanga_title.place(x=300, y=50)
+        search_animanga.place(x=400, y=50)
+        # search_random_anime.place(x=500, y=50)
+        # search_random_manga.place(x=500, y=100)
 
         self.title_result = tk.Label(discover_window, font=('helvetica', 12))
         self.genres_result = tk.Label(discover_window, font=('helvetica', 12))
