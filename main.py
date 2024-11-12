@@ -1364,6 +1364,8 @@ class DiscoverPage(tk.Frame):
         search_random_anime.place(x=750, y=50)
         search_random_manga.place(x=900, y=50)
 
+        self.error_message = tk.Label(discover_window, font=('helvetica', 18), foreground='red')
+
         self.title_result = tk.Label(discover_window, font=('helvetica', 14))
         self.genres_result = tk.Label(discover_window, font=('helvetica', 14))
         self.score_result = tk.Label(discover_window, font=('helvetica', 14))
@@ -1372,6 +1374,8 @@ class DiscoverPage(tk.Frame):
         self.installment_result = tk.Label(discover_window, font=('helvetica', 14))
 
         self.cover_result = tk.Label(discover_window)
+
+        self.error_message.place(x=500, y=100)
 
         self.title_result.place(x=300, y=150)
         self.genres_result.place(x=300, y=200)
@@ -1413,6 +1417,9 @@ class DiscoverPage(tk.Frame):
                     content_data = data['data']
                     # tally the total results found
                     results_size = len(content_data)
+                    # validate if no results were found
+                    if results_size < 1:
+                        return None
                     # select a random result from the tallied results
                     content_data = data['data'][random.randint(0, results_size)]
                     # proceed with rest of the details as normal
@@ -1435,8 +1442,9 @@ class DiscoverPage(tk.Frame):
             return None
         
     def process_animanga(self, mouse_event, search_value):
+        self.error_message.config(text='')
         if self.search_animanga(search_value) is None:
-            self.process_animanga(search_value)
+            self.error_message.config(text='The search found no results.')
         else:
             content_info = self.search_animanga(search_value)
             
