@@ -8,6 +8,7 @@ from tkcalendar import DateEntry
 from entry import EntryInfo
 from datetime import datetime
 import requests
+import random
 
 # save data 
 users = {}
@@ -1409,7 +1410,12 @@ class DiscoverPage(tk.Frame):
             if response.status_code == 200:
                 data = response.json()
                 if 'data' in data:
-                    content_data = data['data'][0]
+                    content_data = data['data']
+                    # tally the total results found
+                    results_size = len(content_data)
+                    # select a random result from the tallied results
+                    content_data = data['data'][random.randint(0, results_size)]
+                    # proceed with rest of the details as normal
                     title = content_data['title']
                     genres = ', '.join(genre['name'] for genre in content_data['genres'])
                     score = content_data['score']
@@ -1442,15 +1448,15 @@ class DiscoverPage(tk.Frame):
             content_img = Image.open(requests.get(content_info[6], stream='True').raw)
             content_img = ImageTk.PhotoImage(content_img)
 
-            self.title_result.config(text=f'Title: {content_info[0]}')
+            self.title_result.config(text=f'Title: {content_info[0][:35]}')
             self.genres_result.config(text=f'Genres: {content_info[1]}')
             self.score_result.config(text=f'Score: {content_info[2]} / 10.00')
             self.type_result.config(text=f'Content Type: {content_info[3]}')
             self.status_result.config(text=f'Status: {content_info[4]}')
             if content_info[3] in ['Manga', 'Novel', 'Light Novel', 'One-shot', 'Doujinshi', 'Manhua', 'Manhwa', 'OEL']:
-                self.installment_result.config(text=f'Total Chapters: {content_info[3]}')
+                self.installment_result.config(text=f'Total Chapters: {content_info[5]}')
             else:
-                self.installment_result.config(text=f'Total Episodes: {content_info[3]}')
+                self.installment_result.config(text=f'Total Episodes: {content_info[5]}')
 
             self.cover_result.config(image=content_img)
             self.cover_result.image = content_img
