@@ -146,3 +146,4 @@ This lead me to create the following (deeper dive) all done on the discover page
 - implemented additional event bindings related to the search feature
 - implemented on_search_entry function
 - implemented off_search_entry function
+- bunch of tweaking code throughout + testings
