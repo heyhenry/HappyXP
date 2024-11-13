@@ -464,17 +464,73 @@ class HomePage(tk.Frame):
         self.confirm_bio.place_forget()
         # endregion
 
-        # favourite entries
+        # region - favourite entries
         fav_entries_section = tk.Frame(home_window, highlightbackground='black', highlightthickness=1)
         fav_entries_section.place(x=250, y=260)
         fav_entries_section.propagate(0)
         fav_entries_section.config(width=800, height=200)
+        # endregion
 
-        # achievement badges
+        # region - achievement badges
         achievement_badges_section = tk.Frame(home_window, highlightbackground='black', highlightthickness=1)
         achievement_badges_section.place(x=250, y=470)
         achievement_badges_section.propagate(0)
         achievement_badges_section.config(width=800, height=200)
+
+        # display latest 4 achievement 
+        
+        # badge one display
+        badge_one_img = Image.open('img/achievement_badges/first_entry.png')
+        badge_one_img = ImageTk.PhotoImage(badge_one_img)
+
+        badge_one_name = tk.Label(achievement_badges_section, text='Newcomer', font=('helvetica', 12))
+        badge_one = tk.Label(achievement_badges_section, image=badge_one_img)
+        badge_one.image = badge_one_img
+        badge_one_date = tk.Label(achievement_badges_section, text='Unlocked: \n10/11/2024', font=('helvetica', 10))
+
+        badge_one_name.place(x=30, y=10)
+        badge_one.place(x=10, y=30)  
+        badge_one_date.place(x=30, y=130)
+
+        # badge two display
+        badge_two_img = Image.open('img/achievement_badges/five_entries.png')
+        badge_two_img = ImageTk.PhotoImage(badge_two_img)
+
+        badge_two_name = tk.Label(achievement_badges_section, text='Moving Along', font=('helvetica', 12))
+        badge_two = tk.Label(achievement_badges_section, image=badge_two_img)
+        badge_two.image = badge_two_img
+        badge_two_date = tk.Label(achievement_badges_section, text='Unlocked: \n24/11/2024', font=('helvetica', 10))
+
+        badge_two_name.place(x=230, y=10)
+        badge_two.place(x=210, y=30)
+        badge_two_date.place(x=230, y=130)
+
+        # badge three display
+        badge_three_img = Image.open('img/achievement_badges/ten_anime.png')
+        badge_three_img = ImageTk.PhotoImage(badge_three_img)
+
+        badge_three_name = tk.Label(achievement_badges_section, text='Anime Star', font=('helvetica', 12))
+        badge_three = tk.Label(achievement_badges_section, image=badge_three_img)
+        badge_three.image = badge_three_img
+        badge_three_date = tk.Label(achievement_badges_section, text='Unlocked: \n31/11/2024', font=('helvetica', 10))
+
+        badge_three_name.place(x=430, y=10)
+        badge_three.place(x=410, y=30)
+        badge_three_date.place(x=430, y=130)
+
+        # badge four display
+        badge_four_img = Image.open('img/achievement_badges/hundred_chapters.png')
+        badge_four_img = ImageTk.PhotoImage(badge_four_img)
+
+        badge_four_name = tk.Label(achievement_badges_section, text='Manga Star', font=('helvetica', 12))
+        badge_four = tk.Label(achievement_badges_section, image=badge_four_img)
+        badge_four.image = badge_four_img
+        badge_four_date = tk.Label(achievement_badges_section, text='Unlocked: \n14/12/2024', font=('helvetica', 10))
+
+        badge_four_name.place(x=630, y=10)
+        badge_four.place(x=610, y=30)
+        badge_four_date.place(x=610, y=130)
+        # endregion
 
     # redirects user to the selected page from the navbar
     def redirect_page(self, mouse_event, page_name):
