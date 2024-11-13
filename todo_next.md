@@ -151,8 +151,8 @@ This lead me to create the following (deeper dive) all done on the discover page
 
 # Nov 12th todo list for tomorrow (maybe later today included)
 - create achievement badges
-    - find 5-7 images for badges
-    - figure out 5-7 achievements
+    - find 5-7 images for badges x
+    - figure out 5-7 achievements x
     - need for an edit page.....? maybe not so.. just show 5 recent badges. but store all of them with a date attached (hidden or otherwise)
 - add additional user competitive metrics like:
     - total episodes watched
@@ -162,3 +162,34 @@ This lead me to create the following (deeper dive) all done on the discover page
     - need for a edit page for favourites? (EditFavouritesPage?)
     - search query for anime/manga that will also confirm its in their list? or maybe dont bother confirming. ppl like to exasperate.
 - App colour scheme (i.e. like kandayo)
+
+
+# Nov 13th Log
+# updated todo list for today... going on tomorrow probably
+- 1.0 Achievement Section
+    - Find 5-7 images for the achievement badges x
+    - Figure out 5-7 achivements to associate with the badges ^ x
+        - first_entry
+        - five_entries
+        - hundred_chapters
+        - hundred_episodes
+        - speedster (finished an entry in a day)
+        - ten_mangas
+        - ten_anime
+    - Display top 5 latest badge icons
+    - Provide a popup window via button in the achievement section, to see list of all achievements and date achieved
+    - Implement User Metrics for Achievement Tracking
+        - first_entry --> total_entries_count : int
+        - five_entries --> total_entries_count : int
+        - hundred_chapters --> total_chapters_count : int
+        - hundred_episodes --> total_episodes_count : int
+        - speedster (finished an entry in a day) --> entry_start_date == entry_end_date
+        - ten_mangas --> total_mangas_count : int
+        - ten_anime --> total_anime_count : 
+- 2.0 Navigation Bar Section
+    - Update UI
+        - Include profile image
+        - Include Username
+        - Redesign 
+- 3.0 Profile Image Section
+    - Set fixed user profile image dimensions and fill with selected image
