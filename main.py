@@ -9,6 +9,7 @@ from entry import EntryInfo
 from datetime import datetime
 import requests
 import random
+from achievement import AchievementInfo
 
 # save data 
 users = {}
@@ -94,6 +95,11 @@ class MainApp(tk.Tk):
                 'status': obj.status,
                 'start_date': obj.start_date,
                 'end_date': obj.end_date
+            }
+        elif isinstance(obj, AchievementInfo):
+            return {
+                'name': obj.name,
+                'date_unlocked': obj.date_unlocked
             }
         return obj
 
