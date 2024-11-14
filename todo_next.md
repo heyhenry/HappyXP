@@ -193,3 +193,14 @@ This lead me to create the following (deeper dive) all done on the discover page
         - Redesign 
 - 3.0 Profile Image Section
     - Set fixed user profile image dimensions and fill with selected image
+
+
+# 14Nov notes for tomorrow.
+
+- Still use the above list to work on next stuff.
+
+- What i've done tonight to help future me know whats up.
+    - follow similar structure to the workout logic in my betterlife project.
+        - have a separate dict/save file that contains the achievements
+        - have the metrics for achievements in the user obj/save file
+        - based on the user's metrics, update the achievements save file with new achievement badges when achieved
