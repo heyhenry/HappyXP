@@ -14,6 +14,7 @@ from achievement import AchievementInfo
 # save data 
 users = {}
 entries = {}
+achievements = {}
 
 # save file names
 user_savefile = 'user_save.json'
@@ -88,8 +89,7 @@ class MainApp(tk.Tk):
                 'total_chapters_count': obj.total_chapters_count,
                 'total_episodes_count': obj.total_episodes_count,
                 'total_anime_count': obj.total_anime_count,
-                'total_manga_count': obj.total_manga_count,
-                'achievements': obj.achievements
+                'total_manga_count': obj.total_manga_count
             }
         elif isinstance(obj, EntryInfo):
             return {
@@ -120,7 +120,7 @@ class MainApp(tk.Tk):
                 users_data = json.load(file)
                 # populate the users dictionary with the save file's data
                 for user, user_info in users_data.items():
-                    users[user] = UserInfo(user_info['display_name'], user_info['username'], user_info['password'], user_info['toggle_login'], user_info['bio_message'])
+                    users[user] = UserInfo(user_info['display_name'], user_info['username'], user_info['password'], user_info['toggle_login'], user_info['bio_message'], user_info['total_entries_count'], user_info['total_chapters_count'], user_info['total_episodes_count'], user_info['total_anime_count'], user_info['total_manga_count'])
 
     # load the user's entries' saved data and update entries dictionary
     def load_entries(self):

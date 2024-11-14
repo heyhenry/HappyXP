@@ -1,9 +1,14 @@
 {
     "user": {
-        "display_name": "Henry.HD",
-        "username": "henry",
-        "password": "hens12347",
-        "toggle_login": true,
-        "bio_message": "The beauty of this world we live in.yes\n\n"
+        "display_name": "",
+        "username": "",
+        "password": "",
+        "toggle_login": false,
+        "bio_message": "",
+        "total_entries_count": 0,
+        "total_chapters_count": 0,
+        "total_episodes_count": 0,
+        "total_anime_count": 0,
+        "total_manga_count": 0
     }
 }
