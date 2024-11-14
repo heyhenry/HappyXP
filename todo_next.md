@@ -164,7 +164,7 @@ This lead me to create the following (deeper dive) all done on the discover page
 - App colour scheme (i.e. like kandayo)
 
 
-# Nov 13th Log
+# Nov 13th Log --- (pushed to 14th.)
 # updated todo list for today... going on tomorrow probably
 - 1.0 Achievement Section
     - Find 5-7 images for the achievement badges x
