@@ -83,7 +83,13 @@ class MainApp(tk.Tk):
                 'username': obj.username,
                 'password': obj.password,
                 'toggle_login': obj.toggle_login,
-                'bio_message': obj.bio_message
+                'bio_message': obj.bio_message,
+                'total_entries_count': obj.total_entries_count,
+                'total_chapters_count': obj.total_chapters_count,
+                'total_episodes_count': obj.total_episodes_count,
+                'total_anime_count': obj.total_anime_count,
+                'total_manga_count': obj.total_manga_count,
+                'achievements': obj.achievements
             }
         elif isinstance(obj, EntryInfo):
             return {
