@@ -1157,15 +1157,17 @@ class EntriesPage(tk.Frame):
 
     # delete the selected entry in the the entries list
     def delete_entry(self):
-        entry_id = ''
+        entry_name = ''
         # get the selected entry's id
         for i in self.entries_lb.curselection():
-            entry_id = self.entries_lb.get(i)
-
-        if entry_id:
+            entry_name = self.entries_lb.get(i)
+            entry_id = i
+        
+        if entry_name:
+            
             # delete the selectd entry from the dictionary and listbox
-            del entries[self.entries_lb.get(i)]
-            self.entries_lb.delete(i)
+            del entries[entry_name]
+            self.entries_lb.delete(entry_id)
             # reduce 'total_entries_count' by 1
             users['user'].total_entries_count -= 1
             self.controller.update_user_save()
