@@ -186,6 +186,14 @@ This lead me to create the following (deeper dive) all done on the discover page
         - speedster (finished an entry in a day) --> entry_start_date == entry_end_date x
         - ten_mangas --> total_mangas_count : int x
         - ten_anime --> total_anime_count : int  x
+    - Implement achievement triggers:
+        - first_entry x
+        - five_entries
+        - hundred_chapters
+        - hundred episodes
+        - speedster
+        - ten_mangas
+        - ten_anime
 - 2.0 Navigation Bar Section
     - Update UI
         - Include profile image

@@ -8,5 +8,15 @@
         "status": "Dropped",
         "start_date": "15/11/2024",
         "end_date": "15/11/2024"
+    },
+    "asdgsdfg": {
+        "title": "asdgsdfg",
+        "content_type": "Manga",
+        "rating": "2",
+        "current_progress": "12",
+        "total_progress": "12",
+        "status": "Finished",
+        "start_date": "15-11-2024",
+        "end_date": "15-11-2024"
     }
 }

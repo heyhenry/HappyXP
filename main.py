@@ -737,16 +737,27 @@ class NewEntryPage(tk.Frame):
             # update the entries list with the addition of the new entry
             self.controller.populate_entries(self.controller.pages[EntriesPage].entries_lb)
 
+            # region - achievement tracking trigger
+
+            # get date and format
+            today = datetime.today()
+            today = today.strftime("%d/%m/%Y")
+
+            # achievement: first entry
             # achievement granted when first entry is saved
             # only trigger once (regardless of full entry page was cleared)
             if users['user'].total_entries_count == 1 and not achievements['first_entry'].date_unlocked:
-                # get date and format
-                today = datetime.today()
-                today = today.strftime("%d/%m/%Y")
                 # update the achievement with the date
                 achievements['first_entry'].date_unlocked = today
                 # update the achievements save file
                 self.controller.update_achievements_save()
+
+            # achievement: speedster
+            if self.new_entry_start_date_info.get() == self.new_entry_end_date_info.get() and not achievements['speedster'].date_unlocked:
+                achievements['speedster'].date_unlocked = today
+                self.controller.update_achievements_save()
+
+            # endregion
 
     # validation checks for new entries
     def validate_entry(self):
@@ -968,6 +979,16 @@ class UpdateEntryPage(tk.Frame):
             self.controller.update_entries_save()
             self.controller.populate_entries(self.controller.pages[EntriesPage].entries_lb)
             self.controller.show_page(EntriesPage)
+
+            # region - achievement tracking trigger
+                today = datetime.today()
+                today = today.strftime('%d/%m/%Y')
+
+                if entries[entry_id].start_date == entries[entry_id].end_date and not achievements['speedster'].date_unlocked:
+                    achievements['speedster'].date_unlocked = today
+                    self.controller.update_achievements_save()
+
+            # endregion
 
     # validation checks for entry updates
     def validate_entry(self):
