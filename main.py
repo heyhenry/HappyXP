@@ -771,6 +771,16 @@ class NewEntryPage(tk.Frame):
                 achievements['hundred_episodes'].date_unlocked = today
                 self.controller.update_achievements_save()
 
+            # achievement: ten mangas
+            if users['user'].total_manga_count == 10 and achievements['ten_mangas'].date_unlocked == "":
+                achievements['ten_mangas'].date_unlocked = today
+                self.controller.update_achievements_save()
+
+            # achievement: ten anime
+            if users['user'].total_anime_count == 10 and achievements['ten_anime'].date_unlocked == "":
+                achievements['ten_anime'].date_unlocked = today
+                self.controller.update_achievements_save()
+
             # endregion
             self.controller.update_entries_save()
             self.controller.update_user_save()

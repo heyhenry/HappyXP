@@ -5,10 +5,10 @@
         "password": "hens12345",
         "toggle_login": true,
         "bio_message": "",
-        "total_entries_count": 5,
-        "total_chapters_count": 35,
-        "total_episodes_count": 13,
-        "total_anime_count": 2,
-        "total_manga_count": 3
+        "total_entries_count": 20,
+        "total_chapters_count": 206,
+        "total_episodes_count": 184,
+        "total_anime_count": 10,
+        "total_manga_count": 10
     }
 }
