@@ -188,7 +188,7 @@ This lead me to create the following (deeper dive) all done on the discover page
         - ten_anime --> total_anime_count : int  x
     - Implement achievement triggers:
         - first_entry x
-        - five_entries
+        - five_entries x
         - hundred_chapters
         - hundred episodes
         - speedster x
