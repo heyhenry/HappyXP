@@ -1146,6 +1146,8 @@ class EntriesPage(tk.Frame):
             # delete the selectd entry from the dictionary and listbox
             del entries[self.entries_lb.get(i)]
             self.entries_lb.delete(i)
+            # reduce 'total_entries_count' by 1
+            users['user'].total_entries_count -= 1
 
         # update the entries save data
         self.controller.update_entries_save()
