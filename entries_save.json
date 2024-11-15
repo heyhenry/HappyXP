@@ -8,15 +8,5 @@
         "status": "Viewing",
         "start_date": "15-11-2024",
         "end_date": "15-11-2024"
-    },
-    "Tusa": {
-        "title": "Tusa",
-        "content_type": "Book",
-        "rating": "3",
-        "current_progress": "1212",
-        "total_progress": "12",
-        "status": "Paused",
-        "start_date": "15/11/2024",
-        "end_date": "15/11/2024"
     }
 }

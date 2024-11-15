@@ -1122,12 +1122,18 @@ class EntriesPage(tk.Frame):
     # loads the details for the selected entry that will be getting updated
     # redirects to the update entry page
     def load_update_entry(self):
+        entry_id = ''
         # get the selected entry's id
         for i in self.entries_lb.curselection():
+            entry_id = self.entries_lb.get(i)
+
+        if entry_id:
             # set the global variable for entry_id_var to the selected entry id
-            self.controller.entry_id_var.set(self.entries_lb.get(i))
-        # redirect to the update entry page
-        self.controller.show_page(UpdateEntryPage)
+            self.controller.entry_id_var.set(entry_id)
+            # redirect to the update entry page
+            self.controller.show_page(UpdateEntryPage)
+
+        # if the if statement is not triggered, just do nothing
 
     # delete the selected entry in the the entries list
     def delete_entry(self):

@@ -207,5 +207,5 @@ This lead me to create the following (deeper dive) all done on the discover page
 
 # 15th Nov
 - Prevent user from clicking the update entry or delet entry buttons if they have no selected an entry
-- Prevent ability to create a new entry that has more current_progress > than total_progress
+- Prevent ability to create a new entry that has more current_progress > than total_progress x
 - 
