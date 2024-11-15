@@ -178,14 +178,14 @@ This lead me to create the following (deeper dive) all done on the discover page
         - ten_anime
     - Display top 5 latest badge icons
     - Provide a popup window via button in the achievement section, to see list of all achievements and date achieved
-    - Implement User Metrics for Achievement Tracking
-        - first_entry --> total_entries_count : int
-        - five_entries --> total_entries_count : int
-        - hundred_chapters --> total_chapters_count : int
-        - hundred_episodes --> total_episodes_count : int
-        - speedster (finished an entry in a day) --> entry_start_date == entry_end_date
-        - ten_mangas --> total_mangas_count : int
-        - ten_anime --> total_anime_count : 
+    - Implement User Metrics for Achievement Tracking x
+        - first_entry --> total_entries_count : int x
+        - five_entries --> total_entries_count : int x
+        - hundred_chapters --> total_chapters_count : int x
+        - hundred_episodes --> total_episodes_count : int x
+        - speedster (finished an entry in a day) --> entry_start_date == entry_end_date x
+        - ten_mangas --> total_mangas_count : int x
+        - ten_anime --> total_anime_count : int  x
 - 2.0 Navigation Bar Section
     - Update UI
         - Include profile image

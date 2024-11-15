@@ -19,6 +19,7 @@ achievements = {}
 # save file names
 user_savefile = 'user_save.json'
 entries_savefile = 'entries_save.json'
+achievements_savefile = 'achievements_save.json'
 
 class MainApp(tk.Tk):
     # initiate MainApp class
