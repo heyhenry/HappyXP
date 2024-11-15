@@ -146,7 +146,6 @@ class MainApp(tk.Tk):
                 achievements_data = json.load(file)
                 for achievement, achievement_info in achievements_data.items():
                     achievements[achievement] = AchievementInfo(achievement_info['name'], achievement_info['date_unlocked'])
-        print(achievements)
 
     # update the user save file
     def update_user_save(self):
@@ -725,7 +724,6 @@ class NewEntryPage(tk.Frame):
             # update the total count of entries
             users['user'].total_entries_count += 1
             # update the total count for episodes/chapters and anime/manga
-            print(self.selected_ctype.get())
             if self.selected_ctype.get() in ['Anime', 'TV Show', 'Movie', 'ONA']:
                 users['user'].total_episodes_count += int(self.current_progress.get())
                 users['user'].total_anime_count += 1
@@ -738,6 +736,12 @@ class NewEntryPage(tk.Frame):
             self.controller.show_page(EntriesPage)
             # update the entries list with the addition of the new entry
             self.controller.populate_entries(self.controller.pages[EntriesPage].entries_lb)
+
+            if users['user'].total_entries_count == 1:
+                today = datetime.today()
+                today = today.strftime("%d/%m/%Y")
+                achievements['first_entry'].date_unlocked = today
+                self.controller.update_achievements_save()
 
     # validation checks for new entries
     def validate_entry(self):
