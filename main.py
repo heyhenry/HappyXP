@@ -1108,6 +1108,7 @@ class EntriesPage(tk.Frame):
         self.entry_title_info.config(text=entries[entry_id].title)
         self.entry_ctype_info.config(text=entries[entry_id].content_type)
         self.entry_rating_info.config(text=entries[entry_id].rating)
+        # determine whether progress should show episodes or chapters based on content type of the entry
         if entries[entry_id].content_type in ['Anime', 'TV Show', 'Movie', 'ONA']:
             self.entry_progress_info.config(text=f'{entries[entry_id].current_progress} / {entries[entry_id].total_progress} Episodes')
         else:
