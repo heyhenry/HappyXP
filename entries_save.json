@@ -1,22 +1,32 @@
 {
-    "long": {
-        "title": "long",
+    "asdf": {
+        "title": "asdf",
         "content_type": "Manhwa",
         "rating": "3",
-        "current_progress": "12",
-        "total_progress": "24",
-        "status": "Paused",
-        "start_date": "29-10-2024",
-        "end_date": "15-11-2024"
-    },
-    "sdfg": {
-        "title": "sdfg",
-        "content_type": "Manhwa",
-        "rating": "2",
         "current_progress": "12",
         "total_progress": "12",
         "status": "Finished",
         "start_date": "15-11-2024",
         "end_date": "15-11-2024"
+    },
+    "yoda": {
+        "title": "yoda",
+        "content_type": "Manga",
+        "rating": 2,
+        "current_progress": "12",
+        "total_progress": "24",
+        "status": "Dropped",
+        "start_date": "05-11-2024",
+        "end_date": "05-11-2024"
+    },
+    "yersf": {
+        "title": "yersf",
+        "content_type": "Manga",
+        "rating": 2,
+        "current_progress": "12",
+        "total_progress": "24",
+        "status": "Paused",
+        "start_date": "13-11-2024",
+        "end_date": "13-11-2024"
     }
 }

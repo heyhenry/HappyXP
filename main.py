@@ -735,21 +735,21 @@ class NewEntryPage(tk.Frame):
             # get date and format
             today = datetime.today()
             today = today.strftime("%d-%m-%Y")
-            print(self.new_entry_start_date_info.get())
-            print(self.new_entry_end_date_info.get())
+
             # achievement: first entry
             # achievement granted when first entry is saved
             # only trigger once (regardless of full entry page was cleared)
-            if users['user'].total_entries_count == 1 or not achievements['first_entry'].date_unlocked:
+            if users['user'].total_entries_count == 1 and achievements['first_entry'].date_unlocked == "":
                 # update the achievement with the date
                 achievements['first_entry'].date_unlocked = today
+                print('poop')
                 # update the achievements save file
                 self.controller.update_achievements_save()
 
             # achievement: speedster
-            
             if self.new_entry_start_date_info.get() == self.new_entry_end_date_info.get() and achievements['speedster'].date_unlocked == "":
                 achievements['speedster'].date_unlocked = today
+                print('poop')
                 self.controller.update_achievements_save()
 
             # endregion
@@ -985,8 +985,8 @@ class UpdateEntryPage(tk.Frame):
             today = datetime.today()
             today = today.strftime('%d-%m-%Y')
 
-            if entries[entry_id].start_date == entries[entry_id].end_date or not achievements['speedster'].date_unlocked:
-                achievements['speedster'].date_unlocked = today
+            if entries[entry_id].start_date == entries[entry_id].end_date and achievements['speedster'].date_unlocked == "":
+                achievements['speedster'].date_unlocked = entries[entry_id].end_date
                 self.controller.update_achievements_save()
 
             # endregion
