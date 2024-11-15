@@ -1,21 +1,11 @@
 {
-    "yawoo": {
-        "title": "yawoo",
+    "asdfa": {
+        "title": "asdfa",
         "content_type": "Anime",
         "rating": "2",
         "current_progress": "12",
-        "total_progress": "24",
-        "status": "Paused",
-        "start_date": "15-11-2024",
-        "end_date": "15-11-2024"
-    },
-    "asdf": {
-        "title": "asdf",
-        "content_type": "Manga",
-        "rating": "3",
-        "current_progress": "12",
-        "total_progress": "24",
-        "status": "Paused",
+        "total_progress": "12",
+        "status": "Dropped",
         "start_date": "15/11/2024",
         "end_date": "15/11/2024"
     }

@@ -737,10 +737,15 @@ class NewEntryPage(tk.Frame):
             # update the entries list with the addition of the new entry
             self.controller.populate_entries(self.controller.pages[EntriesPage].entries_lb)
 
-            if users['user'].total_entries_count == 1:
+            # achievement granted when first entry is saved
+            # only trigger once (regardless of full entry page was cleared)
+            if users['user'].total_entries_count == 1 and not achievements['first_entry'].date_unlocked:
+                # get date and format
                 today = datetime.today()
                 today = today.strftime("%d/%m/%Y")
+                # update the achievement with the date
                 achievements['first_entry'].date_unlocked = today
+                # update the achievements save file
                 self.controller.update_achievements_save()
 
     # validation checks for new entries
