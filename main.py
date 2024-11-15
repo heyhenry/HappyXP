@@ -147,6 +147,7 @@ class MainApp(tk.Tk):
                 for achievement, achievement_info in achievements_data.items():
                     achievements[achievement] = AchievementInfo(achievement_info['name'], achievement_info['date_unlocked'])
         print(achievements)
+
     # update the user save file
     def update_user_save(self):
         json_object = json.dumps(users, indent=4, default=self.custom_serializer)
@@ -157,6 +158,12 @@ class MainApp(tk.Tk):
     def update_entries_save(self):
         json_object = json.dumps(entries, indent=4, default=self.custom_serializer)
         with open(entries_savefile, 'w') as outfile:
+            outfile.write(json_object)
+
+    # update the achievements save file
+    def update_achievements_save(self):
+        json_object = json.dumps(achievements, indent=4, default=self.custom_serializer)
+        with open(achievements_savefile, 'w') as outfile:
             outfile.write(json_object)
 
     # updates the login toggle status
