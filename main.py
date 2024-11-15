@@ -704,8 +704,16 @@ class NewEntryPage(tk.Frame):
             new_entry = EntryInfo(self.given_title.get(), self.selected_ctype.get(), self.selected_rating.get(), self.current_progress.get(),
                                 self.total_progress.get(), self.selected_status.get(), self.new_entry_start_date_info.get(), self.new_entry_end_date_info.get())
             entries[self.given_title.get()] = new_entry
-            self.controller.update_entries_save()
+            # update the total count of entries
             users['user'].total_entries_count += 1
+            # update the total count for episodes/chapters and anime/manga
+            if self.selected_ctype.get() in ['Anime, TV Show, Movie, ONA']:
+                users['user'].total_episodes_count += self.current_progress.get()
+                users['user'].total_anime_count += 1
+            else:
+                users['user'].total_chapters_count += self.current_progress.get()
+                users['user'].total_manga_count += 1
+            self.controller.update_entries_save()
             self.controller.update_user_save()
             self.clear_entry_fields()
             self.controller.show_page(EntriesPage)
