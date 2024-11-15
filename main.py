@@ -705,6 +705,8 @@ class NewEntryPage(tk.Frame):
                                 self.total_progress.get(), self.selected_status.get(), self.new_entry_start_date_info.get(), self.new_entry_end_date_info.get())
             entries[self.given_title.get()] = new_entry
             self.controller.update_entries_save()
+            users['user'].total_entries_count += 1
+            self.controller.update_user_save()
             self.clear_entry_fields()
             self.controller.show_page(EntriesPage)
             # update the entries list with the addition of the new entry

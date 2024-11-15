@@ -68,5 +68,25 @@
         "status": "Dropped",
         "start_date": "07-11-2024",
         "end_date": "19-11-2024"
+    },
+    "hehehe": {
+        "title": "hehehe",
+        "content_type": "Anime",
+        "rating": "2",
+        "current_progress": "242",
+        "total_progress": "24",
+        "status": "Viewing",
+        "start_date": "15-11-2024",
+        "end_date": "15-11-2024"
+    },
+    "asdfasdf": {
+        "title": "asdfasdf",
+        "content_type": "Manhwa",
+        "rating": "2",
+        "current_progress": "12",
+        "total_progress": "2",
+        "status": "Viewing",
+        "start_date": "15-11-2024",
+        "end_date": "15-11-2024"
     }
 }
