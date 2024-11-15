@@ -707,11 +707,12 @@ class NewEntryPage(tk.Frame):
             # update the total count of entries
             users['user'].total_entries_count += 1
             # update the total count for episodes/chapters and anime/manga
-            if self.selected_ctype.get() in ['Anime, TV Show, Movie, ONA']:
-                users['user'].total_episodes_count += self.current_progress.get()
+            print(self.selected_ctype.get())
+            if self.selected_ctype.get() in ['Anime', 'TV Show', 'Movie', 'ONA']:
+                users['user'].total_episodes_count += int(self.current_progress.get())
                 users['user'].total_anime_count += 1
             else:
-                users['user'].total_chapters_count += self.current_progress.get()
+                users['user'].total_chapters_count += int(self.current_progress.get())
                 users['user'].total_manga_count += 1
             self.controller.update_entries_save()
             self.controller.update_user_save()
@@ -917,12 +918,13 @@ class UpdateEntryPage(tk.Frame):
             entry_id = self.controller.entry_id_var.get()
 
             # determine and update the total episodes/chapters counted from the given entry
-            if self.selected_ctype.get() in ['Anime, TV Show', 'Movie', 'ONA']:
-                users['user'].total_episodes_count -= entries[entry_id].current_progress
-                users['user'].total_episodes_count += self.current_progress.get()
+            if self.selected_ctype.get() in ['Anime', 'TV Show', 'Movie', 'ONA']:
+                users['user'].total_episodes_count -= int(entries[entry_id].current_progress)
+                users['user'].total_episodes_count += int(self.current_progress.get())
             else:
-                users['user'].total_chapters_count -= entries[entry_id].current_progress
-                users['user'].total_chapters_count += self.current_progress.get()
+                users['user'].total_chapters_count -= int(entries[entry_id].current_progress)
+                users['user'].total_chapters_count += int(self.current_progress.get())
+            self.controller.update_user_save()
 
             entries[entry_id].title = self.given_title.get()
             entries[entry_id].content_type = self.selected_ctype.get()
@@ -1166,6 +1168,7 @@ class EntriesPage(tk.Frame):
             self.entries_lb.delete(i)
             # reduce 'total_entries_count' by 1
             users['user'].total_entries_count -= 1
+            self.controller.update_user_save()
 
         # update the entries save data
         self.controller.update_entries_save()

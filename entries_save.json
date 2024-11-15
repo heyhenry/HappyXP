@@ -1,1 +1,22 @@
-{}
+{
+    "Pookie": {
+        "title": "Pookie",
+        "content_type": "Anime",
+        "rating": 6,
+        "current_progress": "10",
+        "total_progress": "24",
+        "status": "Viewing",
+        "start_date": "15-11-2024",
+        "end_date": "15-11-2024"
+    },
+    "yola": {
+        "title": "yola",
+        "content_type": "TV Show",
+        "rating": 4,
+        "current_progress": "3",
+        "total_progress": "12",
+        "status": "Viewing",
+        "start_date": "15/11/2024",
+        "end_date": "15/11/2024"
+    }
+}
