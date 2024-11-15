@@ -1137,7 +1137,13 @@ class EntriesPage(tk.Frame):
 
     # delete the selected entry in the the entries list
     def delete_entry(self):
+        entry_id = ''
+        # get the selected entry's id
         for i in self.entries_lb.curselection():
+            entry_id = self.entries_lb.get(i)
+
+        if entry_id:
+            # delete the selectd entry from the dictionary and listbox
             del entries[self.entries_lb.get(i)]
             self.entries_lb.delete(i)
 
