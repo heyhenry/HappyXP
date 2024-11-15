@@ -915,6 +915,15 @@ class UpdateEntryPage(tk.Frame):
     def update_entry(self):
         if not self.validate_entry():
             entry_id = self.controller.entry_id_var.get()
+
+            # determine and update the total episodes/chapters counted from the given entry
+            if self.selected_ctype.get() in ['Anime, TV Show', 'Movie', 'ONA']:
+                users['user'].total_episodes_count -= entries[entry_id].current_progress
+                users['user'].total_episodes_count += self.current_progress.get()
+            else:
+                users['user'].total_chapters_count -= entries[entry_id].current_progress
+                users['user'].total_chapters_count += self.current_progress.get()
+
             entries[entry_id].title = self.given_title.get()
             entries[entry_id].content_type = self.selected_ctype.get()
             entries[entry_id].rating = self.selected_rating.get()
@@ -923,6 +932,7 @@ class UpdateEntryPage(tk.Frame):
             entries[entry_id].status = self.selected_status.get()
             entries[entry_id].start_date = self.update_entry_start_date_info.get()
             entries[entry_id].end_date = self.update_entry_end_date_info.get()
+
             # if the entry's title is updated, update the key name for the given entry
             if self.given_title.get() != entry_id:
                 entries[self.given_title.get()] = entries.pop(entry_id)
