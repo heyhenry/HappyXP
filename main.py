@@ -1164,7 +1164,12 @@ class EntriesPage(tk.Frame):
             entry_id = i
         
         if entry_name:
-            
+            if entries[entry_name].content_type in ['Anime', 'TV Show', 'Movie', 'ONA']:
+                users['user'].total_episodes_count -= int(entries[entry_name].current_progress)
+                users['user'].total_anime_count -= 1
+            else:
+                users['user'].total_chapters_count -= int(entries[entry_name].current_progress)
+                users['user'].total_manga_count -= 1
             # delete the selectd entry from the dictionary and listbox
             del entries[entry_name]
             self.entries_lb.delete(entry_id)
