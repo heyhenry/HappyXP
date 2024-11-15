@@ -1,17 +1,17 @@
 {
-    "asdfa": {
-        "title": "asdfa",
-        "content_type": "Anime",
-        "rating": "2",
+    "long": {
+        "title": "long",
+        "content_type": "Manhwa",
+        "rating": "3",
         "current_progress": "12",
-        "total_progress": "12",
-        "status": "Dropped",
-        "start_date": "15/11/2024",
-        "end_date": "15/11/2024"
+        "total_progress": "24",
+        "status": "Paused",
+        "start_date": "29-10-2024",
+        "end_date": "15-11-2024"
     },
-    "asdgsdfg": {
-        "title": "asdgsdfg",
-        "content_type": "Manga",
+    "sdfg": {
+        "title": "sdfg",
+        "content_type": "Manhwa",
         "rating": "2",
         "current_progress": "12",
         "total_progress": "12",

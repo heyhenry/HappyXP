@@ -730,34 +730,35 @@ class NewEntryPage(tk.Frame):
             else:
                 users['user'].total_chapters_count += int(self.current_progress.get())
                 users['user'].total_manga_count += 1
-            self.controller.update_entries_save()
-            self.controller.update_user_save()
-            self.clear_entry_fields()
-            self.controller.show_page(EntriesPage)
-            # update the entries list with the addition of the new entry
-            self.controller.populate_entries(self.controller.pages[EntriesPage].entries_lb)
-
             # region - achievement tracking trigger
 
             # get date and format
             today = datetime.today()
-            today = today.strftime("%d/%m/%Y")
-
+            today = today.strftime("%d-%m-%Y")
+            print(self.new_entry_start_date_info.get())
+            print(self.new_entry_end_date_info.get())
             # achievement: first entry
             # achievement granted when first entry is saved
             # only trigger once (regardless of full entry page was cleared)
-            if users['user'].total_entries_count == 1 and not achievements['first_entry'].date_unlocked:
+            if users['user'].total_entries_count == 1 or not achievements['first_entry'].date_unlocked:
                 # update the achievement with the date
                 achievements['first_entry'].date_unlocked = today
                 # update the achievements save file
                 self.controller.update_achievements_save()
 
             # achievement: speedster
-            if self.new_entry_start_date_info.get() == self.new_entry_end_date_info.get() and not achievements['speedster'].date_unlocked:
+            
+            if self.new_entry_start_date_info.get() == self.new_entry_end_date_info.get() and achievements['speedster'].date_unlocked == "":
                 achievements['speedster'].date_unlocked = today
                 self.controller.update_achievements_save()
 
             # endregion
+            self.controller.update_entries_save()
+            self.controller.update_user_save()
+            self.clear_entry_fields()
+            self.controller.show_page(EntriesPage)
+            # update the entries list with the addition of the new entry
+            self.controller.populate_entries(self.controller.pages[EntriesPage].entries_lb)
 
     # validation checks for new entries
     def validate_entry(self):
@@ -790,7 +791,7 @@ class NewEntryPage(tk.Frame):
 
     # clears the input fields for the entry form
     def clear_entry_fields(self):
-        today = datetime.today().strftime('%d/%m/%Y')
+        today = datetime.today().strftime('%d-%m-%Y')
         self.given_title.set('')
         self.selected_ctype.set('Select Content Type')
         self.selected_rating.set('Select Rating')
@@ -981,12 +982,12 @@ class UpdateEntryPage(tk.Frame):
             self.controller.show_page(EntriesPage)
 
             # region - achievement tracking trigger
-                today = datetime.today()
-                today = today.strftime('%d/%m/%Y')
+            today = datetime.today()
+            today = today.strftime('%d-%m-%Y')
 
-                if entries[entry_id].start_date == entries[entry_id].end_date and not achievements['speedster'].date_unlocked:
-                    achievements['speedster'].date_unlocked = today
-                    self.controller.update_achievements_save()
+            if entries[entry_id].start_date == entries[entry_id].end_date or not achievements['speedster'].date_unlocked:
+                achievements['speedster'].date_unlocked = today
+                self.controller.update_achievements_save()
 
             # endregion
 
