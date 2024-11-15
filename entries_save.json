@@ -1,32 +1,52 @@
 {
-    "asdf": {
-        "title": "asdf",
-        "content_type": "Manhwa",
-        "rating": "3",
-        "current_progress": "12",
-        "total_progress": "12",
+    "Yoda III": {
+        "title": "Yoda III",
+        "content_type": "Movie",
+        "rating": "8",
+        "current_progress": "1",
+        "total_progress": "1",
         "status": "Finished",
         "start_date": "15-11-2024",
         "end_date": "15-11-2024"
     },
-    "yoda": {
-        "title": "yoda",
-        "content_type": "Manga",
-        "rating": 2,
-        "current_progress": "12",
-        "total_progress": "24",
-        "status": "Dropped",
-        "start_date": "05-11-2024",
-        "end_date": "05-11-2024"
+    "Waterpark Land": {
+        "title": "Waterpark Land",
+        "content_type": "Book",
+        "rating": "5",
+        "current_progress": "10",
+        "total_progress": "12",
+        "status": "Viewing",
+        "start_date": "04-11-2024",
+        "end_date": "15-11-2024"
     },
-    "yersf": {
-        "title": "yersf",
-        "content_type": "Manga",
-        "rating": 2,
+    "The Sun Shines East": {
+        "title": "The Sun Shines East",
+        "content_type": "TV Show",
+        "rating": "9",
         "current_progress": "12",
         "total_progress": "24",
         "status": "Paused",
-        "start_date": "13-11-2024",
-        "end_date": "13-11-2024"
+        "start_date": "05-11-2024",
+        "end_date": "07-11-2024"
+    },
+    "Rookie In The Bronx": {
+        "title": "Rookie In The Bronx",
+        "content_type": "Manhwa",
+        "rating": "5",
+        "current_progress": "2",
+        "total_progress": "24",
+        "status": "Viewing",
+        "start_date": "15-11-2024",
+        "end_date": "15-11-2024"
+    },
+    "Silva Stallone": {
+        "title": "Silva Stallone",
+        "content_type": "Manga",
+        "rating": "3",
+        "current_progress": "23",
+        "total_progress": "24",
+        "status": "Dropped",
+        "start_date": "15-11-2024",
+        "end_date": "15-11-2024"
     }
 }

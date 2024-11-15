@@ -191,7 +191,7 @@ This lead me to create the following (deeper dive) all done on the discover page
         - five_entries
         - hundred_chapters
         - hundred episodes
-        - speedster
+        - speedster x
         - ten_mangas
         - ten_anime
 - 2.0 Navigation Bar Section
