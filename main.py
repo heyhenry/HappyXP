@@ -1161,9 +1161,11 @@ class EntriesPage(tk.Frame):
         # get the selected entry's id
         for i in self.entries_lb.curselection():
             entry_name = self.entries_lb.get(i)
+            # get selection item index
             entry_id = i
         
         if entry_name:
+            # reference the currently selected entry to update it's user metric relevance
             if entries[entry_name].content_type in ['Anime', 'TV Show', 'Movie', 'ONA']:
                 users['user'].total_episodes_count -= int(entries[entry_name].current_progress)
                 users['user'].total_anime_count -= 1
