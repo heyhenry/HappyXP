@@ -2,7 +2,7 @@
     "Yola": {
         "title": "Yola",
         "content_type": "Anime",
-        "rating": "2",
+        "rating": 2,
         "current_progress": "12",
         "total_progress": "24",
         "status": "Viewing",

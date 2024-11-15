@@ -727,6 +727,8 @@ class NewEntryPage(tk.Frame):
             self.error_message.config(text='Rating Selection Required.')
         elif not self.current_progress.get().isdigit() or not self.total_progress.get().isdigit():
             self.error_message.config(text='Progress Accepts Integers Only.')
+        elif int(self.current_progress.get()) > int(self.total_progress.get()):
+            self.error_message.config(text='Current Cannot Be More Than Total Progress.')
         elif self.selected_status.get() == 'Select Status':
             self.error_message.config(text='Status Selection Required.')
         else:
