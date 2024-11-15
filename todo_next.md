@@ -204,3 +204,8 @@ This lead me to create the following (deeper dive) all done on the discover page
         - have a separate dict/save file that contains the achievements
         - have the metrics for achievements in the user obj/save file
         - based on the user's metrics, update the achievements save file with new achievement badges when achieved
+
+# 15th Nov
+- Prevent user from clicking the update entry or delet entry buttons if they have no selected an entry
+- Prevent ability to create a new entry that has more current_progress > than total_progress
+- 

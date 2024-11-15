@@ -1108,7 +1108,10 @@ class EntriesPage(tk.Frame):
         self.entry_title_info.config(text=entries[entry_id].title)
         self.entry_ctype_info.config(text=entries[entry_id].content_type)
         self.entry_rating_info.config(text=entries[entry_id].rating)
-        self.entry_progress_info.config(text=f'{entries[entry_id].current_progress} / {entries[entry_id].total_progress}')
+        if entries[entry_id].content_type in ['Anime', 'TV Show', 'Movie', 'ONA']:
+            self.entry_progress_info.config(text=f'{entries[entry_id].current_progress} / {entries[entry_id].total_progress} Episodes')
+        else:
+            self.entry_progress_info.config(text=f'{entries[entry_id].current_progress} / {entries[entry_id].total_progress} Chapters')
         self.entry_status_info.config(text=entries[entry_id].status)
         self.entry_start_date_info.config(text=entries[entry_id].start_date)
         self.entry_end_date_info.config(text=entries[entry_id].end_date)
