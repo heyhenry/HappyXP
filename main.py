@@ -37,6 +37,7 @@ class MainApp(tk.Tk):
 
         self.load_users()
         self.load_entries()
+        self.load_achievements()
 
         self.login_status_var = tk.BooleanVar(value=users['user'].toggle_login)
         self.current_user_image_var = tk.StringVar(value='img/default_pic.png')
@@ -137,6 +138,15 @@ class MainApp(tk.Tk):
                     entries[entry] = EntryInfo(entry_info['title'], entry_info['content_type'], entry_info['rating'], entry_info['current_progress'],
                                                entry_info['total_progress'], entry_info['status'], entry_info['start_date'], entry_info['end_date'])
 
+    # load the users's achievements saved data and update achievements dictionary
+    def load_achievements(self):
+        global achievements
+        if os.path.exists(achievements_savefile):
+            with open(achievements_savefile, 'r') as file:
+                achievements_data = json.load(file)
+                for achievement, achievement_info in achievements_data.items():
+                    achievements[achievement] = AchievementInfo(achievement_info['name'], achievement_info['date_unlocked'])
+        print(achievements)
     # update the user save file
     def update_user_save(self):
         json_object = json.dumps(users, indent=4, default=self.custom_serializer)
