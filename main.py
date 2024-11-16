@@ -232,6 +232,13 @@ class MainApp(tk.Tk):
         for entry_name in entries.keys():
             widget_name.insert('end', entry_name)
 
+    # create activity to variable that traces and activates a function call to update the achievement displayed on the homepage
+    def toggling_achievement_trace(self):
+        if self.achievement_unlocked.get():
+            self.achievement_unlocked.set(False)
+        else:
+            self.achievement_unlocked.set(True)
+
 class SetupPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -772,11 +779,8 @@ class NewEntryPage(tk.Frame):
                 self.controller.update_achievements_save()
                 # update the badge displayed on homepage
                 self.controller.pages[HomePage].unlock_achievement('first_entry')
-                # create activity to variable that traces and activates a function call to update the achievement displayed on the homepage
-                if self.controller.achievement_unlocked.get():
-                    self.controller.achievement_unlocked.set(False)
-                else:
-                    self.controller.achievement_unlocked.set(True)
+                # toggling the achievement unlock variable to activate trace
+                self.controller.toggling_achievement_trace()
 
             # achievement: speedster
             if self.new_entry_start_date_info.get() == self.new_entry_end_date_info.get() and achievements['speedster'].date_unlocked == "":
@@ -784,6 +788,10 @@ class NewEntryPage(tk.Frame):
                 achievements['speedster'].date_unlocked = today
                 # update the achievements save file
                 self.controller.update_achievements_save()
+                # update the badge displayed on the homepage
+                self.controller.pages[HomePage].unlock_achievement('speedster')
+                # toggling the achievement unlock variable to activate trace
+                self.controller.toggling_achievement_trace()
 
             # achievement: five entries
             if users['user'].total_entries_count == 5 and achievements['five_entries'].date_unlocked == "":
@@ -791,6 +799,10 @@ class NewEntryPage(tk.Frame):
                 achievements['five_entries'].date_unlocked = today
                 # update the achievements save file
                 self.controller.update_achievements_save()
+                # update the badge displayed on the homepage
+                self.controller.pages[HomePage].unlock_achievement('five_entries')
+                # toggling the achievement unlock variable to activate trace
+                self.controller.toggling_achievement_trace()
 
             # achievement: hundred chapters
             if users['user'].total_chapters_count >= 100 and achievements['hundred_chapters'].date_unlocked == "":
@@ -798,21 +810,37 @@ class NewEntryPage(tk.Frame):
                 achievements['hundred_chapters'].date_unlocked = today
                 # update the achievements save file
                 self.controller.update_achievements_save()
+                # update the badge displayed on the homepage
+                self.controller.pages[HomePage].unlock_achievement('hundred_chapters')
+                # toggling the achievement unlock variable to activate trace
+                self.controller.toggling_achievement_trace()
 
             # achievement: hundred episodes
             if users['user'].total_episodes_count >= 100 and achievements['hundred_episodes'].date_unlocked == "":
                 achievements['hundred_episodes'].date_unlocked = today
                 self.controller.update_achievements_save()
+                # update the badge displayed on the homepage
+                self.controller.pages[HomePage].unlock_achievement('hundred_episodes')
+                # toggling the achievement unlock variable to activate trace
+                self.controller.toggling_achievement_trace()
 
             # achievement: ten mangas
             if users['user'].total_manga_count == 10 and achievements['ten_mangas'].date_unlocked == "":
                 achievements['ten_mangas'].date_unlocked = today
                 self.controller.update_achievements_save()
+                # update the badge displayed on the homepage
+                self.controller.pages[HomePage].unlock_achievement('ten_mangas')
+                # toggling the achievement unlock variable to activate trace
+                self.controller.toggling_achievement_trace()
 
             # achievement: ten anime
             if users['user'].total_anime_count == 10 and achievements['ten_anime'].date_unlocked == "":
                 achievements['ten_anime'].date_unlocked = today
                 self.controller.update_achievements_save()
+                # update the badge displayed on the homepage
+                self.controller.pages[HomePage].unlock_achievement('ten_anime')
+                # toggling the achievement unlock variable to activate trace
+                self.controller.toggling_achievement_trace()
 
             # endregion
             self.controller.update_entries_save()
@@ -1051,16 +1079,28 @@ class UpdateEntryPage(tk.Frame):
             if entries[entry_id].start_date == entries[entry_id].end_date and achievements['speedster'].date_unlocked == "":
                 achievements['speedster'].date_unlocked = entries[entry_id].end_date
                 self.controller.update_achievements_save()
+                # update the badge displayed on the homepage
+                self.controller.pages[HomePage].unlock_achievement('speedster')
+                # toggling the achievement unlock variable to activate trace
+                self.controller.toggling_achievement_trace()
             
             # achievement: hundred chapters
             if users['user'].total_chapters_count >= 100 and achievements['hundred_chapters'].date_unlocked == "":
                 achievements['hundred_chapters'].date_unlocked = today
                 self.controller.update_achievements_save()
+                # update the badge displayed on the homepage
+                self.controller.pages[HomePage].unlock_achievement('hundred_chapters')
+                # toggling the achievement unlock variable to activate trace
+                self.controller.toggling_achievement_trace()
 
             # achievement: hundred episodes
             if users['user'].total_episodes_count >= 100 and achievements['hundred_episodes'].date_unlocked == "":
                 achievements['hundred_episodes'].date_unlocked = today
                 self.controller.update_achievements_save()
+                # update the badge displayed on the homepage
+                self.controller.pages[HomePage].unlock_achievement('hundred_episodes')
+                # toggling the achievement unlock variable to activate trace
+                self.controller.toggling_achievement_trace()
 
             # endregion
 
