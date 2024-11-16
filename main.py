@@ -581,6 +581,7 @@ class HomePage(tk.Frame):
         self.user_bio_info.config(state='disabled')
         self.confirm_bio.place_forget()
 
+    # update achievements on display
     def update_achievement_display(self):
         badge_one_img = Image.open('img/achievement_badges/'+self.achievement_queue[0]+'.png')
         badge_one_img.thumbnail((100, 100))
@@ -605,6 +606,15 @@ class HomePage(tk.Frame):
         badge_four_img = ImageTk.PhotoImage(badge_four_img)
         self.badge_four.config(image=badge_four_img)
         self.badge_four.image = badge_four_img
+
+    # update the achievements that are displayed on the home page (based on latest achievement)
+    def unlock_achievement(self, name):
+
+        self.achievement_queue[0] = self.achievement_queue[1]
+        self.achievement_queue[1] = self.achievement_queue[2]
+        self.achievement_queue[2] = name
+
+        self.update_achievement_display()
 
 class NewEntryPage(tk.Frame):
     def __init__(self, parent, controller):
