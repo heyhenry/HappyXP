@@ -411,6 +411,8 @@ class HomePage(tk.Frame):
 
         self.controller = controller
 
+        self.achievement_queue = ['default_achievement', 'default_achievement', 'default_achievement', 'default_achievement']
+
         self.create_widgets()
 
     def create_widgets(self):
@@ -509,57 +511,43 @@ class HomePage(tk.Frame):
         # display latest 4 achievement 
         
         # badge one display
-        badge_one_img = Image.open('img/achievement_badges/first_entry.png')
-        badge_one_img = ImageTk.PhotoImage(badge_one_img)
+        self.badge_one_name = tk.Label(achievement_badges_section, font=('helvetica', 12))
+        self.badge_one = tk.Label(achievement_badges_section)
+        self.badge_one_date = tk.Label(achievement_badges_section, font=('helvetica', 10))
 
-        badge_one_name = tk.Label(achievement_badges_section, text='Newcomer', font=('helvetica', 12))
-        badge_one = tk.Label(achievement_badges_section, image=badge_one_img)
-        badge_one.image = badge_one_img
-        badge_one_date = tk.Label(achievement_badges_section, text='Unlocked: \n10/11/2024', font=('helvetica', 10))
-
-        badge_one_name.place(x=30, y=10)
-        badge_one.place(x=10, y=30)  
-        badge_one_date.place(x=30, y=130)
+        self.badge_one_name.place(x=30, y=10)
+        self.badge_one.place(x=10, y=30)  
+        self.badge_one_date.place(x=30, y=130)
 
         # badge two display
-        badge_two_img = Image.open('img/achievement_badges/five_entries.png')
-        badge_two_img = ImageTk.PhotoImage(badge_two_img)
+        self.badge_two_name = tk.Label(achievement_badges_section, font=('helvetica', 12))
+        self.badge_two = tk.Label(achievement_badges_section)
+        self.badge_two_date = tk.Label(achievement_badges_section, font=('helvetica', 10))
 
-        badge_two_name = tk.Label(achievement_badges_section, text='Moving Along', font=('helvetica', 12))
-        badge_two = tk.Label(achievement_badges_section, image=badge_two_img)
-        badge_two.image = badge_two_img
-        badge_two_date = tk.Label(achievement_badges_section, text='Unlocked: \n24/11/2024', font=('helvetica', 10))
-
-        badge_two_name.place(x=230, y=10)
-        badge_two.place(x=210, y=30)
-        badge_two_date.place(x=230, y=130)
+        self.badge_two_name.place(x=230, y=10)
+        self.badge_two.place(x=210, y=30)
+        self.badge_two_date.place(x=230, y=130)
 
         # badge three display
-        badge_three_img = Image.open('img/achievement_badges/ten_anime.png')
-        badge_three_img = ImageTk.PhotoImage(badge_three_img)
+        self.badge_three_name = tk.Label(achievement_badges_section, font=('helvetica', 12))
+        self.badge_three = tk.Label(achievement_badges_section)
+        self.badge_three_date = tk.Label(achievement_badges_section, font=('helvetica', 10))
 
-        badge_three_name = tk.Label(achievement_badges_section, text='Anime Star', font=('helvetica', 12))
-        badge_three = tk.Label(achievement_badges_section, image=badge_three_img)
-        badge_three.image = badge_three_img
-        badge_three_date = tk.Label(achievement_badges_section, text='Unlocked: \n31/11/2024', font=('helvetica', 10))
-
-        badge_three_name.place(x=430, y=10)
-        badge_three.place(x=410, y=30)
-        badge_three_date.place(x=430, y=130)
+        self.badge_three_name.place(x=430, y=10)
+        self.badge_three.place(x=410, y=30)
+        self.badge_three_date.place(x=430, y=130)
 
         # badge four display
-        badge_four_img = Image.open('img/achievement_badges/hundred_chapters.png')
-        badge_four_img = ImageTk.PhotoImage(badge_four_img)
+        self.badge_four_name = tk.Label(achievement_badges_section, font=('helvetica', 12))
+        self.badge_four = tk.Label(achievement_badges_section)
+        self.badge_four_date = tk.Label(achievement_badges_section, font=('helvetica', 10))
 
-        badge_four_name = tk.Label(achievement_badges_section, text='Manga Star', font=('helvetica', 12))
-        badge_four = tk.Label(achievement_badges_section, image=badge_four_img)
-        badge_four.image = badge_four_img
-        badge_four_date = tk.Label(achievement_badges_section, text='Unlocked: \n14/12/2024', font=('helvetica', 10))
-
-        badge_four_name.place(x=630, y=10)
-        badge_four.place(x=610, y=30)
-        badge_four_date.place(x=610, y=130)
+        self.badge_four_name.place(x=630, y=10)
+        self.badge_four.place(x=610, y=30)
+        self.badge_four_date.place(x=610, y=130)
         # endregion
+
+        self.update_achievement_display()
 
     # redirects user to the selected page from the navbar
     def redirect_page(self, mouse_event, page_name):
@@ -592,6 +580,31 @@ class HomePage(tk.Frame):
         self.controller.update_user_save()
         self.user_bio_info.config(state='disabled')
         self.confirm_bio.place_forget()
+
+    def update_achievement_display(self):
+        badge_one_img = Image.open('img/achievement_badges/'+self.achievement_queue[0]+'.png')
+        badge_one_img.thumbnail((100, 100))
+        badge_one_img = ImageTk.PhotoImage(badge_one_img)
+        self.badge_one.config(image=badge_one_img)
+        self.badge_one.image = badge_one_img
+
+        badge_two_img = Image.open('img/achievement_badges/'+self.achievement_queue[1]+'.png')
+        badge_two_img.thumbnail((100, 100))
+        badge_two_img = ImageTk.PhotoImage(badge_two_img)
+        self.badge_two.config(image=badge_two_img)
+        self.badge_two.image = badge_two_img
+
+        badge_three_img = Image.open('img/achievement_badges/'+self.achievement_queue[2]+'.png')
+        badge_three_img.thumbnail((100, 100))
+        badge_three_img = ImageTk.PhotoImage(badge_three_img)
+        self.badge_three.config(image=badge_three_img)
+        self.badge_three.image = badge_three_img
+
+        badge_four_img = Image.open('img/achievement_badges/'+self.achievement_queue[3]+'.png')
+        badge_four_img.thumbnail((100, 100))
+        badge_four_img = ImageTk.PhotoImage(badge_four_img)
+        self.badge_four.config(image=badge_four_img)
+        self.badge_four.image = badge_four_img
 
 class NewEntryPage(tk.Frame):
     def __init__(self, parent, controller):

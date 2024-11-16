@@ -4,7 +4,7 @@ from PIL import Image, ImageTk
 root = tk.Tk()
 
 achievement_name = tk.StringVar()
-achievements_queue = ['default_pic', 'default_pic', 'default_pic']
+achievements_queue = ['default_achievement', 'default_achievement', 'default_achievement']
 
 def unlock_achievement(name):
     achievements_queue[0] = achievements_queue[1]
