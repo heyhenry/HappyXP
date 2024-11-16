@@ -597,8 +597,11 @@ class HomePage(tk.Frame):
         badge_one_img = ImageTk.PhotoImage(badge_one_img)
         self.badge_one.config(image=badge_one_img)
         self.badge_one.image = badge_one_img
+        # checks if there is a valid achievement in this display slot
         if self.achievement_queue[0] != 'default_achievement':
+            # updates the name of the achievement within the given display slot
             self.badge_one_name.config(text=achievements[self.achievement_queue[0]].name)
+            self.badge_one_date.config(text=f'Unlocked:\n{achievements[self.achievement_queue[0]].date_unlocked}')
 
         badge_two_img = Image.open('img/achievement_badges/'+self.achievement_queue[1]+'.png')
         badge_two_img.thumbnail((100, 100))
@@ -607,6 +610,7 @@ class HomePage(tk.Frame):
         self.badge_two.image = badge_two_img
         if self.achievement_queue[1] != 'default_achievement':
             self.badge_two_name.config(text=achievements[self.achievement_queue[1]].name)
+            self.badge_two_date.config(text=f'Unlocked:\n{achievements[self.achievement_queue[1]].date_unlocked}')
 
         badge_three_img = Image.open('img/achievement_badges/'+self.achievement_queue[2]+'.png')
         badge_three_img.thumbnail((100, 100))
@@ -615,6 +619,7 @@ class HomePage(tk.Frame):
         self.badge_three.image = badge_three_img
         if self.achievement_queue[2] != 'default_achievement':
             self.badge_three_name.config(text=achievements[self.achievement_queue[2]].name)
+            self.badge_three_date.config(text=f'Unlocked:\n{achievements[self.achievement_queue[2]].date_unlocked}')
 
         badge_four_img = Image.open('img/achievement_badges/'+self.achievement_queue[3]+'.png')
         badge_four_img.thumbnail((100, 100))
@@ -623,6 +628,7 @@ class HomePage(tk.Frame):
         self.badge_four.image = badge_four_img
         if self.achievement_queue[3] != 'default_achievement':
             self.badge_four_name.config(text=achievements[self.achievement_queue[3]].name)
+            self.badge_four_date.config(text=f'Unlocked:\n{achievements[self.achievement_queue[3]].date_unlocked}')
 
     # update the achievements that are displayed on the home page (based on latest achievement)
     def unlock_achievement(self, name):

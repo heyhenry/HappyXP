@@ -228,6 +228,15 @@ This lead me to create the following (deeper dive) all done on the discover page
     - Implementing the display update based on achievement for imagery.
     - Implemented to all code logics that trigger an achievement.
     - Added a variable toggler (var_name = 'achievement_unlocked') to notify the trace_add to update the badge display
+    - Implemented update to the achievement name and date display based on the given achievement and its position in the display section
 
 - TODO NEXT TIME:
-    - Find a way to implement the update of the Achievement Name and Date Unlocked for said
+    - Need to update text alignment for the name and date that is shown with the achievement badge icon
+    - Need to save the state of the achievements that are being displayed
+    - There's probably more for the above ^ (code reductions, small test cases to consider - none coming up off the top of my head)
+    - Implementation of the favourite manga/anime section...
+        - Things to consider: 
+            - How are we going to display an image? Or do we just not bother. considering manual entries wont have image input nor is there anywhere that images are being displayed for entries in this current version
+            - ^ adding on to the above - maybe just have a full overhaul and only showcase anime/mangas based on the MAL database so i can showcase stuff better.
+                - kind of defeats the purpose of not being able to put in entries of content that isnt not recorded in the MAL Database tho... like certain manhwas.
+                    - maybe just have an option for manual entry as well.

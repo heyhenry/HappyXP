@@ -1,12 +1,12 @@
 {
-    "dfgsdf": {
-        "title": "dfgsdf",
-        "content_type": "Anime",
-        "rating": "2",
+    "yoda": {
+        "title": "yoda",
+        "content_type": "Book",
+        "rating": "1",
         "current_progress": "12",
         "total_progress": "24",
-        "status": "Dropped",
-        "start_date": "16-11-2024",
+        "status": "Viewing",
+        "start_date": "05-11-2024",
         "end_date": "16-11-2024"
     }
 }
