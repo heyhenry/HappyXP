@@ -41,6 +41,7 @@ class MainApp(tk.Tk):
 
         self.login_status_var = tk.BooleanVar(value=users['user'].toggle_login)
         self.current_user_image_var = tk.StringVar(value='img/default_pic.png')
+        self.achievement_unlocked = tk.BooleanVar(value=False)
 
         # tracer to find changes to the current_user_image_var variable, if found - execute the update_profile_image function
         self.current_user_image_var.trace_add('write', self.update_profile_image)
@@ -546,7 +547,8 @@ class HomePage(tk.Frame):
         self.badge_four.place(x=610, y=30)
         self.badge_four_date.place(x=610, y=130)
         # endregion
-
+        
+        self.controller.achievement_unlocked.trace_add('write', lambda *args:  self.update_achievement_display)
         self.update_achievement_display()
 
     # redirects user to the selected page from the navbar
@@ -582,7 +584,7 @@ class HomePage(tk.Frame):
         self.confirm_bio.place_forget()
 
     # update achievements on display
-    def update_achievement_display(self):
+    def update_achievement_display(self, *args):
         badge_one_img = Image.open('img/achievement_badges/'+self.achievement_queue[0]+'.png')
         badge_one_img.thumbnail((100, 100))
         badge_one_img = ImageTk.PhotoImage(badge_one_img)
@@ -612,7 +614,8 @@ class HomePage(tk.Frame):
 
         self.achievement_queue[0] = self.achievement_queue[1]
         self.achievement_queue[1] = self.achievement_queue[2]
-        self.achievement_queue[2] = name
+        self.achievement_queue[2] = self.achievement_queue[3]
+        self.achievement_queue[3] = name
 
         self.update_achievement_display()
 
@@ -767,6 +770,13 @@ class NewEntryPage(tk.Frame):
                 achievements['first_entry'].date_unlocked = today
                 # update the achievements save file
                 self.controller.update_achievements_save()
+                # update the badge displayed on homepage
+                self.controller.pages[HomePage].unlock_achievement('first_entry')
+                # create activity to variable that traces and activates a function call to update the achievement displayed on the homepage
+                if self.controller.achievement_unlocked.get():
+                    self.controller.achievement_unlocked.set(False)
+                else:
+                    self.controller.achievement_unlocked.set(True)
 
             # achievement: speedster
             if self.new_entry_start_date_info.get() == self.new_entry_end_date_info.get() and achievements['speedster'].date_unlocked == "":
