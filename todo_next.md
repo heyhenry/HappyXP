@@ -218,4 +218,16 @@ This lead me to create the following (deeper dive) all done on the discover page
 # 15th Nov
 - Prevent user from clicking the update entry or delet entry buttons if they have no selected an entry x
 - Prevent ability to create a new entry that has more current_progress > than total_progress x
-- 
+
+
+# 16th Nov.
+
+- BIG NOTE: Ignore everything above for a moment.
+
+- Latest completion: 
+    - Implementing the display update based on achievement for imagery.
+    - Implemented to all code logics that trigger an achievement.
+    - Added a variable toggler (var_name = 'achievement_unlocked') to notify the trace_add to update the badge display
+
+- TODO NEXT TIME:
+    - Find a way to implement the update of the Achievement Name and Date Unlocked for said

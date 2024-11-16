@@ -597,24 +597,32 @@ class HomePage(tk.Frame):
         badge_one_img = ImageTk.PhotoImage(badge_one_img)
         self.badge_one.config(image=badge_one_img)
         self.badge_one.image = badge_one_img
+        if self.achievement_queue[0] != 'default_achievement':
+            self.badge_one_name.config(text=achievements[self.achievement_queue[0]].name)
 
         badge_two_img = Image.open('img/achievement_badges/'+self.achievement_queue[1]+'.png')
         badge_two_img.thumbnail((100, 100))
         badge_two_img = ImageTk.PhotoImage(badge_two_img)
         self.badge_two.config(image=badge_two_img)
         self.badge_two.image = badge_two_img
+        if self.achievement_queue[1] != 'default_achievement':
+            self.badge_two_name.config(text=achievements[self.achievement_queue[1]].name)
 
         badge_three_img = Image.open('img/achievement_badges/'+self.achievement_queue[2]+'.png')
         badge_three_img.thumbnail((100, 100))
         badge_three_img = ImageTk.PhotoImage(badge_three_img)
         self.badge_three.config(image=badge_three_img)
         self.badge_three.image = badge_three_img
+        if self.achievement_queue[2] != 'default_achievement':
+            self.badge_three_name.config(text=achievements[self.achievement_queue[2]].name)
 
         badge_four_img = Image.open('img/achievement_badges/'+self.achievement_queue[3]+'.png')
         badge_four_img.thumbnail((100, 100))
         badge_four_img = ImageTk.PhotoImage(badge_four_img)
         self.badge_four.config(image=badge_four_img)
         self.badge_four.image = badge_four_img
+        if self.achievement_queue[3] != 'default_achievement':
+            self.badge_four_name.config(text=achievements[self.achievement_queue[3]].name)
 
     # update the achievements that are displayed on the home page (based on latest achievement)
     def unlock_achievement(self, name):
