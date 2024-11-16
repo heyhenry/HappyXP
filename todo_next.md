@@ -176,6 +176,7 @@ This lead me to create the following (deeper dive) all done on the discover page
         - speedster (finished an entry in a day)
         - ten_mangas
         - ten_anime
+    - Link the achievements to the badges
     - Display top 5 latest badge icons
     - Provide a popup window via button in the achievement section, to see list of all achievements and date achieved
     - Implement User Metrics for Achievement Tracking x
@@ -189,11 +190,12 @@ This lead me to create the following (deeper dive) all done on the discover page
     - Implement achievement triggers:
         - first_entry x
         - five_entries x
-        - hundred_chapters
-        - hundred episodes
+        - hundred_chapters x
+        - hundred episodes x
         - speedster x
-        - ten_mangas
-        - ten_anime
+        - ten_mangas x
+        - ten_anime x
+
 - 2.0 Navigation Bar Section
     - Update UI
         - Include profile image
