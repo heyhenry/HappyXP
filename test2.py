@@ -1,71 +1,58 @@
+from tkcalendar import DateEntry
 import tkinter as tk
-from PIL import Image, ImageTk
+
+save_data = {'status': '', 'start_date': '', 'end_date': ''}
+
+def is_complete():
+    save_data['status'] = status_choice.get()
+    if status_choice.get() == 'Planned':
+        save_data['start_date'] = 'N/A'
+        save_data['end_date'] = 'N/A'
+        print(f'Status: Planned')
+        print(f'Start Date: {save_data['start_date']}\nEnd Date: {save_data['end_date']}')
+    elif status_choice.get() == 'Finished':
+        save_data['start_date'] = start_date.get()
+        save_data['end_date'] = end_date.get()
+        print('Status: Finished.')
+        print(f'Start Date: {save_data['start_date']}\nEnd Date: {save_data['end_date']}')
+    else:
+        save_data['start_date'] = start_date.get()
+        save_data['end_date'] = 'N/A'
+        print('Status: Viewing.')
+        print(f'Start Date: {save_data['start_date']}\nEnd Date: {save_data['end_date']}')
 
 root = tk.Tk()
+root.geometry('250x250')
 
-achievement_name = tk.StringVar()
-achievements_queue = ['default_achievement', 'default_achievement', 'default_achievement']
+status_choice = tk.StringVar(value='Select Status')
 
-def unlock_achievement(name):
-    achievements_queue[0] = achievements_queue[1]
-    achievements_queue[1] = achievements_queue[2]
-    achievements_queue[2] = name
+status_options = [
+    'Planned',
+    'Viewing',
+    'Finished'
+]
 
-    update_images()
+status_title = tk.Label(root, text='Status:')
+status = tk.OptionMenu(root, status_choice, *status_options)
 
-achievements_title = tk.Label(root, text='Achievements Hall:')
+start_date_title = tk.Label(root, text='Start Date:')
+start_date = DateEntry(root, date_pattern='dd-mm-yyyy')
 
-def update_images():
-    first_img = Image.open('img/achievement_badges/'+achievements_queue[0]+'.png')
-    first_img.thumbnail((100, 100))
-    first_img = ImageTk.PhotoImage(first_img)
-    first_image.config(image=first_img)
-    first_image.image = first_img
+end_date_title = tk.Label(root, text='End Date:')
+end_date = DateEntry(root, date_pattern='dd-mm-yyyy')
 
-    second_img = Image.open('img/achievement_badges/'+achievements_queue[1]+'.png')
-    second_img.thumbnail((100, 100))
-    second_img = ImageTk.PhotoImage(second_img)
-    second_image.config(image=second_img)
-    second_image.image = second_img
+submit = tk.Button(root, text='Submit', command=is_complete)
 
-    third_img = Image.open('img/achievement_badges/'+achievements_queue[2]+'.png')
-    third_img.thumbnail((100, 100))
-    third_img = ImageTk.PhotoImage(third_img)
-    third_image.config(image=third_img)
-    third_image.image = third_img
+status_title.grid(row=0, column=0)
+status.grid(row=0, column=1)
 
-first_achievement_title = tk.Label(root, text='')
-first_image = tk.Label(root)
-first_achievement_date = tk.Label(root, text='')
+start_date_title.grid(row=1, column=0)
+start_date.grid(row=1, column=1)
 
-second_achievement_title = tk.Label(root, text='')
-second_image = tk.Label(root)
-second_achievement_date = tk.Label(root, text='')
+end_date_title.grid(row=2, column=0)
+end_date.grid(row=2, column=1)
 
-third_achievement_title = tk.Label(root, text='')
-third_image = tk.Label(root)
-third_achievement_date = tk.Label(root, text='')
-
-achievement_entry = tk.Entry(root, textvariable=achievement_name)
-achievement_submit = tk.Button(root, text='Submit Achievement', command=lambda: unlock_achievement(achievement_name.get()))
-
-achievements_title.grid(row=0, columnspan=3)
-
-first_achievement_title.grid(row=1, column=0)
-first_image.grid(row=2, column=0)
-first_achievement_date.grid(row=3, column=0)
-
-second_achievement_title.grid(row=1, column=1)
-second_image.grid(row=2, column=1)
-second_achievement_date.grid(row=3, column=1)
-
-third_achievement_title.grid(row=1, column=2)
-third_image.grid(row=2, column=2)
-third_achievement_date.grid(row=3, column=2)
-
-achievement_entry.grid(row=4, columnspan=3)
-achievement_submit.grid(row=5, columnspan=3)
-
-update_images()
+submit.grid(row=3, columnspan=2)
 
 root.mainloop()
+
