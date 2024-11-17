@@ -240,3 +240,32 @@ This lead me to create the following (deeper dive) all done on the discover page
             - ^ adding on to the above - maybe just have a full overhaul and only showcase anime/mangas based on the MAL database so i can showcase stuff better.
                 - kind of defeats the purpose of not being able to put in entries of content that isnt not recorded in the MAL Database tho... like certain manhwas.
                     - maybe just have an option for manual entry as well.
+# ----------------------------------------------------------------------------------- #
+
+# 17th Nov.  TODO:
+- Adopt the algorithm created yesterday in test2.py in NewEntryPage and UpdateEntryPage.
+	- TLDR Algorithm Logic: Update the entry's dictionary, save it and then reference it's start date, end date so that we can have a 'N/A' value based on the status of the entry.
+	- Cont. Algorithm Logic: Displays of the entry details will always be referenced from the saved data in lieu of tkinter get() variables.
+	- Suggestion for Implementation: Potentially having some sort of trace action of the status selected in an entry in real time that will hide the end date or just a simple checkbox next to both start and end dates to let the user know whether the date has been taken or a null (N/A) value will be given once they submit the entry.
+- Remove all mention of Book, TV Show, Movies, Ona and ensure only Manga, Manhua, Manhwa, Comic, Anime, Donghua, Hanguk Aeni and Animation are present.
+- Update the UpdateEntryPage's fields:
+	- Non-Editable: Title, Content Type and Total Progress Count
+	- Include the Chapters/Episodes text next to progress except, only one of the two based on the content type given
+- Allow the discover page to be used to help search for entries
+	- This would include new functions on said page: 
+		- Create Entry: This will open up a New Entry Style Page except, relevant data that can be sourced from the api will be prefilled (non-editable). This will require a new page class.
+# Low Priority
+- Update text alignment for displayed achievement badge's name and date unlocked
+- Change the profile bio message's Edit and Confirm buttons to highlighted texts (highlight colour based on action performed/performing)
+- Button or label widget that opens up a pop-up window to list out all unlocked achievements
+	- Maybe also those that haven't been unlocked yet (Similar setup to steam achievements)
+- Create the favourite entry section
+	- Consider imagery and name text display
+		- For manual entries have a nice default image for the time being (something like... numba one best show gold medal ambiguous imagery?)
+- Navbar Update
+	- Include display name
+	- Include user's profile image
+	- Include mini social media/community/contact icons with dummy references (temp, but real redirects later)
+- General UI update
+	- removing the borderlines
+	- adjusting the locaiton of the bordered boxed content
