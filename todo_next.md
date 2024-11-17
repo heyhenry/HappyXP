@@ -232,7 +232,7 @@ This lead me to create the following (deeper dive) all done on the discover page
 
 - TODO NEXT TIME:
     - Need to update text alignment for the name and date that is shown with the achievement badge icon
-    - Need to save the state of the achievements that are being displayed
+    - Need to save the state of the achievements that are being displayed x
     - There's probably more for the above ^ (code reductions, small test cases to consider - none coming up off the top of my head)
     - Implementation of the favourite manga/anime section...
         - Things to consider: 

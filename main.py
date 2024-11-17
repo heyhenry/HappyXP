@@ -703,13 +703,14 @@ class NewEntryPage(tk.Frame):
         new_entry_title_info = tk.Entry(new_entry_form, font=('helvetica', 18), textvariable=self.given_title)
 
         ctype_options = [
-            "Book",
             "Anime",
+            "Donghua",
+            "Hanguk Aeni",
+            "Animation",
             "Manga",
+            "Manhua",
             "Manhwa",
-            "TV Show",
-            "Movie",
-            "OVA"
+            "Comic"
         ]
         self.selected_ctype.set("Select Content Type")
         new_entry_ctype_info = tk.OptionMenu(new_entry_form, self.selected_ctype, *ctype_options)
@@ -974,13 +975,14 @@ class UpdateEntryPage(tk.Frame):
         self.update_entry_title_info = tk.Entry(update_entry_form, font=('helvetica', 18), textvariable=self.given_title)
 
         ctype_options = [
-            "Book",
             "Anime",
+            "Donghua",
+            "Hanguk Aeni",
+            "Animation",
             "Manga",
+            "Manhua",
             "Manhwa",
-            "TV Show",
-            "Movie",
-            "OVA"
+            "Comic"
         ]
         self.selected_ctype.set("Select Content Type")
         self.update_entry_ctype_info = tk.OptionMenu(update_entry_form, self.selected_ctype, *ctype_options)
