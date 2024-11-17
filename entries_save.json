@@ -1,12 +1,12 @@
 {
-    "yoda": {
-        "title": "yoda",
-        "content_type": "Book",
-        "rating": "1",
+    "dsfg": {
+        "title": "dsfg",
+        "content_type": "Anime",
+        "rating": "3",
         "current_progress": "12",
         "total_progress": "24",
-        "status": "Viewing",
-        "start_date": "05-11-2024",
-        "end_date": "16-11-2024"
+        "status": "Paused",
+        "start_date": "17-11-2024",
+        "end_date": "17-11-2024"
     }
 }

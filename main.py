@@ -92,7 +92,11 @@ class MainApp(tk.Tk):
                 'total_chapters_count': obj.total_chapters_count,
                 'total_episodes_count': obj.total_episodes_count,
                 'total_anime_count': obj.total_anime_count,
-                'total_manga_count': obj.total_manga_count
+                'total_manga_count': obj.total_manga_count,
+                'achievement_slot_one': obj.achievement_slot_one,
+                'achievement_slot_two': obj.achievement_slot_two,
+                'achievement_slot_three': obj.achievement_slot_three,
+                'achievement_slot_four': obj.achievement_slot_four
             }
         elif isinstance(obj, EntryInfo):
             return {
@@ -123,7 +127,8 @@ class MainApp(tk.Tk):
                 users_data = json.load(file)
                 # populate the users dictionary with the save file's data
                 for user, user_info in users_data.items():
-                    users[user] = UserInfo(user_info['display_name'], user_info['username'], user_info['password'], user_info['toggle_login'], user_info['bio_message'], user_info['total_entries_count'], user_info['total_chapters_count'], user_info['total_episodes_count'], user_info['total_anime_count'], user_info['total_manga_count'])
+                    users[user] = UserInfo(user_info['display_name'], user_info['username'], user_info['password'], user_info['toggle_login'], user_info['bio_message'], user_info['total_entries_count'], user_info['total_chapters_count'], user_info['total_episodes_count'], user_info['total_anime_count'], user_info['total_manga_count'],
+                                           user_info['achievement_slot_one'], user_info['achievement_slot_two'], user_info['achievement_slot_three'], user_info['achievement_slot_four'])
 
     # load the user's entries' saved data and update entries dictionary
     def load_entries(self):
@@ -419,7 +424,7 @@ class HomePage(tk.Frame):
 
         self.controller = controller
 
-        self.achievement_queue = ['default_achievement', 'default_achievement', 'default_achievement', 'default_achievement']
+        self.achievement_queue = [users['user'].achievement_slot_one, users['user'].achievement_slot_two, users['user'].achievement_slot_three, users['user'].achievement_slot_four]
 
         self.create_widgets()
 
@@ -638,7 +643,15 @@ class HomePage(tk.Frame):
         self.achievement_queue[2] = self.achievement_queue[3]
         self.achievement_queue[3] = name
 
+        users['user'].achievement_slot_one = self.achievement_queue[0]
+        users['user'].achievement_slot_two = self.achievement_queue[1]
+        users['user'].achievement_slot_three = self.achievement_queue[2]
+        users['user'].achievement_slot_four = self.achievement_queue[3]
+
+        self.controller.update_user_save()
+
         self.update_achievement_display()
+
 
 class NewEntryPage(tk.Frame):
     def __init__(self, parent, controller):
