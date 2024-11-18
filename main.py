@@ -739,7 +739,7 @@ class NewEntryPage(tk.Frame):
         new_entry_progress_info_divider = tk.Label(new_entry_form, text='/', font=('helvetica', 18))
         new_entry_progress_info_total = tk.Entry(new_entry_form, font=('helvetica', 18), textvariable=self.total_progress)
         new_entry_progress_info_total.config(width=5)
-        new_entry_progress_metric = tk.Label(new_entry_form, text='Episodes/Chapters', font=('helvetica', 12))
+        new_entry_progress_metric = tk.Label(new_entry_form, text='Episodes/Chapters', font=('helvetica', 18))
 
         status_options = [
             'Planned',
@@ -1038,7 +1038,7 @@ class UpdateEntryPage(tk.Frame):
         self.update_entry_progress_info_divider = tk.Label(update_entry_form, text='/', font=('helvetica', 18))
         self.update_entry_progress_info_total = tk.Entry(update_entry_form, font=('helvetica', 18), textvariable=self.total_progress, state='disabled')
         self.update_entry_progress_info_total.config(width=5)
-        self.update_entry_progress_metric = tk.Label(update_entry_form, font=('helvetica', 12))
+        self.update_entry_progress_metric = tk.Label(update_entry_form, font=('helvetica', 18))
 
         status_options = [
             'Planned',
@@ -1068,7 +1068,9 @@ class UpdateEntryPage(tk.Frame):
         self.update_entry_progress_metric.place(x=580, y=250)
         self.update_entry_status_info.place(x=350, y=300)
         self.update_entry_start_date_info.place(x=350, y=350)
+        self.update_entry_start_date_info.place_forget()
         self.update_entry_end_date_info.place(x=350, y=400)
+        self.update_entry_end_date_info.place_forget()
 
         update_entry_submit.place(x=150, y=480)
         update_entry_cancel.place(x=350, y=480)
@@ -1092,19 +1094,32 @@ class UpdateEntryPage(tk.Frame):
 
     # load the existing entry's details as prefilled information and set relevant variables
     def load_existing_entry_info(self, *args):
+        # get entry id for selected entry
         entry_id = self.controller.entry_id_var.get()
+        today = datetime.today()
+        today = today.strftime("%d-%m-%Y")
+        # determine whether to display episodes or chapters based on content type of the entry
+        if entries[entry_id].content_type in ['Anime', 'Donghua', 'Hanguk Aeni', 'Animation']:
+            self.update_entry_progress_metric.config(text='Episodes')
+        else:
+            self.update_entry_progress_metric.config(text='Chapters')
+        # predetermine the initial display of the dates
+        if entries[entry_id].status == 'Viewing' or entries[entry_id].status == 'Paused':
+            self.update_entry_start_date_info.place(x=350, y=350)
+            self.update_entry_end_date_info.place_forget()
+        elif entries[entry_id].status == 'Dropped' or entries[entry_id].status == 'Finished':
+            self.update_entry_start_date_info.place(x=350, y=350)
+            self.update_entry_end_date_info.place(x=350, y=400)
+            
         self.given_title.set(entries[entry_id].title)
         self.selected_ctype.set(entries[entry_id].content_type)
         self.selected_rating.set(entries[entry_id].rating)
         self.current_progress.set(entries[entry_id].current_progress)
         self.total_progress.set(entries[entry_id].total_progress)
         self.selected_status.set(entries[entry_id].status)
-        self.update_entry_start_date_info.set_date(entries[entry_id].start_date)
-        self.update_entry_end_date_info.set_date(entries[entry_id].end_date)
-        if self.selected_ctype in ['Anime', 'Donghua', 'Hanguk Aeni', 'Animation']:
-            self.update_entry_progress_metric.config(text='Episodes')
-        else:
-            self.update_entry_progress_metric.config(text='Chapters')
+        self.update_entry_start_date_info.set_date(today)
+        self.update_entry_end_date_info.set_date(today)
+
 
     def update_entry(self):
         if not self.validate_entry():
