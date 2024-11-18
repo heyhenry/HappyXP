@@ -1038,6 +1038,7 @@ class UpdateEntryPage(tk.Frame):
         self.update_entry_progress_info_divider = tk.Label(update_entry_form, text='/', font=('helvetica', 18))
         self.update_entry_progress_info_total = tk.Entry(update_entry_form, font=('helvetica', 18), textvariable=self.total_progress, state='disabled')
         self.update_entry_progress_info_total.config(width=5)
+        self.update_entry_progress_metric = tk.Label(update_entry_form, font=('helvetica', 12))
 
         status_options = [
             'Planned',
@@ -1064,6 +1065,7 @@ class UpdateEntryPage(tk.Frame):
         self.update_entry_progress_info_current.place(x=350, y=250)
         self.update_entry_progress_info_divider.place(x=445, y=250)
         self.update_entry_progress_info_total.place(x=480, y=250)
+        self.update_entry_progress_metric.place(x=580, y=250)
         self.update_entry_status_info.place(x=350, y=300)
         self.update_entry_start_date_info.place(x=350, y=350)
         self.update_entry_end_date_info.place(x=350, y=400)
@@ -1099,13 +1101,17 @@ class UpdateEntryPage(tk.Frame):
         self.selected_status.set(entries[entry_id].status)
         self.update_entry_start_date_info.set_date(entries[entry_id].start_date)
         self.update_entry_end_date_info.set_date(entries[entry_id].end_date)
+        if self.selected_ctype in ['Anime', 'Donghua', 'Hanguk Aeni', 'Animation']:
+            self.update_entry_progress_metric.config(text='Episodes')
+        else:
+            self.update_entry_progress_metric.config(text='Chapters')
 
     def update_entry(self):
         if not self.validate_entry():
             entry_id = self.controller.entry_id_var.get()
 
             # determine and update the total episodes/chapters counted from the given entry
-            if self.selected_ctype.get() in ['Anime', 'TV Show', 'Movie', 'ONA']:
+            if self.selected_ctype.get() in ['Anime', 'Donghua', 'Hanguk Aeni', 'Animation']:
                 users['user'].total_episodes_count -= int(entries[entry_id].current_progress)
                 users['user'].total_episodes_count += int(self.current_progress.get())
             else:
@@ -1351,7 +1357,7 @@ class EntriesPage(tk.Frame):
         self.entry_ctype_info.config(text=entries[entry_id].content_type)
         self.entry_rating_info.config(text=entries[entry_id].rating)
         # determine whether progress should show episodes or chapters based on content type of the entry
-        if entries[entry_id].content_type in ['Anime', 'TV Show', 'Movie', 'ONA']:
+        if entries[entry_id].content_type in ['Anime', 'Donghua', 'Hanguk Aeni', 'Animation']:
             self.entry_progress_info.config(text=f'{entries[entry_id].current_progress} / {entries[entry_id].total_progress} Episodes')
         else:
             self.entry_progress_info.config(text=f'{entries[entry_id].current_progress} / {entries[entry_id].total_progress} Chapters')

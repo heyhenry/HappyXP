@@ -249,7 +249,7 @@ This lead me to create the following (deeper dive) all done on the discover page
 	- Suggestion for Implementation: Potentially having some sort of trace action of the status selected in an entry in real time that will hide the end date or just a simple checkbox next to both start and end dates to let the user know whether the date has been taken or a null (N/A) value will be given once they submit the entry. x
 - Remove all mention of Book, TV Show, Movies, Ona and ensure only Manga, Manhua, Manhwa, Comic, Anime, Donghua, Hanguk Aeni and Animation are present.
 - Update the UpdateEntryPage's fields:
-	- Non-Editable: Title, Content Type and Total Progress Count
+	- Non-Editable: Title, Content Type and Total Progress Count x 
 	- Include the Chapters/Episodes text next to progress except, only one of the two based on the content type given
 - Allow the discover page to be used to help search for entries
 	- This would include new functions on said page: 
