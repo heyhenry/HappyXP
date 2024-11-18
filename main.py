@@ -1077,6 +1077,9 @@ class UpdateEntryPage(tk.Frame):
 
         self.error_message = tk.Label(update_entry_form, text='', font=('helvetica', 18), foreground='red')
         self.error_message.place(x=200, y=550)
+
+        self.selected_status.trace_add('write', self.check_status)
+
         # endregion
 
     # temp* check info retrieved
@@ -1092,17 +1095,33 @@ class UpdateEntryPage(tk.Frame):
 
         print(self.controller.entry_id_var.get())
 
+    # dsiplay the input date fields based on the selected status
+    def check_status(self, *args):
+        if self.selected_status.get() == 'Viewing' or self.selected_status.get() == 'Paused':
+            self.update_entry_start_date_info.place(x=350, y=350)
+            self.update_entry_end_date_info.place_forget()
+        elif self.selected_status.get() == 'Dropped' or self.selected_status.get() == 'Finished':
+            self.update_entry_start_date_info.place(x=350, y=350)
+            self.update_entry_end_date_info.place(x=350, y=400)
+        elif self.selected_status.get() == 'Planned':
+            self.update_entry_start_date_info.place_forget()
+            self.update_entry_end_date_info.place_forget()
+
     # load the existing entry's details as prefilled information and set relevant variables
     def load_existing_entry_info(self, *args):
         # get entry id for selected entry
         entry_id = self.controller.entry_id_var.get()
+
+        # placeholder date to circumvent temporary error of the DateEntry value = 'N/A'
         today = datetime.today()
         today = today.strftime("%d-%m-%Y")
+
         # determine whether to display episodes or chapters based on content type of the entry
         if entries[entry_id].content_type in ['Anime', 'Donghua', 'Hanguk Aeni', 'Animation']:
             self.update_entry_progress_metric.config(text='Episodes')
         else:
             self.update_entry_progress_metric.config(text='Chapters')
+
         # predetermine the initial display of the dates
         if entries[entry_id].status == 'Viewing' or entries[entry_id].status == 'Paused':
             self.update_entry_start_date_info.place(x=350, y=350)
@@ -1110,7 +1129,7 @@ class UpdateEntryPage(tk.Frame):
         elif entries[entry_id].status == 'Dropped' or entries[entry_id].status == 'Finished':
             self.update_entry_start_date_info.place(x=350, y=350)
             self.update_entry_end_date_info.place(x=350, y=400)
-            
+
         self.given_title.set(entries[entry_id].title)
         self.selected_ctype.set(entries[entry_id].content_type)
         self.selected_rating.set(entries[entry_id].rating)
