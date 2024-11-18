@@ -275,3 +275,15 @@ This lead me to create the following (deeper dive) all done on the discover page
 - disallow the ability to choose a earlier end date than that of the start date in new entry and update entry (validation issue)
 - potentially change the disabled state widgets in the update_entry_page forms to labels so it looks smoother
 - automatically change the current_progress count to total_progress count if user selectes status=Finished
+- *Might need to double check whether the check_status function in the UpdateEntryPage requires a check_dates{} implementation to display accurate/saved dates between status switches.
+
+# 18th Nov Completed: 
+- implemented the dates vs status algorithm to the new entry creation form (either date is given or N/A is provided)
+- implemented check_status function that will use trace activity to determine whether start or end dates should be displayed for input in the new entry form
+- removed deprecated content type options
+- implemented the episode or chapter display feature for the update entry's form
+- implemented the check_statusf unciton that will use trace activity to determine whether start or end dates should be displayed for input in the update entry form
+- implemented pre-determined display of start and/or end date input fields in the update entry form
+
+
+# Refer to 18th November's Notes for 19th Nov Todo.
