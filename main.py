@@ -808,7 +808,6 @@ class NewEntryPage(tk.Frame):
             elif self.selected_status.get() == 'Dropped' or self.selected_status.get() == 'Finished':
                 check_dates['start_date'] = self.new_entry_start_date_info.get()
                 check_dates['end_date'] = self.new_entry_end_date_info.get()
-            print(check_dates)
             # create a new entry object
             new_entry = EntryInfo(self.given_title.get(), self.selected_ctype.get(), self.selected_rating.get(), self.current_progress.get(),
                                 self.total_progress.get(), self.selected_status.get(), check_dates['start_date'], check_dates['end_date'])
@@ -824,7 +823,7 @@ class NewEntryPage(tk.Frame):
                 users['user'].total_manga_count += 1
             # region - achievement tracking trigger
 
-            # get date and format
+            # get date and format to be used for the achievement triggers
             today = datetime.today()
             today = today.strftime("%d-%m-%Y")
 
@@ -1002,7 +1001,7 @@ class UpdateEntryPage(tk.Frame):
         update_entry_start_date.place(x=150, y=350)
         update_entry_end_date.place(x=150, y=400)
 
-        self.update_entry_title_info = tk.Entry(update_entry_form, font=('helvetica', 18), textvariable=self.given_title)
+        self.update_entry_title_info = tk.Entry(update_entry_form, font=('helvetica', 18), textvariable=self.given_title, state='disabled')
 
         ctype_options = [
             "Anime",
@@ -1016,7 +1015,7 @@ class UpdateEntryPage(tk.Frame):
         ]
         self.selected_ctype.set("Select Content Type")
         self.update_entry_ctype_info = tk.OptionMenu(update_entry_form, self.selected_ctype, *ctype_options)
-        self.update_entry_ctype_info.config(font=('helvetica', 12), indicatoron=0)
+        self.update_entry_ctype_info.config(font=('helvetica', 12), indicatoron=0, state='disabled')
 
         rating_options = [
             1,
@@ -1037,7 +1036,7 @@ class UpdateEntryPage(tk.Frame):
         self.update_entry_progress_info_current = tk.Entry(update_entry_form, font=('helvetica', 18), textvariable=self.current_progress)
         self.update_entry_progress_info_current.config(width=5)
         self.update_entry_progress_info_divider = tk.Label(update_entry_form, text='/', font=('helvetica', 18))
-        self.update_entry_progress_info_total = tk.Entry(update_entry_form, font=('helvetica', 18), textvariable=self.total_progress)
+        self.update_entry_progress_info_total = tk.Entry(update_entry_form, font=('helvetica', 18), textvariable=self.total_progress, state='disabled')
         self.update_entry_progress_info_total.config(width=5)
 
         status_options = [

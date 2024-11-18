@@ -244,9 +244,9 @@ This lead me to create the following (deeper dive) all done on the discover page
 
 # 18th Nov.  TODO:
 - Adopt the algorithm created yesterday in test2.py in NewEntryPage and UpdateEntryPage.
-	- TLDR Algorithm Logic: Update the entry's dictionary, save it and then reference it's start date, end date so that we can have a 'N/A' value based on the status of the entry.
-	- Cont. Algorithm Logic: Displays of the entry details will always be referenced from the saved data in lieu of tkinter get() variables.
-	- Suggestion for Implementation: Potentially having some sort of trace action of the status selected in an entry in real time that will hide the end date or just a simple checkbox next to both start and end dates to let the user know whether the date has been taken or a null (N/A) value will be given once they submit the entry.
+	- TLDR Algorithm Logic: Update the entry's dictionary, save it and then reference it's start date, end date so that we can have a 'N/A' value based on the status of the entry. x
+	- Cont. Algorithm Logic: Displays of the entry details will always be referenced from the saved data in lieu of tkinter get() variables. x
+	- Suggestion for Implementation: Potentially having some sort of trace action of the status selected in an entry in real time that will hide the end date or just a simple checkbox next to both start and end dates to let the user know whether the date has been taken or a null (N/A) value will be given once they submit the entry. x
 - Remove all mention of Book, TV Show, Movies, Ona and ensure only Manga, Manhua, Manhwa, Comic, Anime, Donghua, Hanguk Aeni and Animation are present.
 - Update the UpdateEntryPage's fields:
 	- Non-Editable: Title, Content Type and Total Progress Count

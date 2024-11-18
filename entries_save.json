@@ -28,15 +28,5 @@
         "status": "Viewing",
         "start_date": "18-11-2024",
         "end_date": "N/A"
-    },
-    "asdf": {
-        "title": "asdf",
-        "content_type": "Hanguk Aeni",
-        "rating": "2",
-        "current_progress": "12",
-        "total_progress": "12",
-        "status": "Finished",
-        "start_date": "18-11-2024",
-        "end_date": "05-11-2024"
     }
 }
