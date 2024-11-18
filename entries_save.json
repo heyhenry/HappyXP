@@ -1,12 +1,92 @@
 {
-    "dsfg": {
-        "title": "dsfg",
+    "Yakuza": {
+        "title": "Yakuza",
+        "content_type": "Hanguk Aeni",
+        "rating": "4",
+        "current_progress": "12",
+        "total_progress": "24",
+        "status": "Viewing",
+        "start_date": "N/A",
+        "end_date": "N/A"
+    },
+    "fghd": {
+        "title": "fghd",
         "content_type": "Anime",
+        "rating": "6",
+        "current_progress": "12",
+        "total_progress": "24",
+        "status": "Viewing",
+        "start_date": "N/A",
+        "end_date": "N/A"
+    },
+    "hju": {
+        "title": "hju",
+        "content_type": "Hanguk Aeni",
+        "rating": "4",
+        "current_progress": "12",
+        "total_progress": "24",
+        "status": "Dropped",
+        "start_date": "N/A",
+        "end_date": "N/A"
+    },
+    "dgsdfgsfgsdfg": {
+        "title": "dgsdfgsfgsdfg",
+        "content_type": "Hanguk Aeni",
+        "rating": "4",
+        "current_progress": "12",
+        "total_progress": "24",
+        "status": "Viewing",
+        "start_date": "N/A",
+        "end_date": "N/A"
+    },
+    "asdfasdfasdf": {
+        "title": "asdfasdfasdf",
+        "content_type": "Donghua",
+        "rating": "4",
+        "current_progress": "12",
+        "total_progress": "24",
+        "status": "Planned",
+        "start_date": "N/A",
+        "end_date": "N/A"
+    },
+    "ghgjhgj12": {
+        "title": "ghgjhgj12",
+        "content_type": "Donghua",
         "rating": "3",
+        "current_progress": "12",
+        "total_progress": "12",
+        "status": "Finished",
+        "start_date": "18-11-2024",
+        "end_date": "18-11-2024"
+    },
+    "dsfsdf": {
+        "title": "dsfsdf",
+        "content_type": "Manhua",
+        "rating": "4",
+        "current_progress": "12",
+        "total_progress": "24",
+        "status": "Viewing",
+        "start_date": "18-11-2024",
+        "end_date": "N/A"
+    },
+    "12fdf": {
+        "title": "12fdf",
+        "content_type": "Manga",
+        "rating": "4",
         "current_progress": "12",
         "total_progress": "24",
         "status": "Paused",
-        "start_date": "17-11-2024",
-        "end_date": "17-11-2024"
+        "start_date": "18-11-2024",
+        "end_date": "N/A"
+    },
+    "dfhfhj": {
+        "title": "dfhfhj",
+        "content_type": "Hanguk Aeni",
+        "rating": "4",
+        "current_progress": "12",
+        "total_progress": "24",
+        "status": "Dropped",
+        "start_date": "18-11-2024",
+        "end_date": "18-11-2024"
     }
 }

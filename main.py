@@ -778,13 +778,30 @@ class NewEntryPage(tk.Frame):
     # create a new entry
     def create_new_entry(self):
         if not self.validate_entry():
+            'Planned',
+            'Viewing', 
+            'Paused',
+            'Dropped',
+            'Finished'
+            # validate dates prior to creating entry object
+            # default values set for status: planned
+            check_dates = {'start_date': 'N/A', 'end_date': 'N/A'}
+            # for status: viewing and paused
+            if self.selected_status.get() == 'Viewing' or self.selected_status.get() == 'Paused':
+                check_dates['start_date'] = self.new_entry_start_date_info.get()
+            # for status: dropped and finished
+            elif self.selected_status.get() == 'Dropped' or self.selected_status.get() == 'Finished':
+                check_dates['start_date'] = self.new_entry_start_date_info.get()
+                check_dates['end_date'] = self.new_entry_end_date_info.get()
+            print(check_dates)
+            # create a new entry object
             new_entry = EntryInfo(self.given_title.get(), self.selected_ctype.get(), self.selected_rating.get(), self.current_progress.get(),
-                                self.total_progress.get(), self.selected_status.get(), self.new_entry_start_date_info.get(), self.new_entry_end_date_info.get())
+                                self.total_progress.get(), self.selected_status.get(), check_dates['start_date'], check_dates['end_date'])
             entries[self.given_title.get()] = new_entry
             # update the total count of entries
             users['user'].total_entries_count += 1
             # update the total count for episodes/chapters and anime/manga
-            if self.selected_ctype.get() in ['Anime', 'TV Show', 'Movie', 'ONA']:
+            if self.selected_ctype.get() in ['Anime', 'Donghua', 'Hanguk Aeni', 'Animation']:
                 users['user'].total_episodes_count += int(self.current_progress.get())
                 users['user'].total_anime_count += 1
             else:
