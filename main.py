@@ -1126,9 +1126,15 @@ class UpdateEntryPage(tk.Frame):
         if entries[entry_id].status == 'Viewing' or entries[entry_id].status == 'Paused':
             self.update_entry_start_date_info.place(x=350, y=350)
             self.update_entry_end_date_info.place_forget()
+            # temporary place holder values
+            self.update_entry_end_date_info.set_date(today)
         elif entries[entry_id].status == 'Dropped' or entries[entry_id].status == 'Finished':
             self.update_entry_start_date_info.place(x=350, y=350)
             self.update_entry_end_date_info.place(x=350, y=400)
+        elif entries[entry_id].status == 'Planned':
+            # temporary place holder values
+            self.update_entry_start_date_info.set(today)
+            self.update_entry_end_date_info.set(today)
 
         self.given_title.set(entries[entry_id].title)
         self.selected_ctype.set(entries[entry_id].content_type)
@@ -1137,8 +1143,6 @@ class UpdateEntryPage(tk.Frame):
         self.total_progress.set(entries[entry_id].total_progress)
         self.selected_status.set(entries[entry_id].status)
         self.update_entry_start_date_info.set_date(today)
-        self.update_entry_end_date_info.set_date(today)
-
 
     def update_entry(self):
         if not self.validate_entry():
