@@ -271,4 +271,5 @@ This lead me to create the following (deeper dive) all done on the discover page
 	- adjusting the locaiton of the bordered boxed content
 
 # Bug Found (required fix)
-- when deleting the entries via the app, the user_save's data for said entry information still resides and gets scuffed... i.e. negative numbers.
+- when deleting the entries via the app, the user_save's data for said entry information still resides and gets scuffed... i.e. negative numbers. (saved state/clearing state? issue)
+- disallow the ability to choose a earlier end date than that of the start date in new entry and update entry (validation issue)

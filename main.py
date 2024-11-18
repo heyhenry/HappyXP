@@ -940,15 +940,14 @@ class NewEntryPage(tk.Frame):
 
     # clears the input fields for the entry form
     def clear_entry_fields(self):
-        today = datetime.today().strftime('%d-%m-%Y')
         self.given_title.set('')
         self.selected_ctype.set('Select Content Type')
         self.selected_rating.set('Select Rating')
         self.current_progress.set('')
         self.total_progress.set('')
         self.selected_status.set('Select Status')
-        self.new_entry_start_date_info.set_date(today)
-        self.new_entry_end_date_info.set_date(today)
+        self.new_entry_start_date_info.place_forget()
+        self.new_entry_end_date_info.place_forget()
 
     # clears the error message
     def clear_error_message(self):

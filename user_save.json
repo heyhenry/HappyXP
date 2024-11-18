@@ -5,14 +5,14 @@
         "password": "hens12345",
         "toggle_login": true,
         "bio_message": "",
-        "total_entries_count": 2,
+        "total_entries_count": 4,
         "total_chapters_count": -72,
-        "total_episodes_count": 96,
-        "total_anime_count": 8,
+        "total_episodes_count": 120,
+        "total_anime_count": 10,
         "total_manga_count": -6,
-        "achievement_slot_one": "default_achievement",
-        "achievement_slot_two": "first_entry",
-        "achievement_slot_three": "speedster",
-        "achievement_slot_four": "five_entries"
+        "achievement_slot_one": "speedster",
+        "achievement_slot_two": "five_entries",
+        "achievement_slot_three": "hundred_episodes",
+        "achievement_slot_four": "ten_anime"
     }
 }
