@@ -665,6 +665,9 @@ class NewEntryPage(tk.Frame):
         self.total_progress = tk.StringVar()
         self.selected_status = tk.StringVar()
 
+        self.start_date_forgotten = True
+        self.end_date_forgotten = True
+
         self.create_widgets()
 
     def create_widgets(self):
@@ -766,23 +769,35 @@ class NewEntryPage(tk.Frame):
         new_entry_progress_metric.place(x=580, y=250)
         new_entry_status_info.place(x=350, y=300)
         self.new_entry_start_date_info.place(x=350, y=350)
+        self.new_entry_start_date_info.place_forget()
         self.new_entry_end_date_info.place(x=350, y=400)
+        self.new_entry_end_date_info.place_forget()
 
         new_entry_submit.place(x=150, y=480)
         new_entry_cancel.place(x=350, y=480)
 
         self.error_message = tk.Label(new_entry_form, text='', font=('helvetica', 18), foreground='red')
         self.error_message.place(x=200, y=550)
+
+        self.selected_status.trace_add('write', self.check_status)
+
         # endregion
+    
+    # display selectable date calendar based on chosen status
+    def check_status(self, *args):
+        if self.selected_status.get() == 'Viewing' or self.selected_status.get() == 'Paused':
+            self.new_entry_start_date_info.place(x=350, y=350)
+            self.new_entry_end_date_info.place_forget()
+        elif self.selected_status.get() == 'Dropped' or self.selected_status.get() == 'Finished':
+            self.new_entry_start_date_info.place(x=350, y=350)
+            self.new_entry_end_date_info.place(x=350, y=400)
+        elif self.selected_status.get() == 'Planned':
+            self.new_entry_start_date_info.place_forget()
+            self.new_entry_end_date_info.place_forget()
 
     # create a new entry
     def create_new_entry(self):
         if not self.validate_entry():
-            'Planned',
-            'Viewing', 
-            'Paused',
-            'Dropped',
-            'Finished'
             # validate dates prior to creating entry object
             # default values set for status: planned
             check_dates = {'start_date': 'N/A', 'end_date': 'N/A'}

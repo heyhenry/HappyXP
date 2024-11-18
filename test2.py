@@ -62,17 +62,53 @@
 import tkinter as tk
 from tkcalendar import DateEntry
 
+class App:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Trace OptionMenu Example")
+        
+        # Create a StringVar to store the selected value from the OptionMenu
+        self.selected_status = tk.StringVar()
+        
+        # Create an OptionMenu with a list of options
+        self.status_options = ["Viewing", "Paused", "Dropped", "Finished", "Planned"]
+        self.selected_status.set(self.status_options[0])  # Default value
+        
+        self.status_menu = tk.OptionMenu(self.root, self.selected_status, *self.status_options)
+        self.status_menu.pack(padx=10, pady=10)
+        
+        # Add a trace to the StringVar that tracks changes to the selected value
+        self.selected_status.trace_add("write", self.on_status_change)
+        
+        # Label to display selected status
+        self.status_label = tk.Label(self.root, text="Selected Status: " + self.selected_status.get())
+        self.status_label.pack(padx=10, pady=10)
+
+        # Date Entry Display
+        self.status_date = DateEntry(self.root, date_pattern='dd-mm-yyyy')
+        self.status_date.pack()
+        self.status_date.pack_forget()
+    
+    def on_status_change(self, *args):
+        # This function will be called whenever the value in selected_status changes
+        new_status = self.selected_status.get()
+        print(f"Status changed to: {new_status}")
+        
+        # Update the label to reflect the change
+        self.status_label.config(text="Selected Status: " + new_status)
+
+        if self.selected_status.get() == 'Finished' or self.selected_status.get() == 'Dropped':
+            self.status_date.pack()
+        else:
+            self.status_date.pack_forget()
+
+# Create the main window
 root = tk.Tk()
-root.geometry('250x250')
 
-def clear_date():
-    date.set_date('00/00/0000')
+# Create the app instance
+app = App(root)
 
-date = DateEntry(root, date_patter='dd-mm-yyyy')
-clear = tk.Button(root, text='Clear Date', command=clear_date)
-
-date.pack()
-clear.pack()
-
+# Start the Tkinter event loop
 root.mainloop()
+
 

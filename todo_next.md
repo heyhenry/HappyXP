@@ -242,7 +242,7 @@ This lead me to create the following (deeper dive) all done on the discover page
                     - maybe just have an option for manual entry as well.
 # ----------------------------------------------------------------------------------- #
 
-# 17th Nov.  TODO:
+# 18th Nov.  TODO:
 - Adopt the algorithm created yesterday in test2.py in NewEntryPage and UpdateEntryPage.
 	- TLDR Algorithm Logic: Update the entry's dictionary, save it and then reference it's start date, end date so that we can have a 'N/A' value based on the status of the entry.
 	- Cont. Algorithm Logic: Displays of the entry details will always be referenced from the saved data in lieu of tkinter get() variables.
@@ -269,3 +269,6 @@ This lead me to create the following (deeper dive) all done on the discover page
 - General UI update
 	- removing the borderlines
 	- adjusting the locaiton of the bordered boxed content
+
+# Bug Found (required fix)
+- when deleting the entries via the app, the user_save's data for said entry information still resides and gets scuffed... i.e. negative numbers.
