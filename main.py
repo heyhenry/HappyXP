@@ -1391,8 +1391,8 @@ class EntriesPage(tk.Frame):
             entry_id = i
         
         if entry_name:
-            # reference the currently selected entry to update it's user metric relevance
-            if entries[entry_name].content_type in ['Anime', 'TV Show', 'Movie', 'ONA']:
+            # reference the currently selected entry to update it's relevant user metric
+            if entries[entry_name].content_type in ['Anime', 'Donghua', 'Hanguk Aeni', 'Animation']:
                 users['user'].total_episodes_count -= int(entries[entry_name].current_progress)
                 users['user'].total_anime_count -= 1
             else:
