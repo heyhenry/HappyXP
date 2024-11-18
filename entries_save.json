@@ -19,34 +19,44 @@
         "start_date": "05-11-2024",
         "end_date": "N/A"
     },
-    "asdfa": {
-        "title": "asdfa",
-        "content_type": "Donghua",
-        "rating": "3",
-        "current_progress": "12",
-        "total_progress": "24",
-        "status": "Viewing",
-        "start_date": "18-11-2024",
-        "end_date": "N/A"
-    },
-    "Yukooa": {
-        "title": "Yukooa",
-        "content_type": "Manga",
-        "rating": 7,
-        "current_progress": "0",
-        "total_progress": "0",
-        "status": "Planned",
-        "start_date": "18-11-2024",
-        "end_date": "18-11-2024"
-    },
     "sdfgsdfg": {
         "title": "sdfgsdfg",
         "content_type": "Donghua",
         "rating": 2,
         "current_progress": "12",
         "total_progress": "24",
-        "status": "Viewing",
+        "status": "Dropped",
         "start_date": "18-11-2024",
         "end_date": "18-11-2024"
+    },
+    "pukuilui": {
+        "title": "pukuilui",
+        "content_type": "Hanguk Aeni",
+        "rating": "3",
+        "current_progress": "12",
+        "total_progress": "24",
+        "status": "Viewing",
+        "start_date": "06-11-2024",
+        "end_date": "N/A"
+    },
+    "dsrtxfnjg ": {
+        "title": "dsrtxfnjg ",
+        "content_type": "Animation",
+        "rating": 3,
+        "current_progress": "12",
+        "total_progress": "24",
+        "status": "Finished",
+        "start_date": "28-10-2024",
+        "end_date": "18-11-2024"
+    },
+    "fghhh": {
+        "title": "fghhh",
+        "content_type": "Donghua",
+        "rating": 2,
+        "current_progress": "12",
+        "total_progress": "24",
+        "status": "Viewing",
+        "start_date": "28-10-2024",
+        "end_date": "N/A"
     }
 }

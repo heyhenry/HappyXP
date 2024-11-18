@@ -273,3 +273,5 @@ This lead me to create the following (deeper dive) all done on the discover page
 # Bug Found (required fix)
 - when deleting the entries via the app, the user_save's data for said entry information still resides and gets scuffed... i.e. negative numbers. (saved state/clearing state? issue)
 - disallow the ability to choose a earlier end date than that of the start date in new entry and update entry (validation issue)
+- potentially change the disabled state widgets in the update_entry_page forms to labels so it looks smoother
+- automatically change the current_progress count to total_progress count if user selectes status=Finished

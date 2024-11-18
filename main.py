@@ -808,6 +808,9 @@ class NewEntryPage(tk.Frame):
             elif self.selected_status.get() == 'Dropped' or self.selected_status.get() == 'Finished':
                 check_dates['start_date'] = self.new_entry_start_date_info.get()
                 check_dates['end_date'] = self.new_entry_end_date_info.get()
+            # if user saves the new entry as 'planned' then save just the start date and consider it as date of entry made
+            elif self.selected_status.get() == 'Planned':
+                check_dates['start_date'] = self.new_entry_start_date_info.get()
             # create a new entry object
             new_entry = EntryInfo(self.given_title.get(), self.selected_ctype.get(), self.selected_rating.get(), self.current_progress.get(),
                                 self.total_progress.get(), self.selected_status.get(), check_dates['start_date'], check_dates['end_date'])
@@ -1126,15 +1129,15 @@ class UpdateEntryPage(tk.Frame):
         if entries[entry_id].status == 'Viewing' or entries[entry_id].status == 'Paused':
             self.update_entry_start_date_info.place(x=350, y=350)
             self.update_entry_end_date_info.place_forget()
-            # temporary place holder values
-            self.update_entry_end_date_info.set_date(today)
+            self.update_entry_start_date_info.set_date(entries[entry_id].start_date)
         elif entries[entry_id].status == 'Dropped' or entries[entry_id].status == 'Finished':
             self.update_entry_start_date_info.place(x=350, y=350)
             self.update_entry_end_date_info.place(x=350, y=400)
+            self.update_entry_start_date_info.set_date(entries[entry_id].start_date)
+            self.update_entry_end_date_info.set_date(entries[entry_id].end_date)
         elif entries[entry_id].status == 'Planned':
-            # temporary place holder values
-            self.update_entry_start_date_info.set(today)
-            self.update_entry_end_date_info.set(today)
+            self.update_entry_start_date_info.set_date(entries[entry_id])
+            self.update_entry_end_date_info.set_date(today)
 
         self.given_title.set(entries[entry_id].title)
         self.selected_ctype.set(entries[entry_id].content_type)
@@ -1142,7 +1145,6 @@ class UpdateEntryPage(tk.Frame):
         self.current_progress.set(entries[entry_id].current_progress)
         self.total_progress.set(entries[entry_id].total_progress)
         self.selected_status.set(entries[entry_id].status)
-        self.update_entry_start_date_info.set_date(today)
 
     def update_entry(self):
         if not self.validate_entry():
@@ -1155,6 +1157,8 @@ class UpdateEntryPage(tk.Frame):
             else:
                 users['user'].total_chapters_count -= int(entries[entry_id].current_progress)
                 users['user'].total_chapters_count += int(self.current_progress.get())
+            
+            # updates the user's saved data (namely for episode and chapter tallies)
             self.controller.update_user_save()
 
             entries[entry_id].title = self.given_title.get()
@@ -1163,8 +1167,16 @@ class UpdateEntryPage(tk.Frame):
             entries[entry_id].current_progress = self.current_progress.get()
             entries[entry_id].total_progress = self.total_progress.get()
             entries[entry_id].status = self.selected_status.get()
-            entries[entry_id].start_date = self.update_entry_start_date_info.get()
-            entries[entry_id].end_date = self.update_entry_end_date_info.get()
+
+            check_dates = {'start_date': 'N/A', 'end_date': 'N/A'}
+            if self.selected_status.get() == 'Viewing' or self.selected_status.get() == 'Paused':
+                check_dates['start_date'] = self.update_entry_start_date_info.get()
+            elif self.selected_status.get() == 'Dropped' or self.selected_status.get() == 'Finished':
+                check_dates['start_date'] = self.update_entry_start_date_info.get()
+                check_dates['end_date'] = self.update_entry_end_date_info.get()
+
+            entries[entry_id].start_date = check_dates['start_date']
+            entries[entry_id].end_date = check_dates['end_date']
 
             # if the entry's title is updated, update the key name for the given entry
             if self.given_title.get() != entry_id:
